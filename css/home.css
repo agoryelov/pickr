@@ -1,0 +1,82 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+	width: 0px;
+}
+
+#nav_Bar {
+	background-color: #18EAAF;
+}
+
+#rightNav {
+	margin-right: 5px;
+}
+
+#rightNav li {
+	margin-right: 10px;
+	transform: translateY(12px);
+}
+
+#activities {
+	margin-bottom: 30px;
+}
+
+/**#cardAct {
+	background-color: rgba(30, 130, 76, 1);
+}*/
+
+#favs {
+	width: 40px;
+	background-color: #18EAAF;
+}
+
+.cost-title {
+	float:right;
+	margin-right: 10px;
+}
+
+.sticky_buttons {
+	width: 50px;
+
+}
+
+.stars {
+	width: 35px;
+}
+
+.information {
+	position: absolute;
+	bottom: 10px;
+	right: 25px;
+}
+
+.info {
+	width: 35px;
+}
+
+.ecoratings {
+	position: absolute;
+	bottom: 20px;
+}
+
+@media screen and (min-width: 992px){
+  .heading {
+	font-size: 12pt;
+  }
+   #logo {
+  	width: 180px;
+  	transform:translateY(20px);
+  }
+}
+
+@media screen and (max-width: 992px){
+  .heading {
+	font-size: 14pt;
+  }
+  #logo {
+  	width: 180px;
+  	transform: translateX(10px) translateY(20px);
+  }
+}
