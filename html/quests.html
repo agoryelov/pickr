@@ -6,9 +6,15 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
    		 <!-- jQuery library -->
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
     	<!-- Latest compiled JavaScript -->
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+       <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+       </script>
+
+
 	</head>
 	<body id = "homePage" data-spy="scroll" data-target=".navbar" data-offset="50">
 	  <nav id = "nav_Bar" class = "navbar navbar-expand-lg sticky-top navbar-light bg -light">
@@ -31,21 +37,96 @@
       </div>
     </nav>
       <div style = "background: rgba(204, 204, 204, 0.4); margin-bottom: 0px" class = "jumbotron text-center">
-      	<h2 class = "pageTitle">My Quests </h2><img id = "Filter" src = "../images/filter.png" alt= "filter">
+      	<h2 class = "pageTitle">My Quests </h2><img id = "Filter" src = "../images/filter.png" alt= "filter" class = "btn btn-primary" data-toggle = "modal" data-target = "#filterModal">
       </div>
+      <div id = "filterModal" class ="modal fade" tabindex = "-1" role = "dialog" aria-labelledby = "filterModalLabel" aria-hidden = "true">
+        <div class = "modal-dialog modal-dialog-centered" role = "document">
+          <div class = "modal-content">
+            <div class = "modal-header">
+              <h5 class = "modal-title" id = "filterModalLabel">Filter By</h5>
+
+            </div>
+            <div style = "background-color: #18EAAF; color:white" class = "modal-body">
+              <h6 class = "filterHeadings">Distance:</h6>
+              <input type = "range" class = "custom-range" value = "30" min = "1" max = "100" id = "distRange" oninput = "setDistanceid.value = distRange.value + &quot km &quot ">
+              <output name = "setDistance" id = "setDistanceid"></output>
+              <br/>
+               <h6 class = "filterHeadings">Cost:</h6>
+              <input type = "range" class = "custom-range" value = "1" min = "0" max = "3" id = "costRange" oninput = "setCostid.value = costRange.value">
+              <output name = "setCost" id = "setCostid"></output>
+              <br/>
+              <h6 class = "filterHeadings">Date: </h6>
+            </div>
+            <div class = "modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type = "button" class = "btn btn-primary" id = "setSave">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div id = "questList" class = "container-fluid">
-        <div class = "questItem">
+        <ul id = "sortList">
+          <li class = "ui-state-default">
+        <div class = "questItem" id = "QI1">
          <div class = "questIcons">
            <img class = "questImages" src = "../images/bike_icon2.png" alt = "bikeIcon">
          </div>
           <h3 class = "questTitles">Bike at Whistler</h3>
+          <div class = "date">
+            <h6 class = "dateNum">May 2<sup>nd</sup> 2019</h6>
+          </div>
+          <div class = "describeQuest" id = "QId1">
+            <h6>Sura is a traditional Korean restaurant.</h6>
+          </div>
         </div>
-        <div class = "questItem">
+      </li>
+      <li class = "ui-state-default">
+        <div class = "questItem" id = "QI2">
           <div class = "questIcons">
-           <img class = "questImages" src = "../images/food.png" alt = "bikeIcon">
-         </div>
-          <h3 class = "questTitles">Cuisine</h3>
+             <img class = "questImages" src = "../images/food.png" alt = "bikeIcon">
+          </div>
+
+            <h3 class = "questTitles">Dinner at Sura</h3>
+   
+            <div class = "date">
+                <h6 class = "dateNum">May 2<sup>nd</sup> 2019</h6>
+             <!--<input class="form-control start_date" type="text" placeholder="start date" id="startdate_datepicker">
+               <div class="input-group-append">
+                <span class="fa fa-calendar input-group-text start_date_calendar" aria-hidden="true "></span>
+               </div>-->
         </div>
+          <div class = "describeQuest" id="QId2">
+            <h6>Sura is a traditional Korean restaurant.</h6>
+          </div>
+          </div>
+      </li>
+      </ul>
       </div>
+
+      <script type = "text/javascript">
+        var hideable = true;
+        $('#sortList').sortable();
+        $('#sortList').disableSelection();
+        $('#QI2').click(function(){
+          if(hideable){
+            $('#QId2').hide();
+            hideable = false;
+          } else {
+            hideable = true;
+            $('#QId2').show();
+          }
+        });
+          $('#QI1').click(function(){
+          if(hideable){
+            $('#QId1').hide();
+            hideable = false;
+          } else {
+            hideable = true;
+            $('#QId1').show();
+          }
+        });
+      </script>
+      <script src = "../js/selectDate.js">
 	</body>
 </html>
