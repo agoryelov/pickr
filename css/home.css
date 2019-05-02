@@ -31,7 +31,10 @@ body::-webkit-scrollbar {
 	cursor: grab;
 }
 
-
+#Filter {
+	width: 40px;
+	float: right;
+}
 
 #cancel_button {
 
@@ -41,8 +44,16 @@ body::-webkit-scrollbar {
 	margin-top:40px;
 }
 
+#questList {
+	width: 100%;
+}
+
 .cost-title {
 	float:right;
+}
+
+.badge_icons {
+	width: 100%;	
 }
 
 .sticky_buttons {
@@ -53,8 +64,23 @@ body::-webkit-scrollbar {
 	width: 25px;
 }
 
+.questIcons {
+	display: inline-block;
+	float: left;
+	margin-left: 5px;
+}
+
+.questImages {
+	width: 40px;
+}
+
 .stars {
 	width: 35px;
+}
+
+.pageTitle {
+	transform: translateX(30px);
+	display: inline-block;
 }
 
 .information {
@@ -65,6 +91,47 @@ body::-webkit-scrollbar {
 
 .info {
 	width: 35px;
+}
+
+.catGroupsclicked{
+	background-color: #18EAAF;
+	border-radius: 15px;
+	margin-top: 20px;
+	margin-bottom: 15px;
+	margin-right: 15px;
+	margin-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor:pointer;
+}
+
+.catGroupsunclicked {
+	background-color: #A0A0A0;
+	border-radius: 15px;
+	margin-top: 20px;
+	margin-bottom: 15px;
+	margin-right: 15px;
+	margin-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor:pointer;
+}
+
+.questItem {
+	background-color: #18EAAF;
+	margin-top: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	box-shadow: 0px 0px 4px black;
+	text-align: center;
+	width: 100%;
+	cursor: pointer;
+}
+
+.catTitles {
+	color: white;
+	display: inline-block;
+	transform: translateX(-10px);
 }
 
 .ecoratings {
@@ -98,5 +165,11 @@ body::-webkit-scrollbar {
   #favs {
 	width: 35px;
 	background-color: #18EAAF;
+}
+}
+
+@media screen and (max-width: 576px) {
+ .badge_icons {
+	width: 60px;
 }
 }
