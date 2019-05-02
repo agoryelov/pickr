@@ -131,6 +131,11 @@ body::-webkit-scrollbar {
 .catTitles {
 	color: white;
 	display: inline-block;
+}
+
+.questTitles {
+	color: white;
+	display: inline-block;
 	transform: translateX(-10px);
 }
 
