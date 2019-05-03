@@ -35,6 +35,7 @@ function loadQuest(questId) {
         questLocation = questLocation.substring(1, questLocation.length -1);
 
         var questTags = JSON.stringify(snap.val().tags);
+        questTags = questTags.substring(1, questTags.length -1);
 
 
         // display quest info
@@ -43,6 +44,8 @@ function loadQuest(questId) {
         $("#questLocation").html(questLocation);
         $("#questImgLink").attr("src", questImgLink);
         $("#questLink").attr("href", questLink);
+        $("#questTags").html(questTags);
+
 
         // display number of stars based on questEcoRating (1-3)
         if(questEcoRating == 1) {
@@ -77,9 +80,14 @@ function loadQuest(questId) {
     })
  }
 
+ // currently just moves on to the next quest
  $( "#save_button" ).click(function() {
     let index = questArray.indexOf(currentQuest);
     currentQuest = questArray[index + 1];
     console.log(currentQuest);
     loadQuest(currentQuest);
   });
+
+
+
+  
