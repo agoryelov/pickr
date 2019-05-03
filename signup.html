@@ -52,31 +52,36 @@
   <div id="cardAct" class="card">
     <img class="card-img" src="./images/rock_climb.jpg" alt="bike" style="width:100%;filter: contrast(70%);">
     <div class="card-img-overlay">
-      <h2 style="color:white; text-align: center" class="card-title">Login</h2>
-      <form id="sign_up" onsubmit="firebaseLogin(); return false;">
+      <h2 style="color:white; text-align: center" class="card-title">Sign Up </h2>
+      <form id="sign_up" onsubmit="firebaseSignUp(); return false;">
         <div class="container-fluid text-center">
           <div class="form-row justify-content-center">
             <div class="form-group col col-md-5">
-              <input id="email" type="email" class="form-control" placeholder="Email" required>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                </div>
+                <input id="username" type="text" class="form-control" placeholder="Username" pattern="[a-zA-Z0-9]{6,14}"
+                  required>
+              </div>
             </div>
           </div>
           <div class="form-row justify-content-center">
             <div class="form-group col col-md-5">
-              <input id="password" type="password" class="form-control" placeholder="Password" required>
+              <input id="email" type="email" class="form-control" placeholder="Enter email" required>
             </div>
           </div>
           <div class="form-row justify-content-center">
-            <div class="form-group col-6 col-xs-5 col-sm-3 col-md-2 col-xg-1">
-              <button style="background-color: #18EAAF; border: none" class="btn btn-primary" type="button"
-                onclick="location.href='./signup.html';">Sign Up</button>
+            <div class="form-group col col-md-5">
+              <input id="password" type="password" class="form-control" placeholder="Enter password" required>
             </div>
-            <div class="form-group col-6 col-xs-5 col-sm-3 col-md-2 col-xg-1">
-              <input style="background-color: #18EAAF; border: none" class="btn btn-primary" type="submit"
-                value="Login">
+          </div>
+          <div class="form-row justify-content-center">
+            <div class="form-group col">
+              <input style="background-color: #18EAAF; border: none" class="btn btn-primary" type="submit" value="Create Account">
             </div>
           </div>
         </div>
-
       </form>
       <button onClick="signout()">signout</button>
       <button onClick="test()">test</button>
@@ -85,16 +90,19 @@
   <script src="js/firebase_creds.js"></script>
   <script src="js/firebase_auth.js"></script>
   <script>
-
+    function firebaseSignUp() {
+      let username = $("#username").val();
+      let email = $("#email").val();
+      let password = $("#password").val();
+      firebaseCreateNewUser(username, email, password);
+    }
     function signout() {
-      console.log("Signing Out");
+      console.log("Signing out");
       firebase.auth().signOut();
     }
-
     function test() {
       console.log(firebase.auth().currentUser.displayName);
     }
   </script>
 </body>
-
 </html>
