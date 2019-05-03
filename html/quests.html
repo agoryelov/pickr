@@ -7,6 +7,7 @@
    		 <!-- jQuery library -->
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/jsSocials/1.5.0/jssocials.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
     	<!-- Latest compiled JavaScript -->
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -56,6 +57,12 @@
               <output name = "setCost" id = "setCostid"></output>
               <br/>
               <h6 class = "filterHeadings">Date: </h6>
+              <select class = "form-control form-control-sm" id = "dateSelect">
+                <option>This Month</option>
+                <option>This Week</option>
+              </select>
+              <br/>
+              <h6 class = "filterHeadings">Category:</h6>
             </div>
             <div class = "modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -64,7 +71,7 @@
           </div>
         </div>
       </div>
-
+ 
       <div id = "questList" class = "container-fluid">
         <ul id = "sortList">
           <li class = "ui-state-default">
@@ -76,7 +83,19 @@
           <div class = "date">
             <h6 class = "dateNum">May 2<sup>nd</sup> 2019</h6>
           </div>
+          <!--<div class="input-group date" data-provide="datepicker">
+            <input type="text" class="datepicker"  data-date-format = "mm/dd/yyyy">
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>-->
+
           <div class = "describeQuest" id = "QId1">
+            <div class = "socMediaContainer">
+              <a class ="socialLinks" href="https://www.facebook.com/sharer/sharer.php?u=quests.html" target="_blank">
+                <img src = "../images/facebook.png" alt = "facebook" class = "socMediaIcons">
+              </a>
+            </div>
             <h6 class = "description">Sura is a traditional Korean restaurant.</h6>
             <div class = "iconContainer">
               <img class = "editIcons" src = "../images/edit_icon.png" alt = "editIcon">

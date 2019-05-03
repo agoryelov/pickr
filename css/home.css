@@ -31,6 +31,17 @@ body::-webkit-scrollbar {
 	margin-left: 10px;
 }
 
+#catPrompt {
+	text-align: center;
+	margin-top: 10px;
+}
+
+#catReset {
+	background-color: grey;
+	border: grey;
+	margin-right: 5px;
+}
+
 #setSave {
 	background-color: #18EAAF;
 	border: #18EAAF;
@@ -38,15 +49,22 @@ body::-webkit-scrollbar {
 
 #buttonBar {
 	text-align: center;
+	margin: 0px auto;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #C0C0C0;
+	width: 65%;
 }
 
 #distRange {
-	width: 100px;
+	width: 120px;
 	float: right;
 }
 
 #costRange {
-	width: 100px;
+	width: 120px;
 	float:right;
 }
 
@@ -64,6 +82,24 @@ body::-webkit-scrollbar {
 
 #cancel_button {
 
+}
+
+#dateSelect {
+	width: 120px;
+	float:right;
+}
+
+#dateSelect option {
+	font-size: 12pt;
+}
+
+#rightArrow {
+	margin-left: 20px;
+}
+
+#leftArrow {
+	margin-right: 20px;
+	transform: rotate(180deg);
 }
 
 #costSlide {
@@ -102,6 +138,20 @@ body::-webkit-scrollbar {
 	margin-top: 5px;
 	padding-bottom: 20px;
 	background-color: white;
+}
+
+.socMediaContainer {
+	float: left;
+	margin-left: 10px;
+	margin-right: none;
+}
+
+.socMediaIcons {
+	width: 25px;
+}
+
+.socialLinks, .socialLinks:hover {
+	text-decoration: none;
 }
 
 .slideIcons {
@@ -184,7 +234,8 @@ body::-webkit-scrollbar {
 	margin-left: 15px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	cursor:pointer;
+	cursor: pointer;
+	box-shadow: 1px 1px 3px black;
 	text-align: center;
 }
 
@@ -197,7 +248,8 @@ body::-webkit-scrollbar {
 	margin-left: 15px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	cursor:pointer;
+	cursor: pointer;
+	box-shadow: 0px 0px 3px black;
 	text-align: center;
 }
 
@@ -263,7 +315,7 @@ body::-webkit-scrollbar {
 }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 486px) {
 	.badgeDesc {
 		font-size: 12pt;
 		display: inline-block;
@@ -286,5 +338,8 @@ body::-webkit-scrollbar {
      }
      .catTitles {
      	font-size: 16pt;
+     }
+     .sticky_buttons {
+     	width: 35px;
      }
 }
