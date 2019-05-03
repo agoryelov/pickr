@@ -2,23 +2,6 @@ var globalUser;
 var questArray = [1,2,3,4,5];
 var currentQuest;
 
-
-// //Change Title Bar to User Name's Garden
-// firebase.auth().onAuthStateChanged(function(user){
-// 	globalUser = user;
-// 	//Get User's name and change the title to their garden.
-// 	var ref = firebase.database().ref("users/" + user.uid);
-// 	ref.on("value", function(snap) {
-// 		var stringName = JSON.stringify(snap.val().name);
-// 		stringName = stringName.substring(1, stringName.length -1);
-//     });
-
-//     questArray = [1];
-
-    
-// });
-
-
 // loads first quest
 $(document).ready(function () {
     currentQuest = questArray[0];
@@ -53,6 +36,7 @@ function loadQuest(questId) {
 
         var questTags = JSON.stringify(snap.val().tags);
 
+
         // display quest info
         $("#questTitle").html(questName);
         $("#questDescription").html(questDescription);
@@ -61,7 +45,6 @@ function loadQuest(questId) {
         $("#questLink").attr("href", questLink);
 
         // display number of stars based on questEcoRating (1-3)
-
         if(questEcoRating == 1) {
             $("#ecoTwo").css("display", "none");
             $("#ecoThree").css("display", "none");
@@ -72,8 +55,25 @@ function loadQuest(questId) {
             $("#ecoTwo").css("display", "inline-block");
             $("#ecoThree").css("display", "inline-block");
         }
-        
 
+        // change colour of dollar signs based on questCost
+        if(questCost == 0) {
+            $("#costOne").attr("src", "./images/dollar_sign_grey.png")
+            $("#costTwo").attr("src", "./images/dollar_sign_grey.png")
+            $("#costThree").attr("src", "./images/dollar_sign_grey.png")
+        } else if(questCost == 1) {
+            $("#costOne").attr("src", "./images/dollar_sign_green.png")
+            $("#costTwo").attr("src", "./images/dollar_sign_grey.png")
+            $("#costThree").attr("src", "./images/dollar_sign_grey.png")
+        } else if(questCost == 2) {
+            $("#costOne").attr("src", "./images/dollar_sign_green.png")
+            $("#costTwo").attr("src", "./images/dollar_sign_green.png")
+            $("#costThree").attr("src", "./images/dollar_sign_grey.png")
+        } else {
+            $("#costOne").attr("src","./images/dollar_sign_green.png")
+            $("#costTwo").attr("src","./images/dollar_sign_green.png")
+            $("#costThree").attr("src","./images/dollar_sign_green.png")       
+        }
     })
  }
 

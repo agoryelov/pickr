@@ -78,6 +78,11 @@ body::-webkit-scrollbar {
 	width: 35px;
 }
 
+.dollars {
+	width: 35px;
+}
+
+
 .pageTitle {
 	transform: translateX(30px);
 	display: inline-block;
