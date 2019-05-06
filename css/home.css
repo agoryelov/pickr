@@ -195,10 +195,6 @@ body::-webkit-scrollbar {
 	width: 35px;
 }
 
-.dollars {
-	width: 35px;
-}
-
 .pageTitle {
 	transform: translateX(30px);
 	display: inline-block;
@@ -275,7 +271,7 @@ body::-webkit-scrollbar {
 .questTitles {
 	color: white;
 	display: inline-block;
-	transform: translateX(-10px);
+	transform: translateX(35px);
 }
 
 .ecoratings {
@@ -312,8 +308,38 @@ body::-webkit-scrollbar {
 }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 656px) {
  .badge_icons {
 	width: 60px;
+	display: inline;
 }
+}
+
+@media screen and (max-width: 486px) {
+	.badgeDesc {
+		font-size: 12pt;
+		display: inline-block;
+	}
+	.questTitles {
+		font-size: 12pt;
+		transform: translateX(20px);
+	}
+	.dateNum {
+		font-size: 8pt;
+	}
+	.questImages {
+	   width: 25px;
+     }
+     .describeQuest h6{
+     	font-size: 10pt;
+     }
+     .editIcons {
+     	width: 20px;
+     }
+     .catTitles {
+     	font-size: 16pt;
+     }
+     .sticky_buttons {
+     	width: 35px;
+     }
 }
