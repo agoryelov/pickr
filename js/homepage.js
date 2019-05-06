@@ -2,6 +2,12 @@ var globalUser;
 var questArray = [1,2,3,4,5];
 var currentQuest;
 
+
+firebase.auth().onAuthStateChanged(function(user){
+    globalUser = user;
+    console.log(globalUser);
+});
+
 // loads first quest
 $(document).ready(function () {
     currentQuest = questArray[0];
@@ -84,15 +90,31 @@ function loadQuest(questId) {
  $( "#rightArrow" ).click(function() {
     let index = questArray.indexOf(currentQuest);
     currentQuest = questArray[index + 1];
-    console.log(currentQuest);
+    console.log(globalUser.uid);
     loadQuest(currentQuest);
   });
 
   $( "#leftArrow" ).click(function() {
     let index = questArray.indexOf(currentQuest);
     currentQuest = questArray[index - 1];
-    console.log(currentQuest);
+    console.log(globalUser.uid);
     loadQuest(currentQuest);
+  });
+
+
+  
+  $( "#save_button" ).click(function() {
+    var now = new Date().toString(' MMMM d yyyy');;
+    firebase.database().ref("users/"+ globalUser.uid + "/favourites/" + (currentQuest)).update({
+        "questID" : currentQuest,
+    	"savedDate" : now
+    });
+    
+    let index = questArray.indexOf(currentQuest);
+    currentQuest = questArray[index + 1];
+    console.log(globalUser.uid);
+    loadQuest(currentQuest);
+
   });
 
 
