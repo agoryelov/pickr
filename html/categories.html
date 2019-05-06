@@ -15,11 +15,6 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	</head>
 
-	<body id = "homePage" data-spy="scroll" data-target=".navbar" data-offset="50">
-	  <nav id = "nav_Bar" class = "navbar navbar-expand-lg sticky-top navbar-light bg -light">
-      	<div class = "container-fluid text-center">
-      	  <a href = "#Favorites"><img id = "favs" src = "../images/favs.png" alt = "favs_icon"></a>
-
 	<body style = "margin-bottom: 80px" id = "homePage" data-spy="scroll" data-target=".navbar" data-offset="50">
 	  <nav id = "nav_Bar" class = "navbar navbar-expand-lg sticky-top navbar-light bg -light">
       	<div class = "container-fluid text-center">
@@ -46,16 +41,6 @@
       <div class = "container-fluid">
 
         <h5 id = "catPrompt"> Choose what you like </h5>
-
-        <div class = "catGroupsclicked">
-          <h2 class = "catTitles">Outdoors</h2>
-        </div>
-        <div class = "catGroupsunclicked">
-          <h2 class = "catTitles">Cuisine</h2>
-        </div>
-      </div>
-
-        <h5 id = "catPrompt"> Choose 3 quest preferences. </h5>
 
         <div class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
           <h2 class = "catTitles">Outdoors</h2>
