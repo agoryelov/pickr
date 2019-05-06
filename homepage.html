@@ -8,7 +8,30 @@
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     	<!-- Latest compiled JavaScript -->
-    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyATFqGrjtWMrR2i9QtKjyLNHrQ2Om-Yc2s",
+    authDomain: "pickr-d3f4a.firebaseapp.com",
+    databaseURL: "https://pickr-d3f4a.firebaseio.com",
+    projectId: "pickr-d3f4a",
+    storageBucket: "pickr-d3f4a.appspot.com",
+    messagingSenderId: "872200881175",
+    appId: "1:872200881175:web:b09ccd924fe3d405"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+			
 	</head>
 	<body id = "homePage" data-spy="scroll" data-target=".navbar" data-offset="50">
 	  <nav id = "nav_Bar" class = "navbar navbar-expand-lg sticky-top navbar-light bg -light">
@@ -35,24 +58,31 @@
     </div>-->
    
       	<div id = "cardAct" class = "card">    		
-      	 	<img class = "card-img" src = "./images/biking2.jpg" alt = "bike" style = "width:100%;filter: contrast(60%);">
+      	 	<img id = "questImgLink" class = "card-img" src = "./images/biking2.jpg" alt = "bike" style = "width:auto;filter: contrast(60%);">
       	    <div class = "card-img-overlay">
-      	  	  <h4 class = "card-title" style = "color: white; text-shadow:0px 0px 4px black; display:inline-block;"> Bike at Whistler</h4>
+      	  	  <h4 id = "questTitle" class = "card-title" style = "color: white; text-shadow:0px 0px 4px black; display:inline-block;"> Bike at Whistler</h4>
       	  	  <div class = "cost-title">
-      	  	  	<h5 class = "card-title" style = "color: white; display:inline-block;text-shadow:0px 0px 4px black"> Free </h5>
+								<h5 class = "card-title" style = "color: white; display:inline-block;text-shadow:0px 0px 4px black">Cost</h5>
+								<div>
+								<img id = "costOne" class = "dollars" src = "./images/star2.png">
+      	  	  	<img id = "costTwo" class = "dollars" src = "./images/star2.png">
+								<img id = "costThree" class = "dollars" src = "./images/star2.png">
+								</div>
       	  	  </div>
-      	  	  <h4 class = "card-text" style = "color: white; text-shadow:0px 0px 4px black"> 12km </h4>
+      	  	  <h4 id = "distance" class = "card-text" style = "color: white; text-shadow:0px 0px 4px black"> 12km </h4>
       	  	  <div class = "ecoratings">
       	  	  	<h4 style = "color:white; text-shadow:0px 0px 4px black" class = "card-title">Eco-Rating</h4>
-      	  	  	<img class = "stars" src = "./images/star2.png">
-      	  	  	<img class = "stars" src = "./images/star2.png">
-      	  	  	<img class = "stars" src = "./images/star2.png">
+      	  	  	<img id = "ecoOne" class = "stars" src = "./images/star2.png">
+      	  	  	<img id = "ecoTwo" class = "stars" src = "./images/star2.png">
+      	  	  	<img id = "ecoThree" class = "stars" src = "./images/star2.png">
       	      </div>
       		</div> 
       		<div style = "margin-bottom: 80px" class = "card-body">
-      	      	<p style = "text-align: justify" class = "card-text">The Whistler Bike Park attracts downhill mountain bikers from across the globe with an extensive trail network for all abilities across four mountain zones, with 15 km of new trails opening in 2018 as part of the Creek Zone expansion. </p>
+								<p id = "questDescription" style = "text-align: justify" class = "card-text">The Whistler Bike Park attracts downhill mountain bikers from across the globe with an extensive trail network for all abilities across four mountain zones, with 15 km of new trails opening in 2018 as part of the Creek Zone expansion. </p>
+								<p id = "questTags" class = "card-text" style = "font-weight:bold"></p>
+								<p style = "text-align: justify" class = "card-text"><a id = "questLink" href="">Click for more info</a></p>
       	      	<br/>
-      	      	<p class = "card-text" style = "font-weight:bold"><img class = "icons" src = "./images/ping_icon.png" alt = "location"> Whistler, B.C. </p>
+      	      	<p id = "questLocation" class = "card-text" style = "font-weight:bold"><img class = "icons" src = "./images/ping_icon.png" alt = "location"> Whistler, B.C. </p>
 
       	      	<p class = "card-text"><img class = "icons" src = "./images/clock.png" alt = "clock"></p>
       	    </div>
@@ -65,7 +95,7 @@
       	<img id = "save_button" class = "sticky_buttons" src = "./images/like.png" alt = "like_icon">
     </footer>
 
-    <script>
+    <!--<script>
     	var saved = false;
     	$('#save_button').click(function(){
     		if(!saved) {
@@ -76,9 +106,12 @@
     		  saved = false;
     		}
     	});
-    </script>
+    </script>-->
     <script src = "./js/actions.js">
-    </script>
+		</script>
+		
+
+		<script type="text/javascript" src="./js/homepage.js"></script>
     <!--
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js">
