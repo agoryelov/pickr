@@ -61,32 +61,40 @@ function loadQuest(questId) {
 
         // change colour of dollar signs based on questCost
         if(questCost == 0) {
-            $("#costOne").attr("src", "./images/dollar_sign_grey.png")
-            $("#costTwo").attr("src", "./images/dollar_sign_grey.png")
-            $("#costThree").attr("src", "./images/dollar_sign_grey.png")
+            $("#costOne").attr("src", "../images/dollar_sign_grey.png")
+            $("#costTwo").attr("src", "../images/dollar_sign_grey.png")
+            $("#costThree").attr("src", "../images/dollar_sign_grey.png")
         } else if(questCost == 1) {
-            $("#costOne").attr("src", "./images/dollar_sign_green.png")
-            $("#costTwo").attr("src", "./images/dollar_sign_grey.png")
-            $("#costThree").attr("src", "./images/dollar_sign_grey.png")
+            $("#costOne").attr("src", "../images/dollar_sign_green.png")
+            $("#costTwo").attr("src", "../images/dollar_sign_grey.png")
+            $("#costThree").attr("src", "../images/dollar_sign_grey.png")
         } else if(questCost == 2) {
-            $("#costOne").attr("src", "./images/dollar_sign_green.png")
-            $("#costTwo").attr("src", "./images/dollar_sign_green.png")
-            $("#costThree").attr("src", "./images/dollar_sign_grey.png")
+            $("#costOne").attr("src", "../images/dollar_sign_green.png")
+            $("#costTwo").attr("src", "../images/dollar_sign_green.png")
+            $("#costThree").attr("src", "../images/dollar_sign_grey.png")
         } else {
-            $("#costOne").attr("src","./images/dollar_sign_green.png")
-            $("#costTwo").attr("src","./images/dollar_sign_green.png")
-            $("#costThree").attr("src","./images/dollar_sign_green.png")       
+            $("#costOne").attr("src","../images/dollar_sign_green.png")
+            $("#costTwo").attr("src","../images/dollar_sign_green.png")
+            $("#costThree").attr("src","../images/dollar_sign_green.png")       
         }
     })
  }
 
  // currently just moves on to the next quest
- $( "#save_button" ).click(function() {
+ $( "#rightArrow" ).click(function() {
     let index = questArray.indexOf(currentQuest);
     currentQuest = questArray[index + 1];
     console.log(currentQuest);
     loadQuest(currentQuest);
   });
+
+  $( "#leftArrow" ).click(function() {
+    let index = questArray.indexOf(currentQuest);
+    currentQuest = questArray[index - 1];
+    console.log(currentQuest);
+    loadQuest(currentQuest);
+  });
+
 
 
 
