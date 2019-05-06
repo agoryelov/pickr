@@ -4,32 +4,34 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="./css/home.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-   		 <!-- jQuery library -->
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    	<!-- Latest compiled JavaScript -->
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-			
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
+   	<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<!--Google api-->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDObcbBduNUrssstwky_0Bp83RT1qT731Y"></script>
+		<!--Distance and journey time script-->
+		<script src="./js/journeyTimes.js"></script>
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyATFqGrjtWMrR2i9QtKjyLNHrQ2Om-Yc2s",
-    authDomain: "pickr-d3f4a.firebaseapp.com",
-    databaseURL: "https://pickr-d3f4a.firebaseio.com",
-    projectId: "pickr-d3f4a",
-    storageBucket: "pickr-d3f4a.appspot.com",
-    messagingSenderId: "872200881175",
-    appId: "1:872200881175:web:b09ccd924fe3d405"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
+		<script>
+			// Your web app's Firebase configuration
+			var firebaseConfig = {
+				apiKey: "AIzaSyATFqGrjtWMrR2i9QtKjyLNHrQ2Om-Yc2s",
+				authDomain: "pickr-d3f4a.firebaseapp.com",
+				databaseURL: "https://pickr-d3f4a.firebaseio.com",
+				projectId: "pickr-d3f4a",
+				storageBucket: "pickr-d3f4a.appspot.com",
+				messagingSenderId: "872200881175",
+				appId: "1:872200881175:web:b09ccd924fe3d405"
+			};
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig);
+		</script>
 
 			
 	</head>
@@ -69,7 +71,7 @@
 								<img id = "costThree" class = "dollars" src = "./images/star2.png">
 								</div>
       	  	  </div>
-      	  	  <h4 id = "distance" class = "card-text" style = "color: white; text-shadow:0px 0px 4px black"> 12km </h4>
+      	  	  <h4 id = "distance" class = "card-text" style = "color: white; text-shadow:0px 0px 4px black">Calculating...</h4>
       	  	  <div class = "ecoratings">
       	  	  	<h4 style = "color:white; text-shadow:0px 0px 4px black" class = "card-title">Eco-Rating</h4>
       	  	  	<img id = "ecoOne" class = "stars" src = "./images/star2.png">
