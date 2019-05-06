@@ -46,26 +46,26 @@ function calcRoute(userOrigin, questAddress) {
         directionsService.route(requestWalk, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 $("#distance").html(result.routes[0].legs[0].distance.text);
-                $("#walk").html("Walk Time " + result.routes[0].legs[0].duration.text);
+                $("#walkTime").html('<b><img class = "icons" src = "./images/hike.png" alt = "clock">' + result.routes[0].legs[0].duration.text +'</b>');
             } else {
                 console.log("Journey time request failed");
-                $("#walk").html("Could not calculate distance");
+                $("#walkTime").html("Could not calculate distance");
             }
         });
         directionsService.route(requestBike, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                $("#bike").html("Bike Time " + result.routes[0].legs[0].duration.text);
+                $("#bikeTime").html('<b><img class = "icons" src = "./images/bike_icon.png" alt = "clock">' + result.routes[0].legs[0].duration.text +'</b>');
             } else {
                 console.log("Journey time request failed");
-                $("#bike").html("Could not calculate distance");
+                $("#bikeTime").html("Could not calculate distance");
             }
         });
         directionsService.route(requestTransit, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                $("#transit").html("Transit Time: " + result.routes[0].legs[0].duration.text);
+                $("#transitTime").html('<b><img class = "icons" src = "./images/bus.png" alt = "clock">' + result.routes[0].legs[0].duration.text +'</b>');
             } else {
                 console.log("Journey time request failed");
-                $("#transit").html("Could not calculate distance");
+                $("#transitTime").html("Could not calculate distance");
             }
         });
     } else{

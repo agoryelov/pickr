@@ -7,9 +7,10 @@ $(document).ready(function () {
     currentQuest = questArray[0];
     loadQuest(currentQuest);
  })
-
+ var questAddress;
 // loads quest
 function loadQuest(questId) {
+
     console.log("loading quest" + questId);
     var questRef = firebase.database().ref("quests/" + questId);
     questRef.on("value", function(snap) {
@@ -37,6 +38,8 @@ function loadQuest(questId) {
         var questTags = JSON.stringify(snap.val().tags);
         questTags = questTags.substring(1, questTags.length -1);
 
+        questAddress = JSON.stringify(snap.val().address);
+        questAddress = questAddress.substring(1, questAddress.length -1);
 
         // display quest info
         $("#questTitle").html(questName);
@@ -45,6 +48,8 @@ function loadQuest(questId) {
         $("#questImgLink").attr("src", questImgLink);
         $("#questLink").attr("href", questLink);
         $("#questTags").html(questTags);
+        callRoute(questAddress);
+        console.log(currentQuest + ": " + questAddress);
 
 
         // display number of stars based on questEcoRating (1-3)
@@ -84,10 +89,15 @@ function loadQuest(questId) {
  $( "#save_button" ).click(function() {
     let index = questArray.indexOf(currentQuest);
     currentQuest = questArray[index + 1];
-    console.log(currentQuest);
     loadQuest(currentQuest);
+
+    
+    
   });
 
+  function firstQuest() {
+      callRoute(questAddress);
+  }
 
 
   
