@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />   
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDObcbBduNUrssstwky_0Bp83RT1qT731Y"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>       
+        <style>
+            /*output box*/
+            #output {
+                text-align: center;
+                font-size: 2em;
+                margin: 20px auto;
+            }
+        </style>
+    </head>
+    <body>
+       
+        <div id="distance">
+    
+        </div>
+        <div id="walk">
+    
+        </div>
+        <div id="bike">
+    
+        </div>
+        <div id="transit">
+    
+        </div>
+        <button onclick="calcRoute();">Submit</button>
+        <script>  
+            var userOrigin = "3700 Willingdon Ave, Burnaby, BC V5G 3H2";         
+            var userDestination = "555 Seymour St, Vancouver, BC V6B 3H6";
+            //create a DirectionsService object to use the route method and get a result for our request
+            var directionsService = new google.maps.DirectionsService();
+
+            //define calcRoute function
+            function calcRoute() {
+                //creates requests
+                var requestWalk = {
+                    origin: userOrigin,
+                    destination: userDestination,
+                    travelMode: google.maps.TravelMode.WALKING, 
+                    unitSystem: google.maps.UnitSystem.METRIC
+                }
+                var requestBike = {
+                    origin: userOrigin,
+                    destination: userDestination,
+                    travelMode: google.maps.TravelMode.BICYCLING,
+                    unitSystem: google.maps.UnitSystem.METRIC
+                }
+
+                var requestTransit = {
+                    origin: userOrigin,
+                    destination: userDestination,
+                    travelMode: google.maps.TravelMode.TRANSIT,
+                    unitSystem: google.maps.UnitSystem.METRIC
+                }
+
+                //passing the requests to the route methods
+                directionsService.route(requestWalk, function (result, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        console.log("ok");
+                        $("#distance").html("<div>" + "Distance: " + result.routes[0].legs[0].distance.text + ".</div>");
+                        $("#walk").html("<div> Walk Time " + result.routes[0].legs[0].duration.text + ".</div>");
+
+                    } else {
+                        console.log(" not ok");
+                        $("#walk").html("<div> Could not calculate distance</div>");
+                    }
+                });
+                directionsService.route(requestBike, function (result, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        console.log("ok");
+                        $("#bike").html("<div>Bike Time " + result.routes[0].legs[0].duration.text + ".</div>");
+
+                    } else {
+                        console.log(" not ok");
+                        $("#bike").html("<div> Could not calculate distance </div>");
+                    }
+                });
+                directionsService.route(requestTransit, function (result, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        console.log("ok");
+                        $("#transit").html("<div>Transit Time: " + result.routes[0].legs[0].duration.text + ".</div>");
+
+                    } else {
+                        console.log(" not ok");
+                        $("#tranist").html("<div> Could not calculate distance </div>");
+                    }
+                });
+
+
+
+            }
+        </script>
+        
+    </body>
+</html>
