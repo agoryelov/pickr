@@ -1,10 +1,9 @@
 var globalUser;
 var questArray = [1,2,3,4,5];
-var currentQuest;
+var currentQuest = 1;
 
 // loads first quest
 $(document).ready(function () {
-    currentQuest = questArray[0];
     loadQuest(currentQuest);
  })
 
@@ -84,8 +83,9 @@ function loadQuest(questId) {
  $( "#save_button" ).click(function() {
     let index = questArray.indexOf(currentQuest);
     currentQuest = questArray[index + 1];
-    console.log(currentQuest);
+
     loadQuest(currentQuest);
+    console.log(currentQuest);
   });
 
 
