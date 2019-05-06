@@ -17,8 +17,11 @@ $('#setSave').click(function(){
 
 $('#catReset').click(function(){
     var unclickedCats = document.getElementsByClassName('catGroupsunclicked');
-    for(let i = 0; i < unclickedCats.length; i++) {
-        console.log(unclickedCats[i]);
-        unclickedCats[i].setAttribute("class", "catGroupsclicked");
+    var count = 0;
+    while(unclickedCats.length != 0) {
+        let unclickedCats = document.getElementsByClassName('catGroupsunclicked');
+        console.log(unclickedCats[count]);
+        unclickedCats[count].getAttribute("class");
+        unclickedCats[count].setAttribute("class", "catGroupsclicked");
     }
 });
