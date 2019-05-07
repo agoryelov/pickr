@@ -1,9 +1,13 @@
 var globalUser;
 var questArray = [1,2,3,4,5];
+var numOfQuests = questArray.length;
 var currentQuest = 1;
+var index;
+
 
 // loads first quest
 $(document).ready(function () {
+    index = 0;
     loadQuest(currentQuest);
  })
 
@@ -79,15 +83,39 @@ function loadQuest(questId) {
     })
  }
 
+var indexRedone = () => {
+  if(index >= numOfQuests) {
+      index = 0;
+  } else if(index < 0) {
+      index = numOfQuests - 1;
+  } else {
+      
+  }
+};
+
  // currently just moves on to the next quest
  $( "#save_button" ).click(function() {
-    let index = questArray.indexOf(currentQuest);
-    currentQuest = questArray[index + 1];
+    index++;
+    indexRedone();
+    currentQuest = questArray[index];
 
     loadQuest(currentQuest);
     console.log(currentQuest);
   });
 
 
-
+  $('#rightArrow').click(function(){
+    index++;
+    indexRedone();
+    currentQuest = questArray[index];
+    loadQuest(currentQuest);
+    console.log(index);
+  });
+  
+  $('#leftArrow').click(function() {
+    index--;
+    indexRedone();
+    currentQuest = questArray[index];
+    loadQuest(currentQuest);
+  });
   
