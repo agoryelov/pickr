@@ -26,8 +26,8 @@
           	<li class = "nav-item active"><a class = "nav-link" href = "#"><h4 class = "heading">Preferences</h4></a></li> 
           	<li class="nav-item"><a class = "nav-link" href = "quests.html"><h4 class = "heading">My Quests</h4></a></li>
           	<li class="nav-item"><a class = "nav-link" href = "badges.html"><h4 class = "heading">My Badges</h4></a></li>
-        	<li class="nav-item" style = "color: white"> <a class = "nav-link" href = "login.html"><h4 class = "heading" style = "color: white"> Sign up </h4></a></li>
-        	<li class="nav-item"> <a class = "nav-link"><h4 class = "heading" style = "color: white"> Login</h4></a></li>
+        	<li class="nav-item" style = "color: white"> <a class = "nav-link" href = "signup.html"><h4 class = "heading" style = "color: white"> Sign up </h4></a></li>
+        	<li class="nav-item"> <a class = "nav-link" href = "login.html"><h4 class = "heading" style = "color: white"> Login</h4></a></li>
         	<li class="nav-item"> <a class = "nav-link"><h4 class = "heading" style = "color: white"> Help</h4></a></li>
           </ul>
     	</div>
@@ -37,21 +37,41 @@
       	<h2>Preferences</h2>
       </div>
       <div class = "container-fluid">
-        <h5 id = "catPrompt"> Choose 3 quest preferences. </h5>
-        <div class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
-          <h2 class = "catTitles">Outdoors</h2>
+
+        <h5 id = "catPrompt"> Choose what you like </h5>
+
+        <div id = "cat1" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Nature</h2>
         </div>
-        <div class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
-          <h2 class = "catTitles">Museums</h2>
+        <div id = "cat2" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Food</h2>
         </div>
-        <div class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
-          <h2 class = "catTitles">Cuisine</h2>
+        <div id = "cat3" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Family</h2>
         </div>
-        <div class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
-          <h2 class = "catTitles">Movies</h2>
+        <div id = "cat4" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Music</h2>
         </div>
-          <div class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
-          <h2 class = "catTitles">Concerts</h2>
+        <div id = "cat5" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Fitness</h2>
+        </div>
+          <div id = "cat6" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Games</h2>
+        </div>
+          <div id = "cat7" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Culture</h2>
+        </div>
+          <div id = "cat8" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Social</h2>
+        </div>
+        <div id = "cat9" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Volunteer</h2>
+        </div>
+        <div id = "cat10" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Romantic</h2>
+        </div>
+        <div id = "cat11" class = "catGroupsclicked" onclick = "$(this).hasClass('catGroupsclicked') ? $(this).attr('class', 'catGroupsunclicked') : $(this).attr('class', 'catGroupsclicked') ">
+          <h2 class = "catTitles">Adult</h2>
         </div>
     
       </div>
@@ -59,7 +79,9 @@
         <button type = "button" class = "btn btn-primary" id = "catReset">Reset</button>
         <button type = "button" class = "btn btn-primary" id = "setSave">Save</button>
       </footer>
-      <script type = "text/javascript">
+      <script src = "../js/save.js">
+      </script>
+      <script>
       </script>
 	</body>
 </html>

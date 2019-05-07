@@ -275,7 +275,7 @@ body::-webkit-scrollbar {
 .questTitles {
 	color: white;
 	display: inline-block;
-	transform: translateX(-10px);
+	transform: translateX(35px);
 }
 
 .ecoratings {
@@ -312,8 +312,33 @@ body::-webkit-scrollbar {
 }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 470px) {
  .badge_icons {
 	width: 60px;
 }
+ .questTitles{
+ 	font-size: 12pt;
+ }
+ .dateNum {
+ 	font-size: 8pt;
+ 	transform: translateY(5px);
+ }
+ .questImages {
+ 	width: 25px;
+ }
+ .editIcons {
+ 	width: 15px;
+ }
+ .description{
+ 	font-size: 8pt;
+ }
+ .socMediaIcons {
+ 	width: 20px;
+ }
+ .pageTitle {
+ 	font-size: 18pt;
+ }
+ #Filter {
+ 	width: 40px;
+ }
 }
