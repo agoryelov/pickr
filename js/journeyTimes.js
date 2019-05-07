@@ -46,7 +46,7 @@ function calcRoute(userOrigin, questAddress) {
         directionsService.route(requestWalk, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 $("#distance").html(result.routes[0].legs[0].distance.text);
-                $("#walkTime").html('<b><img class = "icons" src = "./images/hike.png" alt = "clock">' + result.routes[0].legs[0].duration.text +'</b>');
+                $("#walkTime").html('<b><img class = "icons" src = "../images/hike.png" alt = "clock">' + result.routes[0].legs[0].duration.text +'</b>');
             } else {
                 console.log("Journey time request failed");
                 $("#walkTime").html("Could not calculate distance");
@@ -54,7 +54,7 @@ function calcRoute(userOrigin, questAddress) {
         });
         directionsService.route(requestBike, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                $("#bikeTime").html('<b><img class = "icons" src = "./images/bike_icon.png" alt = "clock">' + result.routes[0].legs[0].duration.text +'</b>');
+                $("#bikeTime").html('<b><img class = "icons" src = "../images/bike_icon.png" alt = "clock">' + result.routes[0].legs[0].duration.text +'</b>');
             } else {
                 console.log("Journey time request failed");
                 $("#bikeTime").html("Could not calculate distance");
@@ -62,7 +62,7 @@ function calcRoute(userOrigin, questAddress) {
         });
         directionsService.route(requestTransit, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                $("#transitTime").html('<b><img class = "icons" src = "./images/bus.png" alt = "clock">' + result.routes[0].legs[0].duration.text +'</b>');
+                $("#transitTime").html('<b><img class = "icons" src = "../images/bus.png" alt = "clock">' + result.routes[0].legs[0].duration.text +'</b>');
             } else {
                 console.log("Journey time request failed");
                 $("#transitTime").html("Could not calculate distance");
