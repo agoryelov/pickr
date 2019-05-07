@@ -104,26 +104,6 @@ var indexRedone = () => {
   }
 };
 
- // currently just moves on to the next quest
-
- $( "#rightArrow" ).click(function() {
-    let index = questArray.indexOf(currentQuest);
-    currentQuest = questArray[index + 1];
-    loadQuest(currentQuest);
-  });
-
-  function firstQuest() {
-      callRoute(questAddress);
-  }
-  $( "#leftArrow" ).click(function() {
-    let index = questArray.indexOf(currentQuest);
-    currentQuest = questArray[index - 1];
-    console.log(globalUser.uid);
-    loadQuest(currentQuest);
-  });
-
-
-  
   $( "#save_button" ).click(function() {
     var now = new Date().toString(' MMMM d yyyy');;
     firebase.database().ref("users/"+ globalUser.uid + "/favourites/" + (currentQuest)).update({
@@ -137,8 +117,6 @@ var indexRedone = () => {
     loadQuest(currentQuest);
 
   });
-
-
 
   $('#rightArrow').click(function(){
     index++;
