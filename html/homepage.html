@@ -52,7 +52,7 @@
     	</div>
       </div>
     </nav>
-      	<div id = "cardAct" style = "width:auto; height:90vh;" class = "card">    		
+      	<div id = "cardAct" style = "width:auto; height:90vh; border-bottom:none; border-top:none" class = "card">    		
             <img id = "questImgLink" class = "card-img" src = "../images/biking2.jpg" alt = "bike" style = "width:auto;filter: contrast(60%);">
       	    <div class = "card-img-overlay">
                 <h4 id = "questTitle" class = "card-title" style = "color: white; text-shadow:0px 0px 4px black; display:inline-block;"> Bike at Whistler</h4>
@@ -73,26 +73,41 @@
       	      </div>
       		</div> 
       		<div style = "margin-bottom: 120px" class = "card-body">
-                <p id = "questDescription" style = "text-align: justify" class = "card-text">The Whistler Bike Park attracts downhill mountain bikers from across the globe with an extensive trail network for all abilities across four mountain zones, with 15 km of new trails opening in 2018 as part of the Creek Zone expansion. </p>
-                <p id = "questTags" class = "card-text" style = "font-weight:bold"></p>
-                <p style = "text-align: justify" class = "card-text"><a id = "questLink" href="">Click for more info</a></p>
-      	      	<br/>
-      	      	<p id = "questLocation" class = "card-text" style = "font-weight:bold"><img class = "icons" src = "../images/ping_icon.png" alt = "location"> Whistler, B.C. </p>
-
-      	      	<p class = "card-text"><img class = "icons" src = "../images/clock.png" alt = "clock"></p>
-      	    </div>
+            <p id = "questDescription" style = "text-align: justify" class = "card-text">The Whistler Bike Park attracts downhill mountain bikers from across the globe with an extensive trail network for all abilities across four mountain zones, with 15 km of new trails opening in 2018 as part of the Creek Zone expansion. </p>
+            <p id = "questTags" class = "card-text" style = "font-weight:bold"></p>
+            <p style = "text-align: justify" class = "card-text"><a id = "questLink" href="">Click for more info</a></p>
+      	    <br/>
+      	    <p id = "questLocation" class = "card-text" style = "font-weight:bold"><img class = "icons" src = "../images/ping_icon.png" alt = "location"> Whistler, B.C. </p>
+      	    <p class = "card-text"><img class = "icons" src = "../images/clock.png" alt = "clock"></p>
+      	  </div>
       	</div>
-      	      <!--<div class = "information">
-      	      	<img class = "info" src = "./images/info.jpg" alt = "info_icon">
-      	      </div>-->
+  
     <footer id = "buttonBar" class = "fixed-bottom">
-      <img id = "leftArrow" src = "../images/arrow-right.png" alt = "Larrow" class = "sticky_buttons">
-    	<img id = "cancel_button" class = "sticky_buttons" src = "../images/red_x.png" alt = "like_icon">
-      	<img id = "save_button" class = "sticky_buttons" src = "../images/like.png" alt = "like_icon">
-      <img id = "rightArrow" src = "../images/arrow-right.png" alt = "Rarrow" class = "sticky_buttons">
-    </footer>
-
+			<div class = "container-fluid">
+			  <div class = "row">
+				  <div class = "col-3">
+            <img id = "leftArrow" src = "../images/arrow-right.png" alt = "Larrow" class = "sticky_buttons">
+				  </div>
+				  <div class = "col-3">
+			     <img id = "cancel_button" class = "sticky_buttons" src = "../images/red_x.png" alt = "like_icon">
+		      </div>
+		      <div class = "col-3">
+			     <img id = "save_button" class = "sticky_buttons" src = "../images/like.png" alt = "like_icon">
+		      </div>
+		      <div class = "col-3">
+			     <img id = "rightArrow" src = "../images/arrow-right.png" alt = "Rarrow" class = "sticky_buttons">
+		      </div>
+		   </div>
+	    </div>
+		</footer>
+		<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+	crossorigin="anonymous"></script>
+	<script src = "http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
     <script src = "../js/firebase_setup.js"></script>
     <script src = "../js/actions.js"></script>
+
+    <script type="text/javascript" src="../js/homepage.js"></script>
 	</body>
 </html>
