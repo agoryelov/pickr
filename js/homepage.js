@@ -1,6 +1,9 @@
 var globalUser;
 var questArray = [1,2,3,4,5];
-var currentQuest;
+var numOfQuests = questArray.length;
+var currentQuest = 1;
+var index;
+
 
 
 firebase.auth().onAuthStateChanged(function(user){
@@ -10,7 +13,7 @@ firebase.auth().onAuthStateChanged(function(user){
 
 // loads first quest
 $(document).ready(function () {
-    currentQuest = questArray[0];
+    index = 0;
     loadQuest(currentQuest);
  })
  var questAddress;
@@ -91,14 +94,22 @@ function loadQuest(questId) {
     })
  }
 
+var indexRedone = () => {
+  if(index >= numOfQuests) {
+      index = 0;
+  } else if(index < 0) {
+      index = numOfQuests - 1;
+  } else {
+      
+  }
+};
+
  // currently just moves on to the next quest
+
  $( "#rightArrow" ).click(function() {
     let index = questArray.indexOf(currentQuest);
     currentQuest = questArray[index + 1];
     loadQuest(currentQuest);
-
-    
-    
   });
 
   function firstQuest() {
@@ -129,5 +140,17 @@ function loadQuest(questId) {
 
 
 
-
+  $('#rightArrow').click(function(){
+    index++;
+    indexRedone();
+    currentQuest = questArray[index];
+    loadQuest(currentQuest);
+  });
+  
+  $('#leftArrow').click(function() {
+    index--;
+    indexRedone();
+    currentQuest = questArray[index];
+    loadQuest(currentQuest);
+  });
   
