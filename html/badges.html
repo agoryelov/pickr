@@ -10,14 +10,16 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
-<body id="homePage" data-spy="scroll" data-target=".navbar" data-offset="50" style="background:rgb(0, 204, 0)">
+<body id="homePage" data-spy="scroll" data-target=".navbar" data-offset="50">
 	<nav id="nav_Bar" class="navbar navbar-expand-lg sticky-top navbar-light">
 		<div class="container-fluid text-center">
-			<a href="quests.html"><img id="favs" src="../images/favs.png" alt="favs_icon"></a>
-			<a style="margin: 0 auto; transform:translateY(-18px);" class="navbar-brand" href="homepage.html"><img id="logo"
-					src="../images/pickrlogo.png" alt="logo"></a>
+			<a href="quests.html"><i class="fas fa-heart" style="color: rgb(255, 70, 70); font-size: 40px; margin-left: 3vw;"></i></a>
+			<a style="margin: 0 auto; transform:translateY(-18px);" class="navbar-brand" href="homepage.html"><img
+					id="logo" src="../images/pickrlogo.png" alt="logo"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarNav"
 				aria-controls="navBarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -65,19 +67,19 @@
 		</div>
 	</div>
 	-->
-	<br/>
-	<div class="container bg-light rounded shadow-sm" style="width:90%;">
+	<br />
+	<div class="container bg-light rounded shadow-sm border py-2" style="width:90%;">
 		<div class="row">
 			<div class="col-3" style="font-weight: bold;">
-				Outdoors
+				Nature
 			</div>
-			<div class="col-6" style="">
+			<div class="col-6">
 				3712 experience
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12" style="">
-				<div class="progress my-2" style="height: 30px;">
+			<div class="col-12">
+				<div class="progress my-2" style="height: 20px;">
 					<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
 						aria-valuemin="0" aria-valuemax="100"></div>
 				</div>
@@ -92,33 +94,102 @@
 			</div>
 		</div>
 	</div>
-	<br/>
-	<div class="container bg-light rounded shadow-sm" style="width:90%;">
+	<br />
+	<div class="container bg-light rounded shadow-sm border py-2" style="width:90%;">
 		<div class="row">
 			<div class="col-3" style="font-weight: bold;">
 				Fitness
 			</div>
-			<div class="col-6" style="">
+			<div class="col-6">
 				1230 experience
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12" style="">
-				<div class="progress my-2" style="height: 30px;">
+			<div class="col-12">
+				<div class="progress my-2" style="height: 20px;">
 					<div class="progress-bar bg-info" role="progressbar" style="width: 45%" aria-valuenow="25"
 						aria-valuemin="0" aria-valuemax="100"></div>
 				</div>
 			</div>
 		</div>
-		<div class="row justify-content-between align-items">
+		<div class="row justify-content-between ">
 			<div class="col-4" style="font-weight: bold;">
 				Level 2
 			</div>
 			<div class="col-6" style="text-align: end;">
-				<span style="color: lightgray;">25 exp to</span> <span style="color: grey;">Level 3</span>
+				<span style="color: lightgray;">120 exp to</span> <span style="color: grey;">Level 3</span>
 			</div>
 		</div>
 	</div>
+	<br />
+	<div class="container bg-light rounded shadow-sm border py-2" style="width:90%;">
+		<div class="row">
+			<div class="col-3" style="font-weight: bold;">
+				Romantic
+			</div>
+			<div class="col-6">
+				<span id="rom-exp-has">0</span> experience
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="progress my-2" style="height: 20px;">
+					<div id="rom-exp-bar" class="progress-bar bg-danger" role="progressbar" style="width: 0%"
+						aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-between ">
+			<div class="col-4" style="font-weight: bold;">
+				Level 1
+			</div>
+			<div class="col-6" style="text-align: end;">
+				<span style="color: lightgray;"><span id="rom-exp-remaining">100</span> exp to</span> <span
+					style="color: grey;">Level 2</span>
+			</div>
+		</div>
+	</div>
+	<div class="container px-4">
+		<button type="button" class="btn btn-success m-4" onclick="changeExp(10)">Add 10 exp</button>
+		<button type="button" class="btn btn-danger" onclick="changeExp(-10)">Remove 10 exp</button>
+	</div>
+
+	<script>
+		function changeExp(amount) {
+			let currentExp = parseInt($('#rom-exp-has').text());
+			console.log(currentExp);
+			let remExp = parseInt($('#rom-exp-remaining').text());
+			console.log(remExp);
+			let goal = currentExp + amount;
+
+			if (currentExp < goal) {
+				var go = setInterval(moveUp, 50);
+			} else {
+				var go = setInterval(moveDown, 50);
+			}
+
+
+			function moveUp() {
+				if (currentExp > goal) {
+					clearInterval(go);
+				} else {
+					$('#rom-exp-has').text(currentExp++);
+					$('#rom-exp-remaining').text(remExp--);
+					$('#rom-exp-bar').css('width', (currentExp + '%'));
+				}
+			}
+
+			function moveDown() {
+				if (currentExp < goal) {
+					clearInterval(go);
+				} else {
+					$('#rom-exp-has').text(currentExp--);
+					$('#rom-exp-remaining').text(remExp++);
+					$('#rom-exp-bar').css('width', (currentExp + '%'));
+				}
+			}
+		}
+	</script>
 </body>
 
 <<<<<<< HEAD
