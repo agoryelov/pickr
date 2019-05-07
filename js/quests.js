@@ -56,11 +56,12 @@ function DisplayQuest(questID, savedDate) {
 		let questTitle = $("<h3 id = 'questTitle" + questID + "' class='questTitles'></h3>");
 		let questDate = $("<div class = 'date'></div>");
 
-		$("#sortList").append(questItem, questTitle, questDate);
+		$("#sortList").append(questItem);
 
-		questItem.append(questTitle);
+		questItem.append(questTitle, questDate);
 
 		questTitle.text(questName);
+		
 
 
 
