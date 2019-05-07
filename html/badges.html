@@ -10,12 +10,14 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
 <body id="homePage" data-spy="scroll" data-target=".navbar" data-offset="50">
 	<nav id="nav_Bar" class="navbar navbar-expand-lg sticky-top navbar-light">
 		<div class="container-fluid text-center">
-			<a href="quests.html"><img id="favs" src="../images/favs.png" alt="favs_icon"></a>
+			<a href="quests.html"><i class="fas fa-heart" style="color: rgb(255, 70, 70); font-size: 40px; margin-left: 3vw;"></i></a>
 			<a style="margin: 0 auto; transform:translateY(-18px);" class="navbar-brand" href="homepage.html"><img
 					id="logo" src="../images/pickrlogo.png" alt="logo"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarNav"
@@ -156,7 +158,7 @@
 		function changeExp(amount) {
 			let currentExp = parseInt($('#rom-exp-has').text());
 			console.log(currentExp);
-			let remExp =  parseInt($('#rom-exp-remaining').text());
+			let remExp = parseInt($('#rom-exp-remaining').text());
 			console.log(remExp);
 			let goal = currentExp + amount;
 
@@ -165,8 +167,8 @@
 			} else {
 				var go = setInterval(moveDown, 50);
 			}
-			
-			
+
+
 			function moveUp() {
 				if (currentExp > goal) {
 					clearInterval(go);
