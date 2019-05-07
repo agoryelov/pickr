@@ -61,7 +61,7 @@ function DisplayQuest(questID, savedDate) {
 		questItem.append(questTitle, questDate);
 
 		questTitle.text(questName);
-
+		
 
 
 
