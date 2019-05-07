@@ -195,10 +195,6 @@ body::-webkit-scrollbar {
 	width: 35px;
 }
 
-.dollars {
-	width: 35px;
-}
-
 .pageTitle {
 	transform: translateX(30px);
 	display: inline-block;
@@ -275,7 +271,7 @@ body::-webkit-scrollbar {
 .questTitles {
 	color: white;
 	display: inline-block;
-	transform: translateX(15px);
+	transform: translateX(35px);
 }
 
 .ecoratings {
