@@ -1,3 +1,15 @@
+var globalUser;
+
+firebase.auth().onAuthStateChanged(function(user){
+	if (user) {
+		globalUser = user;
+		console.log("user: " + user.uid);
+	} else {
+		console.log("not logged in");
+	}
+
+});
+
 $('#setSave').click(function(){
   var savedItems = $('.catGroupsclicked').length;
 
@@ -10,6 +22,7 @@ $('#setSave').click(function(){
   var clickedCats = document.getElementsByClassName('catGroupsclicked');
   for(let i = 0; i < savedItems; i++) {
     prefCats[i] = clickedCats[i].getElementsByTagName("h2")[0].innerHTML;
+    saveToDatabase(prefCats[i]);
   }
 });
 
@@ -21,3 +34,9 @@ $('#catReset').click(function(){
       unclickedCats[count].setAttribute("class", "catGroupsclicked");
     }
 });
+
+function saveToDatabase(category) {
+  firebase.database().ref("users/"+ globalUser.uid + "/preferences/" + (category)).update({
+    "status" : "yes"
+});
+}
