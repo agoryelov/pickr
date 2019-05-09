@@ -3,7 +3,11 @@ import Swing from 'react-swing';
 import './Swing.css'
 
 class Swiper extends React.Component {
+    custom() {
+        console.log('hello');
+    }
     render() {
+        this.custom();
       return (
           <div id="viewport">
               <Swing 

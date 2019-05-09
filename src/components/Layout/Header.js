@@ -13,16 +13,20 @@ import Firebase from '../firebase'
 
 function HeaderAppBar(props) {
 
-  function logout() {
+  function handleLogout() {
     const firebase = new Firebase();
     firebase.signOut();
   }
 
+  function handleLogin() {
+    //document.body.requestFullscreen();
+  }
+
   let button;
   if (props.authUser) {
-    button = <Button component={Link} to={ROUTES.LANDING} onClick={logout} color="inherit">Logout</Button>;
+    button = <Button component={Link} to={ROUTES.LANDING} onClick={handleLogout} color="inherit">Logout</Button>;
   } else {
-    button = <Button component={Link} to={ROUTES.SIGN_IN} color="inherit">Login</Button>;
+    button = <Button component={Link} to={ROUTES.SIGN_IN} onClick={handleLogin} color="inherit">Login</Button>;
   }
 
   return (
