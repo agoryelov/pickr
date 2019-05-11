@@ -75,7 +75,7 @@ class SignInFormBase extends Component {
                     <InputLabel htmlFor="email-input">
                       Email
                     </InputLabel>
-                    <Input name="email" id="email-input" type="email" onChange={this.onChange} />
+                    <Input name="email" id="email-input" type="email" onChange={this.onChange} required />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
@@ -83,7 +83,7 @@ class SignInFormBase extends Component {
                     <InputLabel htmlFor="password-input">
                       Password
                     </InputLabel>
-                    <Input name="password" id="password-input" type="password" onChange={this.onChange} />
+                    <Input name="password" id="password-input" type="password" onChange={this.onChange} required />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} style={{marginTop: '2em'}}>

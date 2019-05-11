@@ -31,7 +31,7 @@ function HeaderAppBar(props) {
 
   return (
     <div className="header-root">
-      <AppBar style={{background: '#18EAAF', position: 'fixed', top: 0}} position="static">
+      <AppBar style={{background: '#009688', position: 'fixed', top: 0}} position="static">
         <Toolbar>
           <IconButton className="menuButton" color="inherit">
             <MenuIcon />

@@ -2,6 +2,8 @@ import React, { cloneElement } from "react";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import Firebase from '../firebase'
 
 import 'typeface-roboto';
@@ -49,22 +51,22 @@ class CategoryProgress extends React.Component {
       const remExp = this.EXP[this.state.categoryLevel + 1] - this.props.exp;
 
         return(
-        <div>
+        <Paper style={{padding: '0 1em 0 1em'}} >
           <Grid container spacing={8} style={{marginTop: '1em'}}>
             <Grid item xs={12} style={{fontWeight: '600'}}>
               <div>{category}</div>
             </Grid>
             <Grid item xs={12}>
-            <LinearProgress color={this.props.color} style={{height:'20px', borderRadius: '10px'}} variant="determinate" value={this.state.completed} />
+            <LinearProgress color={this.props.color} style={{height:'18px', borderRadius: '5px'}} variant="determinate" value={this.state.completed} />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={4} style={{fontWeight: '600'}}>
               <div>Level {categoryLevel}</div>
             </Grid>
             <Grid item xs={8} style={{textAlign: 'right', color: 'grey'}}>
               <div>{remExp} exp to Level {categoryLevel + 1}</div>
             </Grid>
-          </Grid>          
-        </div>
+          </Grid>
+        </Paper>
         )
     }
 }
@@ -101,10 +103,21 @@ class Badges extends React.Component {
         let content;
         if (!this.state.loading) {
           content = 
-          <div style={{margin: '2em'}}>
-            <CategoryProgress color="primary" category="Sports" exp={this.state.userProgress['Sports']}  />
-            <CategoryProgress color="secondary" category="Romantic" exp={this.state.userProgress['Romantic']}  />
-            <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']}  />
+          <div style={{margin: '1em'}}>
+            <Grid container justify='center' spacing={16}>
+              <Grid item xs={12} sm={10} md={7}>
+                  <CategoryProgress color="primary" category="Sports" exp={this.state.userProgress['Sports']} />
+              </Grid>
+              <Grid item xs={12} sm={10} md={7}>
+                  <CategoryProgress color="secondary" category="Romantic" exp={this.state.userProgress['Romantic']} />
+              </Grid>
+              <Grid item xs={12} sm={10} md={7}>
+                  <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']} />
+              </Grid>
+              <Grid item xs={12} sm={10} md={7}>
+                  <CategoryProgress color="secondary" category="Fitness" exp={this.state.userProgress['Fitness']} />
+              </Grid>
+            </Grid>
           </div>;
         } else {
           content = 

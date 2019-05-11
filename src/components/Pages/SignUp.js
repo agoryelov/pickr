@@ -81,7 +81,7 @@ class SignUpFormBase extends Component {
                   <Grid item xs={8}>
                     <Grid container direction="column-reverse" justify="center" alignItems="center" spacing={8}>
                       <Grid item>
-                        <Typography style={{color: 'grey'}} variant="h5">Sign Up</Typography>
+                        <Typography style={{color: 'grey'}} variant="h5">New Account</Typography>
                       </Grid>
                     </Grid>                  
                   </Grid>
@@ -90,7 +90,7 @@ class SignUpFormBase extends Component {
                       <InputLabel htmlFor="username-input">
                         Username
                       </InputLabel>
-                      <Input name="username" id="username-input" type="text" onChange={this.onChange} />
+                      <Input name="username" id="username-input" type="text" onChange={this.onChange} required />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
@@ -98,7 +98,7 @@ class SignUpFormBase extends Component {
                       <InputLabel htmlFor="email-input">
                         Email
                       </InputLabel>
-                      <Input name="email" id="email-input" type="email" onChange={this.onChange} />
+                      <Input name="email" id="email-input" type="email" onChange={this.onChange} required />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
@@ -106,7 +106,7 @@ class SignUpFormBase extends Component {
                       <InputLabel htmlFor="password-input">
                         Password
                       </InputLabel>
-                      <Input name="password" id="password-input" type="password" onChange={this.onChange} />
+                      <Input name="password" id="password-input" type="password" onChange={this.onChange} required />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} style={{marginTop: '2em'}}>
@@ -120,16 +120,6 @@ class SignUpFormBase extends Component {
     );
   }
 }
-
-/*
-<form onSubmit={this.onSubmit}>
-<input name="username" value={username} onChange={this.onChange} type="text" placeholder="Username" />
-<input name="email" value={email} onChange={this.onChange} type="email" placeholder="Email" />
-<input name="password" value={password} onChange={this.onChange} type="password" placeholder="Password" />
-<button disabled={isInvalid} type="submit">Sign Up</button>
-
-{error && <p>{error.message}</p>}
-</form>*/
 
 const SignUpForm = withRouter(SignUpFormBase);
 
