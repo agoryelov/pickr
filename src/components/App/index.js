@@ -43,10 +43,10 @@ class App extends Component {
         return(
             <Router>
                 <Grid container justify='center' style={{backgroundImage: `url(${Background})`, backgroundSize: '100% auto' }}>
-                    <Grid item xs={12} sm={8} md={7} style={{position: 'sticky', top: '0'}}>
+                    <Grid item xs={12} sm={10} md={8} style={{position: 'sticky', top: '0'}}>
                         <HeaderAppBar authUser={this.state.authUser} />
                     </Grid>
-                    <Grid item xs={12} sm={8} md={7} style={{background: 'white', height: 'calc(100vh - 112px)', overflow: 'scroll'}}>
+                    <Grid item xs={12} sm={10} md={8} style={{background: 'white', height: 'calc(100vh - 112px)', overflow: 'scroll'}}>
                         <Route exact path={ROUTES.LANDING} component={LandingPage} />
                         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
                         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
@@ -54,7 +54,7 @@ class App extends Component {
                         <Route path={ROUTES.BADGES} component={BadgesPage} />
                         <Route path={ROUTES.FAVS} component={FavouritesPage} />
                     </Grid>
-                    <Grid item xs={12} sm={8} md={7}>
+                    <Grid item xs={12} sm={10} md={8}>
                         <BottomNav />
                     </Grid>
                 </Grid>
