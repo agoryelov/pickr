@@ -26,7 +26,7 @@ class SimpleBottomNavigation extends React.Component {
         onChange={this.handleChange}
         showLabels
         className="nav-root" 
-        style={{bottom: '0', color: 'red', position: 'fixed', width: '100%'}}
+        style={{width: '100%', height: '56px', position: 'sticky', bottom: '0'}}
       >
         <BottomNavigationAction component={Link} to={ROUTES.HOME} label="Quests" icon={<CollectionsIcon />} />
         <BottomNavigationAction component={Link} to={ROUTES.FAVS} label="Favourites" icon={<FavoriteIcon />} />

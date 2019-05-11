@@ -105,17 +105,26 @@ class Badges extends React.Component {
           content = 
           <div style={{margin: '1em'}}>
             <Grid container justify='center' spacing={16}>
-              <Grid item xs={12} sm={10} md={7}>
+              <Grid item xs={12} sm={10}>
                   <CategoryProgress color="primary" category="Sports" exp={this.state.userProgress['Sports']} />
               </Grid>
-              <Grid item xs={12} sm={10} md={7}>
+              <Grid item xs={12} sm={10}>
                   <CategoryProgress color="secondary" category="Romantic" exp={this.state.userProgress['Romantic']} />
               </Grid>
-              <Grid item xs={12} sm={10} md={7}>
+              <Grid item xs={12} sm={10}>
                   <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']} />
               </Grid>
-              <Grid item xs={12} sm={10} md={7}>
+              <Grid item xs={12} sm={10}>
                   <CategoryProgress color="secondary" category="Fitness" exp={this.state.userProgress['Fitness']} />
+              </Grid>
+              <Grid item xs={12} sm={10}>
+                  <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']} />
+              </Grid>
+              <Grid item xs={12} sm={10}>
+                  <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']} />
+              </Grid>
+              <Grid item xs={12} sm={10}>
+                  <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']} />
               </Grid>
             </Grid>
           </div>;
