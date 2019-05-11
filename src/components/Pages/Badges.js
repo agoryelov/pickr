@@ -4,6 +4,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Firebase from '../firebase'
 
+import 'typeface-roboto';
+
 
 class CategoryProgress extends React.Component {
     EXP = [0, 0, 50, 125, 200, 300, 400];
@@ -49,13 +51,13 @@ class CategoryProgress extends React.Component {
         return(
         <div>
           <Grid container spacing={8} style={{marginTop: '1em'}}>
-            <Grid item xs={12} style={{fontWeight: 'bold'}}>
+            <Grid item xs={12} style={{fontWeight: '600'}}>
               <div>{category}</div>
             </Grid>
             <Grid item xs={12}>
             <LinearProgress color={this.props.color} style={{height:'20px', borderRadius: '10px'}} variant="determinate" value={this.state.completed} />
             </Grid>
-            <Grid item xs={4} style={{fontWeight: 'bold'}}>
+            <Grid item xs={4}>
               <div>Level {categoryLevel}</div>
             </Grid>
             <Grid item xs={8} style={{textAlign: 'right', color: 'grey'}}>
