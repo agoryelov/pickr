@@ -53,7 +53,7 @@ class CategoryProgress extends React.Component {
               <div>{category}</div>
             </Grid>
             <Grid item xs={12}>
-            <LinearProgress style={{height:'20px', borderRadius: '10px'}} variant="determinate" value={this.state.completed} />
+            <LinearProgress color={this.props.color} style={{height:'20px', borderRadius: '10px'}} variant="determinate" value={this.state.completed} />
             </Grid>
             <Grid item xs={4} style={{fontWeight: 'bold'}}>
               <div>Level {categoryLevel}</div>
@@ -100,8 +100,9 @@ class Badges extends React.Component {
         if (!this.state.loading) {
           content = 
           <div style={{margin: '2em'}}>
-            <CategoryProgress category="Sports" exp={this.state.userProgress['Sports']}  />
-            <CategoryProgress category="Fitness" exp={this.state.userProgress['Fitness']}  />
+            <CategoryProgress color="primary" category="Sports" exp={this.state.userProgress['Sports']}  />
+            <CategoryProgress color="secondary" category="Romantic" exp={this.state.userProgress['Romantic']}  />
+            <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']}  />
           </div>;
         } else {
           content = 

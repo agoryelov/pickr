@@ -31,7 +31,7 @@ class Firebase {
 
   users = () => this.db.ref('users');
 
-  categoryProgress = (uid) => this.db.ref(`users/${uid}/Progress`);
+  categoryProgress = (uid) => this.db.ref(`users/${uid}/progress`);
 
 }
 
