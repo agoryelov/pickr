@@ -1,10 +1,11 @@
-import React, { cloneElement } from "react";
+import React from "react";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Firebase from '../firebase'
+import './Badges.css';
+import JourneyTimes from './JourneyTimes';
 
 import 'typeface-roboto';
 
@@ -22,8 +23,8 @@ class CategoryProgress extends React.Component {
     getLevel = (exp) => {
       let level;
       for (level = 1; level < this.EXP.length; level++) {
-        if (exp <= this.EXP[level]) {
-          return level - 1;
+        if (exp < this.EXP[level + 1]) {
+          return level;
         }
       }
     }
@@ -57,7 +58,7 @@ class CategoryProgress extends React.Component {
               <div>{category}</div>
             </Grid>
             <Grid item xs={12}>
-            <LinearProgress color={this.props.color} style={{height:'18px', borderRadius: '5px'}} variant="determinate" value={this.state.completed} />
+            <LinearProgress classes={{barColorPrimary: `barColorLevel${categoryLevel}`, colorPrimary: `colorLevel${categoryLevel}`}} color="primary" style={{height:'18px', borderRadius: '5px'}} variant="determinate" value={this.state.completed} />
             </Grid>
             <Grid item xs={4} style={{fontWeight: '600'}}>
               <div>Level {categoryLevel}</div>
@@ -77,19 +78,31 @@ class Badges extends React.Component {
         super(props);
 
         this.state = {
-            userProgress: null,
+            testSorted: null,
             loading: true,
         };
     }
 
+    //Helper function to sort the json object
+    sortCats = (categerySnapshot) => {
+      let sorted = [];
+      for (let category in categerySnapshot) {
+        sorted.push([category, categerySnapshot[category]]);
+      }
+      sorted.sort((a, b) => {
+        return (b[1] - a[1]);
+      });
+
+      return sorted;
+    }
+
     componentDidMount() {
       this.setState({ loading: true });
-
       this.firebase.auth.onAuthStateChanged(user => {
         if (user) {
-          this.firebase.categoryProgress(user.uid).once("value", snapshot => {
-            this.setState({ 
-              userProgress: snapshot.val(),
+          this.firebase.categoryProgress(user.uid).once("value", snapshot => {       
+            this.setState({
+              testSorted: this.sortCats(snapshot.val()),
               loading: false,
             });
           });
@@ -101,40 +114,26 @@ class Badges extends React.Component {
     
     render() {
         let content;
-        if (!this.state.loading) {
-          content = 
-          <div style={{margin: '1em'}}>
-            <Grid container justify='center' spacing={16}>
-              <Grid item xs={12} sm={10}>
-                  <CategoryProgress color="primary" category="Sports" exp={this.state.userProgress['Sports']} />
-              </Grid>
-              <Grid item xs={12} sm={10}>
-                  <CategoryProgress color="secondary" category="Romantic" exp={this.state.userProgress['Romantic']} />
-              </Grid>
-              <Grid item xs={12} sm={10}>
-                  <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']} />
-              </Grid>
-              <Grid item xs={12} sm={10}>
-                  <CategoryProgress color="secondary" category="Fitness" exp={this.state.userProgress['Fitness']} />
-              </Grid>
-              <Grid item xs={12} sm={10}>
-                  <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']} />
-              </Grid>
-              <Grid item xs={12} sm={10}>
-                  <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']} />
-              </Grid>
-              <Grid item xs={12} sm={10}>
-                  <CategoryProgress color="primary" category="Fitness" exp={this.state.userProgress['Fitness']} />
-              </Grid>
-            </Grid>
-          </div>;
-        } else {
-          content = 
-          <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
-            <CircularProgress />
-          </div>;
+        if (this.state.loading) {
+          return (
+            <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
+              <CircularProgress />
+            </div>
+          );
         }
-        return <div>{content}</div>;
+
+        const sortedCats = this.state.testSorted;
+        return (
+          <div style={{margin: '1em'}}>
+            <JourneyTimes />
+            <Grid container justify='center' spacing={16}>
+              {sortedCats.map(x => 
+                <Grid key={x[0]} item xs={12} sm={10}>
+                  <CategoryProgress category={x[0]} exp={x[1]} />
+                </Grid>)}
+            </Grid>
+          </div>
+        )
     }
 }
 

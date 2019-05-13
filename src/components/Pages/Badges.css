@@ -1,0 +1,31 @@
+.colorLevel1 {
+    background-color: rgba(219, 247, 166, 0.4) !important;
+}
+
+.barColorLevel1 {
+    background-color: #DAF7A6 !important;
+}
+
+.colorLevel2 {
+    background-color: rgba(255, 196, 0, 0.4) !important;
+}
+
+.barColorLevel2 {
+    background-color: #FFC300 !important;
+}
+
+.colorLevel3 {
+    background-color: rgba(255, 88, 51, 0.4) !important;
+}
+
+.barColorLevel3 {
+    background-color: #FF5733 !important;
+}
+
+.colorLevel4 {
+    background-color: rgba(199, 0, 56, 0.4) !important;
+}
+
+.barColorLevel4 {
+    background-color: #C70039 !important;
+}
