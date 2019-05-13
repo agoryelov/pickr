@@ -30,6 +30,8 @@ class Firebase {
   user = (uid) => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');
+  
+  quests = (questId) => this.db.ref(`quests/${questId}`);
 }
 
 export default Firebase;
