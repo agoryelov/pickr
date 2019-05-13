@@ -7,7 +7,6 @@ import Firebase from '../firebase'
 import './Badges.css';
 import JourneyTimes from './JourneyTimes';
 
-import 'typeface-roboto';
 
 
 class CategoryProgress extends React.Component {

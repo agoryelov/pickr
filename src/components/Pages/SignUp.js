@@ -14,7 +14,7 @@ import MaterialLink from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import 'typeface-roboto';
+
 
 const SignUpPage = () => (
   <div>

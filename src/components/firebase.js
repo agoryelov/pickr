@@ -33,6 +33,11 @@ class Firebase {
 
   categoryProgress = (uid) => this.db.ref(`users/${uid}/progress`);
 
+  favourites = (uid) => this.db.ref(`users/${uid}/favourites`);
+
+  quests = () => this.db.ref(`quests`);
+
+
 }
 
 export default Firebase;
