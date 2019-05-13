@@ -12,7 +12,12 @@ import BottomNav from '../Layout/BottomNav';
 import HeaderAppBar from '../Layout/Header'
 
 import * as ROUTES from '../../constants/routes';
-import Firebase from '../firebase'
+import Firebase from '../firebase';
+
+import Grid from '@material-ui/core/Grid';
+
+import './index.css';
+import Background from '../../img/bg3.jpg';
 
 class App extends Component {
     firebase = new Firebase();
@@ -36,17 +41,23 @@ class App extends Component {
 
     render() {
         return(
-              <Router>
-                <HeaderAppBar authUser={this.state.authUser} />
-                <div style={{marginBottom: '100px', marginTop: '75px'}}>
-                    <Route exact path={ROUTES.LANDING} component={LandingPage} />
-                    <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-                    <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-                    <Route path={ROUTES.HOME} component={HomePage} />
-                    <Route path={ROUTES.BADGES} component={BadgesPage} />
-                    <Route path={ROUTES.FAVS} component={FavouritesPage} />
-                </div>
-                <BottomNav />
+            <Router>
+                <Grid container justify='center' style={{backgroundImage: `url(${Background})`, backgroundSize: '100% auto' }}>
+                    <Grid item xs={12} sm={10} md={8} style={{position: 'sticky', top: '0'}}>
+                        <HeaderAppBar authUser={this.state.authUser} />
+                    </Grid>
+                    <Grid item xs={12} sm={10} md={8} style={{background: 'white', height: 'calc(100vh - 112px)', overflow: 'scroll'}}>
+                        <Route exact path={ROUTES.LANDING} component={LandingPage} />
+                        <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+                        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+                        <Route path={ROUTES.HOME} component={HomePage} />
+                        <Route path={ROUTES.BADGES} component={BadgesPage} />
+                        <Route path={ROUTES.FAVS} component={FavouritesPage} />
+                    </Grid>
+                    <Grid item xs={12} sm={10} md={8}>
+                        <BottomNav />
+                    </Grid>
+                </Grid>
             </Router>
         )
     }

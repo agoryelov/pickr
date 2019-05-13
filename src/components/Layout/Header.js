@@ -13,12 +13,12 @@ import Firebase from '../firebase'
 
 function HeaderAppBar(props) {
 
-  function handleLogout() {
+  const handleLogout = () => {
     const firebase = new Firebase();
     firebase.signOut();
   }
 
-  function handleLogin() {
+  const handleLogin = () => {
     //document.body.requestFullscreen();
   }
 
@@ -31,8 +31,8 @@ function HeaderAppBar(props) {
 
   return (
     <div className="header-root">
-      <AppBar style={{background: '#18EAAF', position: 'fixed', top: 0}} position="static">
-        <Toolbar>
+      <AppBar style={{background: '#2196F3', top: 0, maxHeight: '56px'}} position="sticky" elevation={1}>
+        <Toolbar style={{height: '56px'}}>
           <IconButton className="menuButton" color="inherit">
             <MenuIcon />
           </IconButton>
