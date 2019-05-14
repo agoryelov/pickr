@@ -31,6 +31,16 @@ class Firebase {
   preferences = (uid) => this.db.ref(`users/${uid}/preferences`);
   preferencesWrite = (uid, value) => this.db.ref(`users/${uid}/preferences/${value}`);
   users = () => this.db.ref('users');
+
+  categoryProgress = (uid) => this.db.ref(`users/${uid}/progress`);
+
+  favourites = (uid) => this.db.ref(`users/${uid}/favourites`);
+
+  questsAll = () => this.db.ref(`quests`);
+
+
+  
+  quests = (questId) => this.db.ref(`quests/${questId}`);
 }
 
 export default Firebase;
