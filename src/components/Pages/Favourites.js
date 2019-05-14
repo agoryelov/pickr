@@ -32,7 +32,7 @@ class Favourites extends React.Component {
       this.setState({ loading: true });
 
       // grab list of all quests in firebase and save to questList
-      this.firebase.quests().once("value", snapshot => {
+      this.firebase.questsAll().once("value", snapshot => {
         console.log(snapshot.val());
         this.setState({ 
           questList: snapshot.val(),

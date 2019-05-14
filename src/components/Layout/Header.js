@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
-import Firebase from '../firebase'
+import Firebase from '../firebase';
 
 function HeaderAppBar(props) {
 
