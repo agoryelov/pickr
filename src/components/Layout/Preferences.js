@@ -16,7 +16,9 @@ import MoneySlide from './SliderMoney';
 import DistSlide from './SliderDistance';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
+import CheckboxList from '../Layout/prefButtons';
 
 
 const styles = {
@@ -35,12 +37,18 @@ const styles = {
         width: 150,
     }
 };
+
+
 class SwipeableTemporaryDrawer extends React.Component {
     state = {
       right: false,
+      
     };
+
+    
   
     toggleDrawer = (side, open) => () => {
+
       this.setState({
         [side]: open,
       });
@@ -54,54 +62,37 @@ class SwipeableTemporaryDrawer extends React.Component {
       const sideList = (
         <div className={classes.list}>
           <List>
-            {[' ',].map((text, index) => (
-                <ListItem button key={text}>
-                    <div className={classes.drawerHeader}>
-                        
-                            <ListItemIcon>
-                                <IconButton onClick={this.toggleDrawer('right', false)}>
-                                    <ChevronRightIcon />
-                                </IconButton>
-                            </ListItemIcon>
-                     </div>
-                    <ListItemText primary={text} />
-                </ListItem>
-                ))}
+            <ListItem>
+              <div className={classes.drawerHeader}>
+                <ListItemText primary={""} />
+                <ListItemIcon>
+                  <IconButton onClick={this.toggleDrawer('right', false)}> 
+                  Preferences &nbsp;
+                    <ChevronRightIcon />
+                  </IconButton>
+                </ListItemIcon>
+                <Divider />
+              </div>
+
+            </ListItem>
+            
+            <ListItem>
+              $ <MoneySlide />
+            </ListItem>
+            <ListItem>
+              <DistSlide />
+            </ListItem>
           </List>
           <Divider />
-          <List>
-            {[<MoneySlide />, <DistSlide />,].map((text, index) => (
-                <ListItem button key={text}>
-                    <ListItemIcon>{index % 2 === 0 ? '$' : ''}</ListItemIcon>
-                    <ListItemText primary={text} />
-                </ListItem>
-                ))}
-          </List>
-          <Divider />
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+          <CheckboxList />
+          
         </div>
       );
   
   
       return (
         <div>
-          
+          <DistSlide />
           <Button onClick={this.toggleDrawer('right', true)}>Open Right</Button>
           
          
