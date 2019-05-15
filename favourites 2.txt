@@ -28,9 +28,6 @@ class Favourites extends React.Component {
 
             // current user
             globalUser: null,
-
-            // an array of quests favourited by the user
-            favouriteArray: [],
         };
     }
 
@@ -54,81 +51,44 @@ class Favourites extends React.Component {
             this.setState({ 
               list: snapshot.val(),
               loading: false,
+
             });
-            this.updateArray();
+            console.log("if user list:" + this.state.list);
           });
+          console.log("list:" + this.state.list);
         } else {
           //not logged in
         }
-
       });
     }
 
-    // updates user Favourite Quests array
-    updateArray() {
-      let array= [];
-      for (var quest in this.state.list) {
-        console.log(quest);
-        let questID = this.state.list[quest].questID;
-        let savedDate = this.state.list[quest].savedDate;
-        let currentQuest = {
-          questID: questID,
-          savedDate: savedDate
-        };
-        console.log("adding quest");
-        array.push(currentQuest);
-      }
-      this.setState({
-        favouriteArray: array,
-      });
+    deleteQuest(id) {
+            console.log("quest to be deleted " + id);
+            this.firebase.favourites(this.globalUser.uid).child('1').remove();
+            this.createList();
+
     }
-
-    // deletes the quest associated with the delete button that called this
-    deleteQuest(event) {
-            console.log("quest to be deleted " + event.currentTarget.value);
-            this.firebase.favourites(this.globalUser.uid).child(event.currentTarget.value).remove();
-
-            this.firebase.favourites(this.globalUser.uid).once("value", snapshot => {
-              console.log(snapshot.val());
-              this.setState({ 
-                list: snapshot.val(),  
-              });
-
-              this.updateArray();
-
-    });
-  }
 
     createList = () => {
-      // Array of favourited quests in JSX syntax
       let favouriteList = []
 
-      // if favourites quests list is empty render a blank list
-      if(this.state.favouriteArray.length === 0) {
-        console.log("no favourites");
-        return <div>No Quests Favourited</div>
-      }
+      for (var i = 0; i < this.state.list.length; i++) {
+        console.log(i);
+        if (this.state.list[i] != undefined) {
 
-      // if favourites quests list is not empty
-
-      // iterate through every quest in favouriteArray and create a JSX list for the quest
-      for (let i = 0; i < this.state.favouriteArray.length; i++) {
-        console.log(i +" length " + this.state.favouriteArray.length);
-        if (this.state.favouriteArray[i] != undefined) {
-
-          let questName = JSON.stringify(this.state.questList[this.state.favouriteArray[i].questID].name);
+          let questName = JSON.stringify(this.state.questList[this.state.list[i].questID].name);
           questName = questName.substring(1, questName.length -1);
 
-          let questDescription = JSON.stringify(this.state.questList[this.state.favouriteArray[i].questID].description);
+          let questDescription = JSON.stringify(this.state.questList[this.state.list[i].questID].description);
           questDescription = questDescription.substring(1, questDescription.length -1);
 
           // let questImageLink = JSON.stringify(this.state.questList[this.state.list[i].questID].imgLink);
           // questImageLink = questImageLink.substring(1, questImageLink.length -1);
 
-          let savedDate = JSON.stringify(this.state.favouriteArray[i].savedDate);
+          let savedDate = JSON.stringify(this.state.list[i].savedDate);
           savedDate = savedDate.substring(1, savedDate.length -1);
 
-          console.log("quest" + this.state.questList[this.state.favouriteArray[i].questID].name);
+          console.log("quest" + this.state.questList[this.state.list[i].questID].name);
           favouriteList.push(
             <div className = "questContainer">
               <div className = "questTop">
@@ -142,7 +102,7 @@ class Favourites extends React.Component {
                 {questDescription}
               </div>
               <div className = "questButtons">
-                <button className="delete" value = {this.state.favouriteArray[i].questID} onClick={this.deleteQuest.bind(this)
+                <button className="delete" value = {this.state.list[i].questID} onClick={() => this.deleteQuest(  value)
                   }>Delete
                 </button>
                 <img src="../../red_x.png" />
