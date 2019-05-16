@@ -142,17 +142,17 @@ class Favourites extends React.Component {
       completedDate : now
     });
 
-    // this.firebase.favourites(this.globalUser.uid).child(event.currentTarget.value).remove();
+    this.firebase.favourites(this.globalUser.uid).child(event.currentTarget.value).remove();
 
-    // this.firebase.favourites(this.globalUser.uid).once("value", snapshot => {
-    //   console.log(snapshot.val());
-    //   this.setState({ 
-    //     list: snapshot.val(),  
-    //   });
+    this.firebase.favourites(this.globalUser.uid).once("value", snapshot => {
+      console.log(snapshot.val());
+      this.setState({ 
+        list: snapshot.val(),  
+      });
 
-    //   this.updateFavouriteArray();
+      this.updateFavouriteArray();
 
-    // });
+    });
 
     this.firebase.completed(this.globalUser.uid).once("value", snapshot => {
     this.setState({ 
