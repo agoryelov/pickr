@@ -16,6 +16,11 @@ import Menu from '@material-ui/core/Menu';
 import { withStyles } from '@material-ui/core/styles';
 import Preferences from '../Layout/Preferences';
 
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+import './Header.css';
+
 const styles = {
     root: {
       flexGrow: 1,
@@ -35,8 +40,14 @@ class Header2 extends React.Component {
         this.state = {
             auth: null,
             anchorEl: null,
+            navValue: 0,
         };
     }
+
+    handleNavChange = (event, navValue) => {
+      this.setState({ navValue });
+    };
+
       handleChange = event => {
         this.setState({ auth: event.target.checked });
       };
@@ -100,7 +111,6 @@ class Header2 extends React.Component {
         }
     return(
         <div className="header-root">
-        <AppBar style={{background: '#2196F3', top: 0, maxHeight: '56px'}} position="sticky" elevation={1}>
             <Toolbar style={{height: '56px'}}>
             <IconButton className="menuButton" color="inherit">
                 <MenuIcon />
@@ -110,8 +120,17 @@ class Header2 extends React.Component {
             </Typography>
                 {button}
             </Toolbar>
-        </AppBar>
-        
+            <Tabs
+            variant="fullWidth" 
+            value={this.state.navValue} 
+            onChange={this.handleNavChange} 
+            classes={{indicator: "customIndicator"}} 
+            centered
+          >
+            <Tab component={Link} to={ROUTES.HOME} label="Quests" classes={{root: "tabCustom"}} />
+            <Tab component={Link} to={ROUTES.LANDING} label="Saved" classes={{root: "tabCustom"}} />
+            <Tab component={Link} to={ROUTES.BADGES} label="Badges" classes={{root: "tabCustom"}} />
+          </Tabs>
         
         </div>
     )

@@ -46,28 +46,28 @@ class SignUpFormBase extends Component {
         username,
         email,
         preferences: {
-          Nature: "true",
-          Food: "true",
-          Fitness: "true",
-          Culture: "true",
-          Social: "true",
-          Creative: "true",
-          Family: "true",
-          Romantic: "true",
-          Volunteer: "true",
-          Adult: "true"
+          Nature: true,
+          Food: true,
+          Fitness: true,
+          Culture: true,
+          Social: true,
+          Creative: true,
+          Family: true,
+          Romantic: true,
+          Volunteer: true,
+          Adult: true
         },
         progress: {
-          Nature: "0",
-          Food: "0",
-          Fitness: "0",
-          Culture: "0",
-          Social: "0",
-          Creative: "0",
-          Family: "0",
-          Romantic: "0",
-          Volunteer: "0",
-          Adult: "0"
+          Nature: 0,
+          Food: 0,
+          Fitness: 0,
+          Culture: 0,
+          Social: 0,
+          Creative: 0,
+          Family: 0,
+          Romantic: 0,
+          Volunteer: 0,
+          Adult: 0
         },
           favourites: "null"
       });
