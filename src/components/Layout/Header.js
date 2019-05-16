@@ -29,6 +29,8 @@ function HeaderAppBar(props) {
     button = <Button component={Link} to={ROUTES.SIGN_IN} onClick={handleLogin} color="inherit">Login</Button>;
   }
 
+  let aboutButton = <Button component={Link} to={ROUTES.ABOUT} color="inherit">About</Button>;
+
   return (
     <div className="header-root">
       <AppBar style={{background: '#2196F3', top: 0, maxHeight: '56px'}} position="sticky" elevation={1}>
@@ -39,6 +41,7 @@ function HeaderAppBar(props) {
           <Typography style={{ flexGrow: '1'}} variant="h6" color="inherit" className="grow">
             PICKR
           </Typography>
+          {aboutButton}
           {button}
         </Toolbar>
       </AppBar>

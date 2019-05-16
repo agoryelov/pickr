@@ -28,7 +28,8 @@ class Firebase {
   signOut = () => this.auth.signOut();
 
   user = (uid) => this.db.ref(`users/${uid}`);
-
+  preferences = (uid) => this.db.ref(`users/${uid}/preferences`);
+  preferencesWrite = (uid, value) => this.db.ref(`users/${uid}/preferences/${value}`);
   users = () => this.db.ref('users');
 
   categoryProgress = (uid) => this.db.ref(`users/${uid}/progress`);
