@@ -23,7 +23,6 @@ class Cell extends Component {
     render() {
         const { value, onClick, cMenu} = this.props;
         let className = "cell" + (value.dataitem.isRevealed ? "": " hidden") + (value.dataitem.isMine ? " is-mine" : "") + (value.dataitem.isFlagged ? " is-flag" : "");
-        console.log(value); 
         return(
             <div 
             onClick = {onClick}

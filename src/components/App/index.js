@@ -7,6 +7,8 @@ import SignInPage from '../Pages/SignIn';
 import HomePage from '../Pages/HomePage';
 import BadgesPage from '../Pages/Badges';
 import FavouritesPage from '../Pages/Favourites';
+import AboutPage from '../Pages/About';
+import SweepPage from '../Pages/Sweep';
 
 import BottomNav from '../Layout/BottomNav';
 import HeaderAppBar from '../Layout/Header'
@@ -53,6 +55,8 @@ class App extends Component {
                         <Route path={ROUTES.HOME} component={HomePage} />
                         <Route path={ROUTES.BADGES} component={BadgesPage} />
                         <Route path={ROUTES.FAVS} component={FavouritesPage} />
+                        <Route path={ROUTES.ABOUT} component={AboutPage} />
+                        <Route path={ROUTES.SWEEP} component={SweepPage} />
                     </Grid>
                     <Grid item xs={12} sm={10} md={8}>
                         <BottomNav />
