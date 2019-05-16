@@ -19,8 +19,19 @@ class QuestCard extends React.Component {
         };
     }
     componentDidMount() {
-        if (this.props.coords != null) {
-            const distance = this.getDistanceFromLatLonInKm(this.props.coords.latitude, this.props.coords.longitude, 49.296124, -123.127986);
+        //Check that props data actually came in
+        if (this.props.coords != null && this.props.questData['coordinates'] != null) {
+
+            //Grab location data from passed props
+            const userLat = this.props.coords.latitude;
+            const userLong = this.props.coords.longitude;
+            const questLat = this.props.questData['coordinates']['lat'];
+            const questLong = this.props.questData['coordinates']['long'];
+
+            //Calculate distance based on the Haversine Formula
+            const distance = this.getDistanceFromLatLonInKm(userLat, userLong, questLat, questLong);
+
+            //Update Card state too have distance
             this.setState({ distance });
         }
     }
