@@ -31,18 +31,24 @@ class StepSlider extends React.Component {
   };
 
   componentDidMount() {
+    console.log("Mounted");
     this.firebase.auth.onAuthStateChanged((authUser) => {
+      
         if (authUser) {
+          var lessThan = '<';
+          var greaterThan = '>';
             this.setState({ authUser });
             this.userPreferences = this.firebase.preferences(authUser.uid);
             this.userPreferences.once("value", snapshot => {
-              switch(snapshot.val()) {
+              console.log("snap" + snapshot.val());
+              switch(snapshot.val().Cost) {
                 case 0:
                   ReactDOM.render(<div><img src = {CoinFull} alt = "coins" style={imgStyle} />
                   <img src = {CoinEmpty} alt = "coins" style={imgStyle} />
                   <img src = {CoinEmpty} alt = "coins" style={imgStyle} />
                   </div>
                   , document.getElementById('dollarSigns'));  
+                  ReactDOM.render(<span>{lessThan} $20 </span>, document.getElementById('cost'));
                   break;
                 case 1:
                   ReactDOM.render(<div><img src = {CoinFull} alt = "coins" style={imgStyle} />
@@ -50,6 +56,7 @@ class StepSlider extends React.Component {
                   <img src = {CoinEmpty} alt = "coins" style={imgStyle} />
                   </div>
                   , document.getElementById('dollarSigns'));  
+                  ReactDOM.render(<span>{lessThan} $50 </span>, document.getElementById('cost'))
                   break;
                 default:
                   ReactDOM.render(<div><img src = {CoinFull} alt = "coins" style={imgStyle} />
@@ -57,6 +64,7 @@ class StepSlider extends React.Component {
                   <img src = {CoinFull} alt = "coins" style={imgStyle} />
                   </div>
                   , document.getElementById('dollarSigns'));   
+                  ReactDOM.render(<span> {greaterThan} $50 </span>, document.getElementById('cost'));
               } 
               
               //document.getElementById("dollarSigns").setInnerHTML(this.state.moneySigns);
@@ -80,6 +88,13 @@ class StepSlider extends React.Component {
         </div>
         , document.getElementById('dollarSigns'));  
         ReactDOM.render(<span>{lessThan} $20 </span>, document.getElementById('cost'));
+        this.firebase.auth.onAuthStateChanged((authUser) => {
+          if (authUser) {
+            this.firebase.preferences(authUser.uid).update({
+              Cost: 0,
+            });
+          }
+        })
         break;
       case 1:
         ReactDOM.render(<div><img src = {CoinFull} alt = "coins" style={imgStyle} />
@@ -88,7 +103,15 @@ class StepSlider extends React.Component {
         </div>
         , document.getElementById('dollarSigns'));  
         ReactDOM.render(<span>{lessThan} $50 </span>, document.getElementById('cost'));
+        this.firebase.auth.onAuthStateChanged((authUser) => {
+          if (authUser) {
+            this.firebase.preferences(authUser.uid).update({
+              Cost: 1,
+            });
+          }
+        })
         break;
+        
        case 2:
        {
         ReactDOM.render(<div><img src = {CoinFull} alt = "coins" style={imgStyle} />
@@ -97,6 +120,13 @@ class StepSlider extends React.Component {
         </div>
         , document.getElementById('dollarSigns'));  
         ReactDOM.render(<span> {greaterThan} $50 </span>, document.getElementById('cost'));
+        this.firebase.auth.onAuthStateChanged((authUser) => {
+          if (authUser) {
+            this.firebase.preferences(authUser.uid).update({
+              Cost: 2,
+            });
+          }
+        })
        }
     }});
  

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/lab/Slider';
+import Firebase from '../firebase';
 
 const styles = {
   root: {
@@ -14,12 +15,41 @@ const styles = {
 };
 
 class SimpleSlider extends React.Component {
+  firebase = new Firebase();
   state = {
     value: 30,
   };
+  componentDidMount() {
+    this.firebase.auth.onAuthStateChanged((authUser) => {
+      console.log(authUser);
+        if (authUser) {
+            this.setState({ authUser });
+            this.userPreferences = this.firebase.preferences(authUser.uid);
+            this.userPreferences.once("value", snapshot => {
+            this.setState({value : snapshot.val().Distance,})    
 
+                   
+                   console.log(this.state.checked);
+                   
+            
+                
+            })
+            
+        } else {
+            this.setState({ authUser: null });
+            
+        }
+    });
+  }
   handleChange = (event, value) => {
     this.setState({ value });
+    this.firebase.auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        this.firebase.preferences(authUser.uid).update({
+          Distance: value,
+        });
+      }
+    })
   }; 
 
   render() {
