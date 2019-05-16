@@ -18,6 +18,18 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '534298920308249',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.3'
+    });
+  };
+</script>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
     <title>React App</title>
   </head>
   <body>
