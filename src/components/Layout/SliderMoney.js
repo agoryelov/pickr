@@ -26,7 +26,7 @@ const imgStyle = {
 class StepSlider extends React.Component {
   firebase = new Firebase();
   state = {
-    value: 2,
+    value: 0,
     moneySigns: null,
   };
 
@@ -49,6 +49,7 @@ class StepSlider extends React.Component {
                   </div>
                   , document.getElementById('dollarSigns'));  
                   ReactDOM.render(<span>{lessThan} $20 </span>, document.getElementById('cost'));
+                  this.setState({value : 0}); 
                   break;
                 case 1:
                   ReactDOM.render(<div><img src = {CoinFull} alt = "coins" style={imgStyle} />
@@ -57,6 +58,7 @@ class StepSlider extends React.Component {
                   </div>
                   , document.getElementById('dollarSigns'));  
                   ReactDOM.render(<span>{lessThan} $50 </span>, document.getElementById('cost'))
+                  this.setState({value : 1}); 
                   break;
                 default:
                   ReactDOM.render(<div><img src = {CoinFull} alt = "coins" style={imgStyle} />
@@ -65,6 +67,7 @@ class StepSlider extends React.Component {
                   </div>
                   , document.getElementById('dollarSigns'));   
                   ReactDOM.render(<span> {greaterThan} $50 </span>, document.getElementById('cost'));
+                  this.setState({value : 2}); 
               } 
               
               //document.getElementById("dollarSigns").setInnerHTML(this.state.moneySigns);
