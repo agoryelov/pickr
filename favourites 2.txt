@@ -62,9 +62,9 @@ class Favourites extends React.Component {
       });
     }
 
-    deleteQuest(event) {
-            console.log("quest to be deleted " + event.currentTarget.value);
-            this.firebase.favourites(this.globalUser.uid).child(event.currentTarget.value).remove();
+    deleteQuest(id) {
+            console.log("quest to be deleted " + id);
+            this.firebase.favourites(this.globalUser.uid).child('1').remove();
             this.createList();
 
     }
@@ -102,7 +102,7 @@ class Favourites extends React.Component {
                 {questDescription}
               </div>
               <div className = "questButtons">
-                <button className="delete" value = {this.state.list[i].questID} onClick={this.deleteQuest
+                <button className="delete" value = {this.state.list[i].questID} onClick={() => this.deleteQuest(  value)
                   }>Delete
                 </button>
                 <img src="../../red_x.png" />

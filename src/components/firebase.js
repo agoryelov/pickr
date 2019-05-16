@@ -38,9 +38,9 @@ class Firebase {
 
   questsAll = () => this.db.ref(`quests`);
 
-
-  
   quests = (questId) => this.db.ref(`quests/${questId}`);
+
+  completed = (uid) => this.db.ref(`users/${uid}/completed`);
 }
 
 export default Firebase;
