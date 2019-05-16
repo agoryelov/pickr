@@ -10,9 +10,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
-import MaterialLink from '@material-ui/core/Link';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
 
@@ -48,6 +45,31 @@ class SignUpFormBase extends Component {
       this.firebase.user(authUser.user.uid).set({
         username,
         email,
+        preferences: {
+          Nature: "true",
+          Food: "true",
+          Fitness: "true",
+          Culture: "true",
+          Social: "true",
+          Creative: "true",
+          Family: "true",
+          Romantic: "true",
+          Volunteer: "true",
+          Adult: "true"
+        },
+        progress: {
+          Nature: "0",
+          Food: "0",
+          Fitness: "0",
+          Culture: "0",
+          Social: "0",
+          Creative: "0",
+          Family: "0",
+          Romantic: "0",
+          Volunteer: "0",
+          Adult: "0"
+        },
+          favourites: "null"
       });
     })
     .then(() => {
