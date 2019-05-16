@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Firebase from '../firebase'
 import './Badges.css';
-import JourneyTimes from './JourneyTimes';
 
 
 
@@ -67,7 +66,7 @@ class CategoryProgress extends React.Component {
             </Grid>
           </Grid>
         </Paper>
-        )
+        );
     }
 }
 
@@ -112,7 +111,6 @@ class Badges extends React.Component {
     }
     
     render() {
-        let content;
         if (this.state.loading) {
           return (
             <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
@@ -122,9 +120,9 @@ class Badges extends React.Component {
         }
 
         const sortedCats = this.state.testSorted;
+        console.log(sortedCats);
         return (
           <div style={{margin: '1em'}}>
-            <JourneyTimes />
             <Grid container justify='center' spacing={16}>
               {sortedCats.map(x => 
                 <Grid key={x[0]} item xs={12} sm={10}>

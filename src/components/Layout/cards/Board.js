@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import Cell from './Cell';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import Smiley from '../images/smiley.png';
+import Frown from '../images/frowney.png';
+import Face from '../images/mineface.jpg';
+
+var w;
 
 class Board extends Component {
     constructor(props){
@@ -9,7 +15,9 @@ class Board extends Component {
           boardData: this.initBoardData(this.props.height, this.props.width, this. props.mines),
           gameStatus: "Game in Progress",
           mineCount: this.props.mines,
+          face: Face,
         };
+        console.log(this.state.face);
     } 
 
     createEmptyArray = (height, width) => {
@@ -196,7 +204,8 @@ class Board extends Component {
 
         if(this.state.boardData[x][y].isMine) {
             this.setState({
-                gameStatus: "You Lose."
+                gameStatus: "You Lose.",
+                face: Frown,
             });
             this.revealBoard();
         }
@@ -212,7 +221,8 @@ class Board extends Component {
         if (this.getHidden(updatedData).length === this.props.mines) {
             this.setState({
                 mineCount: 0,
-                gameStatus: "You Win!"
+                gameStatus: "You Win!",
+                face: Smiley,
             });
 
             this.revealBoard();
@@ -259,9 +269,12 @@ class Board extends Component {
     renderBoard = (data) => {
         return data.map((datarow) => {
             return datarow.map((dataitem) => {
+                w = window.innerWidth;
                 return (
+                   
                     <div
                       key = {dataitem.x * datarow.length + dataitem.y}
+                      style ={{transform: `translateX(${w/10}px)`}}
                     >
                     <Cell
                       value = {{dataitem}}
@@ -277,20 +290,34 @@ class Board extends Component {
         });
     }
 
+    reset = () => {
+        this.setState ({
+          boardData: this.initBoardData(this.props.height, this.props.width, this. props.mines),
+          gameStatus: "Game in Progress",
+          mineCount: this.props.mines,
+          face: Face,
+        });
+    }
+
     render() {
         return(
+  
             <div className = "board">
                 <div className = "game-info">
                     <span className = "info">
                         Number of Mines: {this.state.mineCount}
                     </span>
                     <br />
-                    <span className = "info">
+                    <div className = "info">
                         {this.state.gameStatus}
-                    </span>
+                        <img style = {{width: '50px'}}src = {this.state.face} alt = "mineFace"/>
+                    </div>
+                    <Button style = {{backgroundColor: "white", marginTop: '10px'}}onClick = {this.reset}> Reset</Button>
+                    
                 </div>
                 {this.renderBoard(this.state.boardData)}
             </div>
+  
             );
         }
     

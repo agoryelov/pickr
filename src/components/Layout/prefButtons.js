@@ -35,6 +35,7 @@ class CheckboxList extends React.Component {
   
   componentDidMount() {
     this.firebase.auth.onAuthStateChanged((authUser) => {
+      console.log(authUser);
         if (authUser) {
             this.setState({ authUser });
             this.userPreferences = this.firebase.preferences(authUser.uid);

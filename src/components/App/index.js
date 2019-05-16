@@ -5,11 +5,14 @@ import LandingPage from '../Pages/Landing';
 import SignUpPage from '../Pages/SignUp';
 import SignInPage from '../Pages/SignIn';
 import HomePage from '../Pages/HomePage';
+import QuestPage from '../Pages/QuestPage';
 import BadgesPage from '../Pages/Badges';
 import FavouritesPage from '../Pages/Favourites';
+import AboutPage from '../Pages/About';
+import SweepPage from '../Pages/Sweep';
 
 import BottomNav from '../Layout/BottomNav';
-import HeaderAppBar from '../Layout/Header'
+import HeaderAppBar from '../Layout/Header2'
 
 import * as ROUTES from '../../constants/routes';
 import Firebase from '../firebase';
@@ -50,9 +53,11 @@ class App extends Component {
                         <Route exact path={ROUTES.LANDING} component={LandingPage} />
                         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
                         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-                        <Route path={ROUTES.HOME} component={HomePage} />
+                        <Route path={ROUTES.HOME} component={QuestPage} />
                         <Route path={ROUTES.BADGES} component={BadgesPage} />
                         <Route path={ROUTES.FAVS} component={FavouritesPage} />
+                        <Route path={ROUTES.ABOUT} component={AboutPage} />
+                        <Route path={ROUTES.SWEEP} component={SweepPage} />
                     </Grid>
                     <Grid item xs={12} sm={10} md={8}>
                         <BottomNav />
