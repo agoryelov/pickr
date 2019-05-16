@@ -21,6 +21,9 @@ import IconButton from '@material-ui/core/IconButton';
 import CheckboxList from '../Layout/prefButtons';
 
 
+
+
+
 const styles = {
     catPrompt: {
         textAlign: 'center',
@@ -32,6 +35,7 @@ const styles = {
     },
     fullList: {
         width: 'auto',
+        height: 40,
     },
     slider: {
         width: 150,
@@ -41,7 +45,7 @@ const styles = {
 
 class SwipeableTemporaryDrawer extends React.Component {
     state = {
-      right: false,
+      bottom: false,
       
     };
 
@@ -59,14 +63,14 @@ class SwipeableTemporaryDrawer extends React.Component {
       
       
   
-      const sideList = (
-        <div className={classes.list}>
+      const fullList = (
+        <div className={classes.fulllist}>
           <List>
             <ListItem>
               <div className={classes.drawerHeader}>
                 <ListItemText primary={""} />
                 <ListItemIcon>
-                  <IconButton onClick={this.toggleDrawer('right', false)}> 
+                  <IconButton onClick={this.toggleDrawer('bottom', false)}> 
                   Preferences &nbsp;
                     <ChevronRightIcon />
                   </IconButton>
@@ -77,7 +81,7 @@ class SwipeableTemporaryDrawer extends React.Component {
             </ListItem>
             
             <ListItem>
-              $ <MoneySlide />
+              <MoneySlide />
             </ListItem>
             <ListItem>
               <DistSlide />
@@ -92,23 +96,23 @@ class SwipeableTemporaryDrawer extends React.Component {
   
       return (
         <div>
-          <DistSlide />
-          <Button onClick={this.toggleDrawer('right', true)}>Open Right</Button>
+          <Button onClick={this.toggleDrawer('bottom', true)}>My Preferences</Button>
           
          
           <SwipeableDrawer
+            
             anchor="right"
-            open={this.state.right}
-            onClose={this.toggleDrawer('right', false)}
-            onOpen={this.toggleDrawer('right', true)}
+            open={this.state.bottom}
+            onClose={this.toggleDrawer('bottom', false)}
+            onOpen={this.toggleDrawer('bottom', true)}
           >
             <div
               tabIndex={0}
               role="button"
-              /*onClick={this.toggleDrawer('right', false)}*/
-              onKeyDown={this.toggleDrawer('right', false)}
+              /*onClick={this.toggleDrawer('bottom', false)}*/
+             onKeyDown={this.toggleDrawer('bottom', false)}
             >
-              {sideList}
+              {fullList}
             </div>
           </SwipeableDrawer>
         </div>
