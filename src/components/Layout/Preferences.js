@@ -22,6 +22,8 @@ import CheckboxList from '../Layout/prefButtons';
 
 
 
+
+
 const styles = {
     catPrompt: {
         textAlign: 'center',
@@ -94,7 +96,7 @@ class SwipeableTemporaryDrawer extends React.Component {
   
       return (
         <div>
-          <Button onClick={this.toggleDrawer('bottom', true)}>Open Bottomt</Button>
+          <Button onClick={this.toggleDrawer('bottom', true)}>My Preferences</Button>
           
          
           <SwipeableDrawer

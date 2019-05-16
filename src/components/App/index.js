@@ -9,7 +9,7 @@ import BadgesPage from '../Pages/Badges';
 import FavouritesPage from '../Pages/Favourites';
 
 import BottomNav from '../Layout/BottomNav';
-import HeaderAppBar from '../Layout/Header'
+import HeaderAppBar from '../Layout/Header2'
 
 import * as ROUTES from '../../constants/routes';
 import Firebase from '../firebase';
