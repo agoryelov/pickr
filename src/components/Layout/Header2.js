@@ -44,22 +44,27 @@ class Header2 extends React.Component {
         };
     }
 
+    handleLogout = () => {
+      const firebase = new Firebase();
+      firebase.signOut();
+    }
+
     handleNavChange = (event, navValue) => {
       this.setState({ navValue });
     };
 
-      handleChange = event => {
-        this.setState({ auth: event.target.checked });
-      };
-    
-      handleMenu = event => {
-        this.setState({ anchorEl: event.currentTarget });
-      };
-    
-      handleClose = () => {
-        this.setState({ anchorEl: null });
-      };
-    
+    handleChange = event => {
+      this.setState({ auth: event.target.checked });
+    };
+  
+    handleMenu = event => {
+      this.setState({ anchorEl: event.currentTarget });
+    };
+  
+    handleClose = () => {
+      this.setState({ anchorEl: null });
+    };
+  
     render() {
         const { classes } = this.props;
         const { auth, anchorEl } = this.state;
@@ -100,7 +105,7 @@ class Header2 extends React.Component {
                     open={open}
                     onClose={this.handleClose}>
                     <Preferences onClick={this.handleClose} />
-                    <Button component={Link} to={ROUTES.LANDING} onClick={handleLogout} onClick={this.handleClose} color="inherit">Logout</Button>
+                    <Button component={Link} to={ROUTES.SIGN_IN} onClick={this.handleLogout} color="inherit">Logout</Button>
                     <br/>
                     <Button onClick={this.handleClose}>Cancel</Button>
                 
@@ -128,7 +133,7 @@ class Header2 extends React.Component {
             centered
           >
             <Tab component={Link} to={ROUTES.HOME} label="Quests" classes={{root: "tabCustom"}} />
-            <Tab component={Link} to={ROUTES.LANDING} label="Saved" classes={{root: "tabCustom"}} />
+            <Tab component={Link} to={ROUTES.FAVS} label="Saved" classes={{root: "tabCustom"}} />
             <Tab component={Link} to={ROUTES.BADGES} label="Badges" classes={{root: "tabCustom"}} />
           </Tabs>
         

@@ -7,6 +7,7 @@ import Firebase from '../firebase'
 import './QuestPage.css'
 
 import QuestCard from '../Layout/QuestCard';
+import * as ROUTES from '../../constants/routes';
 
 class QuestPage extends React.Component {
 
@@ -48,6 +49,8 @@ class QuestPage extends React.Component {
                     loading: false,
                 });
             });
+          } else {
+              this.props.history.push(ROUTES.SIGN_IN);
           }
         });
     }

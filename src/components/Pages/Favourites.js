@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Firebase from '../firebase'
 import '../CSS/Favourites.css';
+import * as ROUTES from '../../constants/routes';
 
 
 
@@ -52,7 +53,7 @@ class Favourites extends React.Component {
           });
           console.log("list:" + this.state.list);
         } else {
-          //not logged in
+          this.props.history.push(ROUTES.SIGN_IN);
         }
       });
     }

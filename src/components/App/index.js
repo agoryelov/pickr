@@ -53,10 +53,9 @@ class App extends Component {
                         </AppBar>
                     </Grid>
                     <Grid item xs={12} sm={10} md={8} style={{background: 'white', height: 'calc(100vh - 104px)', overflow: 'scroll'}}>
-                        <Route exact path={ROUTES.LANDING} component={LandingPage} />
+                        <Route exact path={ROUTES.HOME} component={QuestPage} />
                         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
                         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-                        <Route path={ROUTES.HOME} component={QuestPage} />
                         <Route path={ROUTES.BADGES} component={BadgesPage} />
                         <Route path={ROUTES.FAVS} component={FavouritesPage} />
                         <Route path={ROUTES.ABOUT} component={AboutPage} />
