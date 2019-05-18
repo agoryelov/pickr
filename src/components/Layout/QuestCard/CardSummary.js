@@ -8,13 +8,22 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import { CSSTransition } from 'react-transition-group';
 
+import Firebase from '../../firebase.js'
+
 
 class QuestCardSummary extends React.Component {
+
+    firebase = new Firebase();
 
     handleSave = (e) => {
         e.stopPropagation();
 
-        //TODO: Save quest to firebase
+        let now = new Date().toString(' MMMM d yyyy');
+
+        this.firebase.favourites(this.props.globalUser).child(this.props.questId).update({
+            questID : this.props.questId,
+            savedDate : now,
+          });
     }
 
     render() {

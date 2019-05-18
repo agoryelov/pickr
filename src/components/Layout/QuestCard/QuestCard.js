@@ -76,7 +76,7 @@ class QuestCard extends React.Component {
                     <div className="cardAnimationDefault">
                         <ExpansionPanel elevation={0} expanded={expanded} onChange={this.handleCollapse}>
                             <ExpansionPanelSummary classes={{ content: "noMargin", root: 'noMargin' }} >
-                                <QuestCardSummary expanded={expanded} distance={distance} data={questData} />
+                                <QuestCardSummary expanded={expanded} distance={distance} data={questData} questId={this.props.questId} globalUser={this.props.globalUser}/>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <QuestCardDetails data={questData} />
