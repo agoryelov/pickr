@@ -22,6 +22,8 @@ class QuestPage extends React.Component {
             current: 1,
             userCoords: null,
             virtualData: null,
+            globaUser: null,
+            questList: null,
         };
 
         this.swiper = null;
@@ -43,8 +45,11 @@ class QuestPage extends React.Component {
 
         this.firebase.auth.onAuthStateChanged(user => {
           if (user) {
+              this.globalUser = user.uid;
+              console.log("user: " + this.globalUser);
             this.firebase.questsAll().once("value", snapshot => {
                 this.setState({
+                    questList: snapshot.val(),
                     data: Object.entries(snapshot.val()),
                     loading: false,
                 });
@@ -75,7 +80,7 @@ class QuestPage extends React.Component {
                         getSwiper={(swiper) => this.swiper = swiper} >
                         {data.map(card => (
                             <div key={card[0]}>
-                                <QuestCard current={this.state.current} coords={coords} questId={card[0]} questData={card[1]} />
+                                <QuestCard current={this.state.current} coords={coords} questId={card[0]} questData={card[1]} globalUser={this.globalUser}/>
                             </div>
                         ))}
                     </Swiper>
