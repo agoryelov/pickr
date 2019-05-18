@@ -137,7 +137,7 @@ class Favourites extends React.Component {
 
   // completes the quest associated with the completed button that called this
   completeQuest(event) {
-    let now = new Date().toString(' MMMM d yyyy');;
+    let now = new Date().toString(' MMMM d yyyy');
     this.firebase.completed(this.globalUser.uid).child(event.currentTarget.value).update({
       questID : event.currentTarget.value,
       completedDate : now
