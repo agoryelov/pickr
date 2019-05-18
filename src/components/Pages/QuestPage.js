@@ -1,11 +1,13 @@
 import React from "react";
 import Swiper from 'react-id-swiper/lib/ReactIdSwiper.full';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
 import Firebase from '../firebase'
 
 import './QuestPage.css'
 
 import QuestCard from '../Layout/QuestCard';
+import * as ROUTES from '../../constants/routes';
 
 class QuestPage extends React.Component {
 
@@ -27,7 +29,6 @@ class QuestPage extends React.Component {
 
     updateIndex = () => {
         if (this.swiper != null) {
-            console.log(this.swiper.activeIndex);
             this.setState({current: this.swiper.activeIndex});
         }
     }
@@ -37,7 +38,6 @@ class QuestPage extends React.Component {
 
         //Getting user location
         navigator.geolocation.getCurrentPosition((position) => {
-            console.log('fetching');
             this.setState({userCoords: position.coords});
         });
 
@@ -49,6 +49,8 @@ class QuestPage extends React.Component {
                     loading: false,
                 });
             });
+          } else {
+              this.props.history.push(ROUTES.SIGN_IN);
           }
         });
     }
@@ -66,17 +68,19 @@ class QuestPage extends React.Component {
         const data = this.state.data;
 
         return(
-            <div style={{margin: "2em"}}>
-                <Swiper spaceBetween={15} loop={true}
-                    on={{slideChange: this.updateIndex}} 
-                    getSwiper={(swiper) => this.swiper = swiper} >
-                    {data.map(card => (
-                        <div key={card[0]}>
-                            <QuestCard current={this.state.current} coords={coords} questId={card[0]} questData={card[1]} />
-                        </div>
-                    ))}
-                </Swiper>
-            </div>
+            <Grid container justify="center" style={{paddingTop: '2em'}}>
+                <Grid item xs={10} sm={8} md={6}>
+                    <Swiper spaceBetween={15} loop={true}
+                        on={{slideChange: this.updateIndex}} 
+                        getSwiper={(swiper) => this.swiper = swiper} >
+                        {data.map(card => (
+                            <div key={card[0]}>
+                                <QuestCard current={this.state.current} coords={coords} questId={card[0]} questData={card[1]} />
+                            </div>
+                        ))}
+                    </Swiper>
+                </Grid>
+            </Grid>
         );
     }
 }

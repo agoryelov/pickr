@@ -1,5 +1,6 @@
 import React from "react";
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsTransitIcon from '@material-ui/icons/DirectionsTransit';
@@ -18,9 +19,21 @@ class QuestCard extends React.Component {
             distance: 0,
         };
     }
+
     componentDidMount() {
-        if (this.props.coords != null) {
-            const distance = this.getDistanceFromLatLonInKm(this.props.coords.latitude, this.props.coords.longitude, 49.296124, -123.127986);
+        //Check that props data actually came in
+        if (this.props.coords != null && this.props.questData['coordinates'] != null) {
+
+            //Grab location data from passed props
+            const userLat = this.props.coords.latitude;
+            const userLong = this.props.coords.longitude;
+            const questLat = this.props.questData['coordinates']['lat'];
+            const questLong = this.props.questData['coordinates']['long'];
+
+            //Calculate distance based on the Haversine Formula
+            const distance = this.getDistanceFromLatLonInKm(userLat, userLong, questLat, questLong);
+
+            //Update Card state too have distance
             this.setState({ distance });
         }
     }
@@ -54,7 +67,6 @@ class QuestCard extends React.Component {
         const questAbout = this.props.questData['description'];
         const distance = Math.ceil(this.state.distance) + " km";
 
-        console.log(this.props.current);
         if (this.state.expanded && this.props.questId != (this.props.current)) {
             this.setState({expanded: false});
         }
@@ -72,10 +84,10 @@ class QuestCard extends React.Component {
                     <div style={{width: "100%", height: "85%"}}></div>
                     <div style={{background: 'rgba(0, 0, 0, 0.5)', color: 'white', width: "100%", height: "15%"}}>
                         <Grid container alignItems="center" style={{height: '100%', textAlign: 'left'}}>
-                            <Grid item xs={8} style={{paddingLeft: '12px'}}>
+                            <Grid item xs={9} style={{paddingLeft: '12px'}}>
                                 {questName}
                             </Grid>
-                            <Grid item xs={4} style={{paddingLeft: '12px', textAlign: 'center'}}>
+                            <Grid item xs={3} style={{paddingLeft: '12px', textAlign: 'center'}}>
                                 {distance}
                             </Grid>
                             <Grid item xs={12} style={{paddingLeft: '12px', fontSize: '.8em'}}>
@@ -94,13 +106,16 @@ class QuestCard extends React.Component {
                     width: '100%' }}>
                     <div style={{width: "100%", height: "80%"}}></div>
                     <div style={{background: 'rgba(0, 0, 0, 0.5)', color: 'white', width: "100%", height: "20%"}}>
-                    <Grid container alignItems="center" style={{height: '100%', textAlign: 'left'}}>
-                            <Grid item xs={12} style={{paddingLeft: '1em'}}>
-                                {questName}
-                            </Grid>
-                            <Grid item xs={12} style={{paddingLeft: '1em', fontSize: '.8em'}}>
-                                {questLocation}
-                            </Grid>
+                        <Grid container alignItems="center" style={{height: '100%', textAlign: 'left'}}>
+                                <Grid item xs={8} style={{paddingLeft: '12px'}}>
+                                    {questName}
+                                </Grid>
+                                <Grid item xs={4} style={{paddingLeft: '12px', textAlign: 'center'}}>
+                                    {distance}
+                                </Grid>
+                                <Grid item xs={12} style={{paddingLeft: '12px', fontSize: '.8em'}}>
+                                    {questLocation}
+                                </Grid>
                         </Grid>
                     </div>
                 </Grid>;
@@ -108,7 +123,7 @@ class QuestCard extends React.Component {
             <div>
                 <ExpansionPanel expanded={expanded} 
                 onChange={this.handleChange} 
-                style={{background: "rgba(255, 0, 0, 0.05)", margin: '0', padding: '0'}}>
+                style={{margin: '0', padding: '0'}}>
                     <ExpansionPanelSummary classes={{content: "noMargin", root: 'noMargin'}} >
                         <Grid container style={{padding: '0'}}>
                             <Grid item xs={12}>
