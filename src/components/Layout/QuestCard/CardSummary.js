@@ -40,7 +40,7 @@ class QuestCardSummary extends React.Component {
                     }}>
                         <div className={expanded ? "cardTopOpened" : "cardTopClosed"}>
                             <CSSTransition in={expanded} timeout={500} classNames="saveButtonAnimation">
-                                <div className="saveButtonAnimationDefault">
+                                <div className="saveButtonAnimationDefault heartBeat">
                                     <Fab style={{ backgroundColor: 'white' }} size="medium" onClick={this.handleSave}>
                                         <FavoriteIcon color="secondary" />
                                     </Fab>
