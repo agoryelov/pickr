@@ -4,9 +4,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Firebase from '../firebase'
 
-import './QuestPage.css'
+import '../CSS/QuestPage.css'
 
-import QuestCard from '../Layout/QuestCard';
+import QuestCard from '../Layout/QuestCard/QuestCard';
 import * as ROUTES from '../../constants/routes';
 
 class QuestPage extends React.Component {
@@ -68,8 +68,8 @@ class QuestPage extends React.Component {
         const data = this.state.data;
 
         return(
-            <Grid container justify="center" style={{paddingTop: '2em'}}>
-                <Grid item xs={10} sm={8} md={6}>
+            <Grid container justify="center" style={{}}>
+                <Grid item xs={12} sm={8} md={6}>
                     <Swiper spaceBetween={15} loop={true}
                         on={{slideChange: this.updateIndex}} 
                         getSwiper={(swiper) => this.swiper = swiper} >
