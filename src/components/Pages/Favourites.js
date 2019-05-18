@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Firebase from '../firebase'
 import '../CSS/Favourites.css';
+import * as ROUTES from '../../constants/routes';
 
 
 
@@ -38,7 +39,7 @@ class Favourites extends React.Component {
             // an array of quests completed by the user
             completedArray: [],
 
-            // an array of user progress xp by categories
+            // an array of xp by categories the completed quest will reward
             progressArray: [],
         };
     }
@@ -75,7 +76,7 @@ class Favourites extends React.Component {
             this.updateCompletedArray();
           });
         } else {
-          //not logged in
+          this.props.history.push(ROUTES.SIGN_IN);
         }
 
       });
@@ -136,7 +137,7 @@ class Favourites extends React.Component {
 
   // completes the quest associated with the completed button that called this
   completeQuest(event) {
-    let now = new Date().toString(' MMMM d yyyy');;
+    let now = new Date().toString(' MMMM d yyyy');
     this.firebase.completed(this.globalUser.uid).child(event.currentTarget.value).update({
       questID : event.currentTarget.value,
       completedDate : now
@@ -154,15 +155,13 @@ class Favourites extends React.Component {
 
     });
 
+    this.updateProgressArray(event.currentTarget.value);
+
+
     this.firebase.completed(this.globalUser.uid).once("value", snapshot => {
     this.setState({ 
       completed: snapshot.val(),  
     });
-
-    this.firebase.categoryProgress(this.globalUser.uid).once("value", snapshot => {
-      this.updateProgressArray(snapshot.val());
-    })
-
 
     this.updateCompletedArray();
 
@@ -170,17 +169,22 @@ class Favourites extends React.Component {
 }
 
 // update progressArray before adding xp of quest to be completed
-updateProgressArray(snap) {
+updateProgressArray(quest) {
+  console.log("xp");
+  console.log(quest);
   let array = [];
-  for (var category in snap) {
+  for (var category in this.state.questList[quest].category) {
     let currentCategory =category;
-    let currentXP = snap[category];
-    let currentProgress = {
+    let currentXP = this.state.questList[quest].category[category];
+    let progressXP = {
       category: currentCategory,
       xp: currentXP,
     };
-    array.push(currentProgress);
+    array.push(progressXP);
   };
+
+  this.state.progressArray = array;
+  console.log(this.state.progressArray);
 }
 
 
