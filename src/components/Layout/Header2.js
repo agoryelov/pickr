@@ -19,7 +19,7 @@ import Preferences from '../Layout/Preferences';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import './Header.css';
+import '../CSS/Header.css';
 
 const styles = {
     root: {

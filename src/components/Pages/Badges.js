@@ -4,7 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Firebase from '../firebase'
-import './Badges.css';
+import '../CSS/Badges.css';
 import * as ROUTES from '../../constants/routes';
 
 
