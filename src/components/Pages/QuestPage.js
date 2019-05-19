@@ -17,38 +17,52 @@ class QuestPage extends React.Component {
         super(props);
 
         this.state = {
-            data: null,
+            data: this.props.data,
             loading: true,
             current: 1,
             userCoords: null,
             virtualData: null,
         };
-
+        
         this.swiper = null;
     }
-
+    
     updateIndex = () => {
         if (this.swiper != null) {
             this.setState({current: this.swiper.activeIndex});
         }
     }
 
+    arrayShuffle = (array) => {
+        let m = array.length;
+        let t;
+        let i;
+        console.log("Randomizing");
+        while (m) {
+            i = Math.floor(Math.random() * m--);
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t; 
+        }
+        console.log(array);
+        this.setState({
+              data: array,
+              loading: false,
+          });
+        
+    }
+    
     componentDidMount() {
-        this.setState({ loading: true });
-
+        console.log(this.props.data);
         //Getting user location
+        
         navigator.geolocation.getCurrentPosition((position) => {
             this.setState({userCoords: position.coords});
         });
 
         this.firebase.auth.onAuthStateChanged(user => {
           if (user) {
-            this.firebase.questsAll().once("value", snapshot => {
-                this.setState({
-                    data: Object.entries(snapshot.val()),
-                    loading: false,
-                });
-            });
+                this.arrayShuffle(this.state.data);
           } else {
               this.props.history.push(ROUTES.SIGN_IN);
           }
@@ -63,9 +77,10 @@ class QuestPage extends React.Component {
               </div>
             );
         }
-
+        console.log(this.state.data);
         const coords = this.state.userCoords;
         const data = this.state.data;
+        console.log(this.state.current);
 
         return(
             <Grid container justify="center" style={{}}>
@@ -73,9 +88,9 @@ class QuestPage extends React.Component {
                     <Swiper spaceBetween={15} loop={true}
                         on={{slideChange: this.updateIndex}} 
                         getSwiper={(swiper) => this.swiper = swiper} >
-                        {data.map(card => (
+                        {data.map((card, index) => (
                             <div key={card[0]}>
-                                <QuestCard current={this.state.current} coords={coords} questId={card[0]} questData={card[1]} />
+                                <QuestCard current={this.state.current} coords={coords} questId={index + 1} questData={card[1]} />
                             </div>
                         ))}
                     </Swiper>

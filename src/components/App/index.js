@@ -22,6 +22,9 @@ import AppBar from '@material-ui/core/AppBar';
 
 import './index.css';
 import Background from '../../img/bg3.jpg';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import PreferencesDesktop from '../Layout/PreferencesDesktop';
 
 class App extends Component {
     firebase = new Firebase();
@@ -30,13 +33,26 @@ class App extends Component {
 
         this.state = {
             authUser: null,
+            data: null,
+            test: 'test',
+            curPosition: null,
+            loading: true,
         };
     }
+    
+
 
     componentDidMount() {
         this.firebase.auth.onAuthStateChanged((authUser) => {
             if (authUser) {
                 this.setState({ authUser });
+                this.firebase.questsAll().once("value", snapshot => {
+                    this.setState({
+                        data: Object.entries(snapshot.val()),
+                        loading: false,
+                    });
+
+                });
             } else {
                 this.setState({ authUser: null });
             }
@@ -44,24 +60,45 @@ class App extends Component {
     }
 
     render() {
+
+        if (this.state.loading) {
+            return (
+              <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
+                <CircularProgress />
+              </div>
+            );
+        }
         return(
             <Router>
+
                 <Grid container justify='center' style={{backgroundImage: `url(${Background})`, backgroundSize: '100% auto' }}>
-                    <Grid item xs={12} sm={10} md={8} style={{position: 'sticky', top: '0', maxHeight: '104px'}}>
+          
+                    <Grid item xs={12} sm={12} md={12} style={{position: 'sticky', top: '0', maxHeight: '104px'}}>
+
                         <AppBar style={{background: '#2196F3', top: 0}} position="sticky" elevation={1}>
                             <HeaderAppBar authUser={this.state.authUser} />
                         </AppBar>
                     </Grid>
+                   
+                    <Grid item  md={2} style={{background: '#f5f5f5', height: 'calc(100vh - 104px)', overflow: 'scroll',marginTop:'8px', }} >
+                        <div style={{background:'#f5f5f5', width: '220px', overflowX: 'hidden', marginTop: '10px',}}>
+                            <PreferencesDesktop  />
+                        </div>
+                    </Grid>
                     <Grid item xs={12} sm={10} md={8} style={{background: 'white', height: 'calc(100vh - 104px)', overflow: 'scroll'}}>
-                        <Route exact path={ROUTES.HOME} component={QuestPage} />
+                        <Route exact path={ROUTES.HOME} render={(props) => <QuestPage {...props} data={this.state.data} /> } />
                         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
                         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
                         <Route path={ROUTES.BADGES} component={BadgesPage} />
                         <Route path={ROUTES.FAVS} component={FavouritesPage} />
                         <Route path={ROUTES.ABOUT} component={AboutPage} />
                         <Route path={ROUTES.SWEEP} component={SweepPage} />
+
                     </Grid>
+                    <Grid item md={2}> </Grid>
+                    
                 </Grid>
+                
             </Router>
         )
     }

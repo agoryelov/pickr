@@ -9,12 +9,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
 import Firebase from '../firebase';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    maxWidth: 200,
+    backgroundColor: '#f5f5f5',
   },
 });
 
@@ -28,6 +29,7 @@ class CheckboxList extends React.Component {
     prefTypes: null,
     pref: null,
     prefTest: null,
+    loading: true,
 
   };
   
@@ -86,7 +88,9 @@ class CheckboxList extends React.Component {
                         this.handleToggle(this.prefTypes[10])
                     }
 
-                   
+                    this.setState({
+                      loading: false,
+                  });
                    console.log(this.state.checked);
                    
             
@@ -147,6 +151,13 @@ class CheckboxList extends React.Component {
   render() {
     const { classes } = this.props;
 
+    if (this.state.loading) {
+      return (
+        <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
+          <CircularProgress />
+        </div>
+      );
+  }
     return (
     <div>
       <List className={classes.root}>
