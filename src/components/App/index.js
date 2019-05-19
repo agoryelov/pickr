@@ -37,12 +37,20 @@ class App extends Component {
             test: 'test',
             curPosition: null,
             loading: true,
+            badPrefs: null,
+            userCoords: null, 
         };
     }
     
 
 
     componentDidMount() {
+        //Getting user location
+        
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({userCoords: position.coords});
+        });
+        
         this.firebase.auth.onAuthStateChanged((authUser) => {
             if (authUser) {
                 this.setState({ authUser });
@@ -53,6 +61,29 @@ class App extends Component {
                     });
 
                 });
+                this.userPreferences = this.firebase.preferences(authUser.uid);
+                this.userPreferences.once("value", snapshot => {
+                    let arrayOfBadPrefs = [];
+                    
+                    for(let x  = 0; x < 10; x++) {
+                        if (Object.entries(snapshot.val())[x][1] == false){
+                            arrayOfBadPrefs.push(Object.entries(snapshot.val())[x][0])
+                        }  
+                    }
+
+                    this.setState({
+                        badPrefs: arrayOfBadPrefs
+                    });
+                    console.log("arrayofprefs:");
+                    console.log(this.state.data[0][1]["categories"]);
+                    let tempArray = this.state.data;
+                    //for() {
+                        for(let i in this.state.data[0][1]["categories"] ) {
+                            console.log(i);
+                        }
+                    //}
+                    console.log(this.state.badPrefs);
+                })
             } else {
                 this.setState({ authUser: null });
             }
@@ -60,7 +91,7 @@ class App extends Component {
     }
 
     render() {
-
+        console.log(this.state.userCoords);
         if (this.state.loading) {
             return (
               <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
