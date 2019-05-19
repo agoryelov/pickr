@@ -50,24 +50,20 @@ class SignUpFormBase extends Component {
           Food: true,
           Fitness: true,
           Culture: true,
-          Social: true,
-          Creative: true,
-          Family: true,
-          Romantic: true,
           Volunteer: true,
-          Adult: true
+          Creative: true,
+          Romantic: true,
+          Games: true,
         },
         progress: {
           Nature: 0,
           Food: 0,
           Fitness: 0,
           Culture: 0,
-          Social: 0,
-          Creative: 0,
-          Family: 0,
-          Romantic: 0,
           Volunteer: 0,
-          Adult: 0
+          Creative: 0,
+          Romantic: 0,
+          Games: 0,
         },
           favourites: "null"
       });

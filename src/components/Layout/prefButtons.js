@@ -40,7 +40,7 @@ class CheckboxList extends React.Component {
             this.setState({ authUser });
             this.userPreferences = this.firebase.preferences(authUser.uid);
             this.userPreferences.once("value", snapshot => {
-                this.prefTypes = ['Nature', 'Food', 'Family', 'Music', 'Fitness', 'Games', 'Culture', 'Social', 'Volunteer', 'Romantic', 'Adult'];               
+                this.prefTypes = ['Nature', 'Food', 'Fitness', 'Culture', 'Volunteer', 'Creative', 'Romantic', 'Games'];               
                     if (snapshot.val().Nature) {
                         this.state.checked.push(this.prefTypes[0]);
                         this.handleToggle(this.prefTypes[0])
@@ -49,41 +49,29 @@ class CheckboxList extends React.Component {
                         this.state.checked.push(this.prefTypes[1]);
                         this.handleToggle(this.prefTypes[1])
                     }
-                    if (snapshot.val().Family) {
+                    if (snapshot.val().Fitness) {
                         this.state.checked.push(this.prefTypes[2]);
                         this.handleToggle(this.prefTypes[2])
                     }
-                    if (snapshot.val().Music) {
-                        this.state.checked.push(this.prefTypes[3]);
-                        this.handleToggle(this.prefTypes[3])
-                    }
-                    if (snapshot.val().Fitness) {
-                        this.state.checked.push(this.prefTypes[4]);
-                        this.handleToggle(this.prefTypes[4])
-                    }
-                    if (snapshot.val().Games) {
-                        this.state.checked.push(this.prefTypes[5]);
-                        this.handleToggle(this.prefTypes[5])
-                    }
                     if (snapshot.val().Culture) {
-                        this.state.checked.push(this.prefTypes[6]);
-                        this.handleToggle(this.prefTypes[6])
-                    }
-                    if (snapshot.val().Social) {
-                        this.state.checked.push(this.prefTypes[7]);
-                        this.handleToggle(this.prefTypes[7])
+                      this.state.checked.push(this.prefTypes[3]);
+                      this.handleToggle(this.prefTypes[3])
                     }
                     if (snapshot.val().Volunteer) {
-                        this.state.checked.push(this.prefTypes[8]);
-                        this.handleToggle(this.prefTypes[8])
+                      this.state.checked.push(this.prefTypes[4]);
+                      this.handleToggle(this.prefTypes[4])
+                    }
+                    if (snapshot.val().Creative) {
+                      this.state.checked.push(this.prefTypes[5]);
+                      this.handleToggle(this.prefTypes[5])
                     }
                     if (snapshot.val().Romantic) {
-                        this.state.checked.push(this.prefTypes[9]);
-                        this.handleToggle(this.prefTypes[9])
+                      this.state.checked.push(this.prefTypes[6]);
+                      this.handleToggle(this.prefTypes[6])
                     }
-                    if (snapshot.val().Adult) {
-                        this.state.checked.push(this.prefTypes[10]);
-                        this.handleToggle(this.prefTypes[10])
+                    if (snapshot.val().Games) {
+                        this.state.checked.push(this.prefTypes[7]);
+                        this.handleToggle(this.prefTypes[7])
                     }
 
                    
@@ -150,7 +138,7 @@ class CheckboxList extends React.Component {
     return (
     <div>
       <List className={classes.root}>
-        {['Nature', 'Food', 'Family', 'Music', 'Fitness', 'Games', 'Culture', 'Social', 'Volunteer', 'Romantic', 'Adult'].map(value => (
+        {['Nature', 'Food', 'Fitness', 'Culture', 'Volunteer', 'Creative', 'Romantic', 'Games'].map(value => (
           <ListItem key={value} role={undefined} dense button onClick={this.handleToggle(value)}>
             <Checkbox
               checked={this.state.checked.indexOf(value) !== -1}
