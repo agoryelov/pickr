@@ -33,10 +33,10 @@ class QuestPage extends React.Component {
     }
 
     componentDidMount() {
-        this.arrayShuffle(this.props.data);
-        //this.setState({data: this.props.data, loading: false})
+        //this.arrayShuffle(this.props.data);
+        this.setState({data: this.props.data, loading: false})
     }
-    
+    /*
     arrayShuffle = (array) => {
         let m = array.length;
         let t;
@@ -53,7 +53,7 @@ class QuestPage extends React.Component {
             loading: false,
         });
     }
-    
+    */
     render() {
         if (this.state.loading) {
             return (

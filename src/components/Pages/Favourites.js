@@ -83,12 +83,13 @@ class Favourites extends React.Component {
     const data = this.state.questList;
     console.log(data);
     const saved = Object.entries(this.state.list);
+    console.log(saved);
 
     return (
       <div style={{ padding: '2em' }}>
         {saved.map(x =>
           <div key={x[0]}>
-            <SavedQuestItem questData={data[x[0]][1]} />
+            <SavedQuestItem questId={x[0]} questData={data[x[0] - 1][1]} />
           </div>
         )}
       </div>);
