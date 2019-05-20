@@ -11,76 +11,90 @@ import * as ROUTES from '../../constants/routes';
 
 class QuestPage extends React.Component {
 
-    firebase = new Firebase();
-
     constructor(props) {
         super(props);
 
         this.state = {
-            data: null,
+            data: this.props.data,
             loading: true,
             current: 1,
             userCoords: null,
             virtualData: null,
-            globaUser: null,
-            questList: null,
+            globaUser: null
         };
-
+        
         this.swiper = null;
     }
-
+    
     updateIndex = () => {
         if (this.swiper != null) {
-            this.setState({current: this.swiper.activeIndex});
+            this.setState({ current: this.swiper.activeIndex });
         }
     }
 
+    arrayShuffle = (array) => {
+        let m = array.length;
+        let t;
+        let i;
+        console.log("Randomizing");
+        while (m) {
+            i = Math.floor(Math.random() * m--);
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t; 
+        }
+        console.log(array);
+        this.setState({
+              data: array,
+              loading: false,
+          });
+        
+    }
+    
     componentDidMount() {
-        this.setState({ loading: true });
-
-        //Getting user location
-        navigator.geolocation.getCurrentPosition((position) => {
-            this.setState({userCoords: position.coords});
-        });
-
-        this.firebase.auth.onAuthStateChanged(user => {
-          if (user) {
-              this.globalUser = user.uid;
-              console.log("user: " + this.globalUser);
-            this.firebase.questsAll().once("value", snapshot => {
-                this.setState({
-                    questList: snapshot.val(),
-                    data: Object.entries(snapshot.val()),
-                    loading: false,
-                });
-            });
-          } else {
-              this.props.history.push(ROUTES.SIGN_IN);
-          }
+        this.arrayShuffle(this.props.data);
+        //this.setState({data: this.props.data, loading: false})
+    }
+    
+    arrayShuffle = (array) => {
+        let m = array.length;
+        let t;
+        let i;
+        console.log("Randomizing");
+        while (m) {
+            i = Math.floor(Math.random() * m--);
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
+        this.setState({
+            data: array,
+            loading: false,
         });
     }
-
+    
     render() {
         if (this.state.loading) {
             return (
-              <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
-                <CircularProgress />
-              </div>
+                <div style={{ marginTop: '40vh', display: 'flex', justifyContent: 'center' }}>
+                    <CircularProgress />
+                </div>
             );
         }
 
-        const coords = this.state.userCoords;
+        const coords = this.props.coords;
         const data = this.state.data;
+        console.log(this.state.current);
 
-        return(
+        return (
             <Grid container justify="center" style={{}}>
-                <Grid item xs={12} sm={8} md={6}>
+                <Grid item xs={12}>
                     <Swiper spaceBetween={15} loop={true}
-                        on={{slideChange: this.updateIndex}} 
+                        on={{ slideChange: this.updateIndex }}
                         getSwiper={(swiper) => this.swiper = swiper} >
-                        {data.map(card => (
+                        {data.map((card, index) => (
                             <div key={card[0]}>
-                                <QuestCard current={this.state.current} coords={coords} questId={card[0]} questData={card[1]} globalUser={this.globalUser}/>
+                                <QuestCard current={this.state.current} coords={coords} questId={card[0]} questData={card[1]} globalUser={this.props.authUser} />
                             </div>
                         ))}
                     </Swiper>

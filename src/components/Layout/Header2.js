@@ -125,8 +125,7 @@ class Header2 extends React.Component {
             </Typography>
                 {button}
             </Toolbar>
-            <Tabs
-            variant="fullWidth" 
+            <Tabs 
             value={this.state.navValue} 
             onChange={this.handleNavChange} 
             classes={{indicator: "customIndicator"}} 

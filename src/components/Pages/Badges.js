@@ -10,7 +10,7 @@ import * as ROUTES from '../../constants/routes';
 
 
 class CategoryProgress extends React.Component {
-    EXP = [0, 0, 50, 125, 200, 300, 400];
+    EXP = [0, 0, 500, 1250, 2000, 3000, 4000];
     constructor(props) {
         super(props);
         this.state = {
