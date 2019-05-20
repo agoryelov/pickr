@@ -8,13 +8,23 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import { CSSTransition } from 'react-transition-group';
 
+import Firebase from '../../firebase.js'
+
 
 class QuestCardSummary extends React.Component {
 
+    firebase = new Firebase();
+
     handleSave = (e) => {
         e.stopPropagation();
-
-        //TODO: Save quest to firebase
+        console.log('hello')
+        let now = new Date().toString(' MMMM d yyyy');
+        const uid = this.props.globalUser.uid;
+        
+        this.firebase.favourites(uid).child(this.props.questId).update({
+            questID : this.props.questId,
+            savedDate : now,
+        });
     }
 
     render() {
@@ -40,7 +50,7 @@ class QuestCardSummary extends React.Component {
                     }}>
                         <div className={expanded ? "cardTopOpened" : "cardTopClosed"}>
                             <CSSTransition in={expanded} timeout={500} classNames="saveButtonAnimation">
-                                <div className="saveButtonAnimationDefault">
+                                <div className="saveButtonAnimationDefault heartBeat">
                                     <Fab style={{ backgroundColor: 'white' }} size="medium" onClick={this.handleSave}>
                                         <FavoriteIcon color="secondary" />
                                     </Fab>

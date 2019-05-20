@@ -50,24 +50,20 @@ class SignUpFormBase extends Component {
           Food: true,
           Fitness: true,
           Culture: true,
-          Social: true,
-          Creative: true,
-          Family: true,
-          Romantic: true,
           Volunteer: true,
-          Adult: true
+          Creative: true,
+          Romantic: true,
+          Games: true,
         },
         progress: {
           Nature: 0,
           Food: 0,
           Fitness: 0,
           Culture: 0,
-          Social: 0,
-          Creative: 0,
-          Family: 0,
-          Romantic: 0,
           Volunteer: 0,
-          Adult: 0
+          Creative: 0,
+          Romantic: 0,
+          Games: 0,
         },
           favourites: "null"
       });
@@ -96,7 +92,7 @@ class SignUpFormBase extends Component {
     const isInvalid = username === '' || email === '' || password === '';
     return (
         <Grid container justify='center'>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={12} sm={8} md={6} lg={4}>
             <Paper style={{textAlign: 'center', padding: '2em', margin: '2em 2em 0 2em'}}>
               <form onSubmit={this.onSubmit}>
                 <Grid container spacing={24} justify = "center">

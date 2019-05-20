@@ -56,7 +56,7 @@ class SignInFormBase extends Component {
 
     return (
       <Grid container justify='center'>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={8} md={6} lg={4}>
           <Paper style={{textAlign: 'center', padding: '2em', margin: '2em 2em 0 2em'}}>
             <form onSubmit={this.onSubmit}>
               <Grid container spacing={24} justify = "center">
