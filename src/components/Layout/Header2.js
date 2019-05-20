@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -33,6 +32,8 @@ const styles = {
       marginRight: 20,
     },
   };
+
+const aboutButton = <Button component={Link} to={ROUTES.ABOUT} color="inherit">About Us</Button>;
 
 class Header2 extends React.Component {
     constructor(props) {
@@ -123,10 +124,13 @@ class Header2 extends React.Component {
             <Typography style={{ flexGrow: '1'}} variant="h6" color="inherit" className="grow">
                 PICKR
             </Typography>
+
+            {aboutButton}
                 {button}
             </Toolbar>
             <Tabs
             variant="fullWidth" 
+
             value={this.state.navValue} 
             onChange={this.handleNavChange} 
             classes={{indicator: "customIndicator"}} 

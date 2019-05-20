@@ -10,8 +10,29 @@ class Game extends Component {
             width: 10,
             mines: 20,
         };
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
+    updateWindowDimensions() {
+        this.setState({
+            width: Math.floor(window.innerWidth/85),
+            height: Math.floor(window.innerWidth/85),
+        });
+    }
+
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentWillMount() {
+        this.updateWindowDimensions();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateWindowDimensions);
+    }
+    
     render() {
         return (
             <div id = "game">

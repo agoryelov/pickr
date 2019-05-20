@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Smiley from '../images/smiley.png';
 import Frown from '../images/frowney.png';
-import Face from '../images/mineface.jpg';
+import Face from '../images/mineface.png';
 
 var w;
 
@@ -18,6 +18,7 @@ class Board extends Component {
           face: Face,
         };
         console.log(this.state.face);
+        this.reset = this.reset.bind(this);
     } 
 
     createEmptyArray = (height, width) => {
@@ -288,6 +289,10 @@ class Board extends Component {
         });
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.reset();
+    }
+
     reset = () => {
         this.setState ({
           boardData: this.initBoardData(this.props.height, this.props.width, this. props.mines),
@@ -302,13 +307,16 @@ class Board extends Component {
   
             <div className = "board">
                 <div className = "game-info">
-                    <span className = "info">
+                    <div className = "info">
                         Number of Mines: {this.state.mineCount}
-                    </span>
+                    </div>
                     <br />
                     <div className = "info">
                         {this.state.gameStatus}
-                        <img style = {{width: '50px'}}src = {this.state.face} alt = "mineFace"/>
+                        
+                    </div>
+                    <div className = "info">
+                    <img style = {{width: '50px'}}src = {this.state.face} alt = "mineFace"/>
                     </div>
                     <Button style = {{backgroundColor: "white", marginTop: '10px'}}onClick = {this.reset}> Reset</Button>
                     

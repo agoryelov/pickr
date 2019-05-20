@@ -7,7 +7,7 @@ import Firebase from '../firebase';
 
 const styles = {
   root: {
-    width: 200,
+    width: 125,
   },
   slider: {
     padding: '22px 0px',

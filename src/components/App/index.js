@@ -38,6 +38,8 @@ class App extends Component {
             data: null,
         };
     }
+    
+
 
     toggleDrawer = () => {
         this.setState({
@@ -92,7 +94,10 @@ class App extends Component {
                     <Grid item xs={12}>
                         {user ? <AppContent authUser={user} coords={this.state.coords} data={data} /> : loginFlow}
                     </Grid>
+                    <Grid item md={2}> </Grid>
+                    
                 </Grid>
+                
             </Router>
         )
     }

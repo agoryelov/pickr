@@ -15,23 +15,42 @@ class QuestPage extends React.Component {
         super(props);
 
         this.state = {
-            data: null,
+            data: this.props.data,
             loading: true,
             current: 1,
             userCoords: null,
             virtualData: null,
             globaUser: null
         };
-
+        
         this.swiper = null;
     }
-
+    
     updateIndex = () => {
         if (this.swiper != null) {
             this.setState({ current: this.swiper.activeIndex });
         }
     }
 
+    arrayShuffle = (array) => {
+        let m = array.length;
+        let t;
+        let i;
+        console.log("Randomizing");
+        while (m) {
+            i = Math.floor(Math.random() * m--);
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t; 
+        }
+        console.log(array);
+        this.setState({
+              data: array,
+              loading: false,
+          });
+        
+    }
+    
     componentDidMount() {
         const jsonToArray = Object.entries(this.props.data);
         this.arrayShuffle(jsonToArray);
@@ -65,6 +84,7 @@ class QuestPage extends React.Component {
 
         const coords = this.props.coords;
         const data = this.state.data;
+        console.log(this.state.current);
 
         return (
             <Grid container justify="center" style={{}}>

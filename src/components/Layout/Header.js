@@ -29,7 +29,7 @@ function HeaderAppBar(props) {
     button = <Button component={Link} to={ROUTES.SIGN_IN} onClick={handleLogin} color="inherit">Login</Button>;
   }
 
-  let aboutButton = <Button component={Link} to={ROUTES.ABOUT} color="inherit">About</Button>;
+  
 
   return (
     <div className="header-root">
