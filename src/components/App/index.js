@@ -76,11 +76,12 @@ class App extends Component {
             );
         }
         const user = this.state.authUser;
-        const data = Object.entries(this.state.data);
+        const data = this.state.data;
         const loginFlow = <div>
             <Route exact path={ROUTES.HOME} component={SignInPage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-            <Route path={ROUTES.SIGN_UP} component={SignUpPage} /></div>;
+            <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+            </div>;
         return (
             <Router>
                 <NavDrawer open={this.state.drawer} close={this.toggleDrawer} />

@@ -269,12 +269,10 @@ class Board extends Component {
     renderBoard = (data) => {
         return data.map((datarow) => {
             return datarow.map((dataitem) => {
-                w = window.innerWidth;
                 return (
                    
                     <div
                       key = {dataitem.x * datarow.length + dataitem.y}
-                      style ={{transform: `translateX(${w/10}px)`}}
                     >
                     <Cell
                       value = {{dataitem}}
