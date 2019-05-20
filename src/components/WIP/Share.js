@@ -1,3 +1,6 @@
+
+import React from 'react';
+
 import React, {Component} from 'react';
 import {FaTwitter, FaFacebook, FaPinterest, FaLinkedin} from 'react-icons/fa';
 import { css } from 'emotion';
@@ -37,3 +40,4 @@ class ShareComp extends Component {
 }
 
 export default ShareComp;
+
