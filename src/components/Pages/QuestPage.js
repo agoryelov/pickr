@@ -94,7 +94,7 @@ class QuestPage extends React.Component {
                         getSwiper={(swiper) => this.swiper = swiper} >
                         {data.map((card, index) => (
                             <div key={card[0]}>
-                                <QuestCard current={this.state.current} coords={coords} questId={index + 1} questData={card[1]} globalUser={this.props.authUser} />
+                                <QuestCard current={this.state.current} coords={coords} databaseQuestId={card[0]} questId={index + 1} questData={card[1]} globalUser={this.props.authUser} />
                             </div>
                         ))}
                     </Swiper>
