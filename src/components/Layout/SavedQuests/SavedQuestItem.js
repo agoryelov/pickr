@@ -32,32 +32,40 @@ import CardActions from '@material-ui/core/CardActions';
 import 'typeface-roboto';
 
 import '../../CSS/QuestPage.css'
+import Firebase from "../../firebase";
 
 class SavedQuestItem extends React.Component {
+    firebase = new Firebase();
+
     constructor(props) {
         super(props);
 
         this.state = {
             sampleData: "test",
+            xpArray: null,
         };
     }
 
     componentDidMount() {
-        
     }
 
     handleSave = (e) => {
         e.stopPropagation();
 
+        this.completeQuest();
     }
 
     handleChip = (e) => {
         e.stopPropagation();
     }
 
-    handleDelete = () => {
-        //pls delete me
-        console.log(this.props.questId);
+    deleteQuest() {
+        console.log(this.props.globalUser.uid + " " + this.props.questId);
+        this.firebase.favourites(this.props.globalUser.uid).child(this.props.questId).remove();
+    }
+
+    completeQuest() {
+        console.log(this.props.questData['categories']);
     }
 
     render() {
@@ -71,6 +79,8 @@ class SavedQuestItem extends React.Component {
         const questEcoRating = data['ecoRating'];
         const questAbout = data['description'];
         const cats = Object.entries(data['categories']);
+
+        console.log(data['categories']);
 
         const icons = {
             Fitness: {
@@ -138,7 +148,7 @@ class SavedQuestItem extends React.Component {
                             </Grid>
                             <Grid item container xs={3} md={2} alignItems='center' justify='center'>
                                 <Grid item xs={12}>
-                                    <Fab style={{ backgroundColor: '#EEEEEE' }} size="medium" onClick={this.handleSave}>
+                                    <Fab style={{ backgroundColor: '#EEEEEE' }} size="medium" onClick={this.handleSave.bind(this)}>
                                         <DoneIcon style={{ fontSize: '200%', color: 'green' }} />
                                     </Fab>
                                 </Grid>
@@ -184,7 +194,7 @@ class SavedQuestItem extends React.Component {
                                 <Button size="small" color="default">
                                     Learn More
                                 </Button>
-                                <Button onClick={this.handleDelete} size="small" color="secondary">
+                                <Button size="small" color="secondary" onClick={this.deleteQuest.bind(this)}>
                                     Delete
                                 </Button>
                             </Grid>
