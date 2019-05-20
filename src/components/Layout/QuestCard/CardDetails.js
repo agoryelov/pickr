@@ -20,13 +20,13 @@ class QuestCardDetails extends React.Component {
                 </Grid>
                 <Grid item xs={3}>
                     &#128176; {questCost} / 3
-                                    </Grid>
+                </Grid>
                 <Grid item xs={3}>
                     &#127758; {questEcoRating} / 3
-                                    </Grid>
+                </Grid>
                 <Grid item xs={4} style={{ fontWeight: "500" }}>
                     Details
-                                    </Grid>
+                </Grid>
                 <Grid item xs={12} style={{ fontSize: ".8em", textAlign: 'justify' }}>
                     {questAbout}
                 </Grid>

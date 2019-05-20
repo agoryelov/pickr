@@ -25,7 +25,7 @@ class Favourites extends React.Component {
     this.state = {
 
       // List of all quests
-      questList: this.props.data,
+      questList: null,
 
       // List of quests favourited by the user (pulled from firebase)
       list: null,
@@ -52,7 +52,6 @@ class Favourites extends React.Component {
   }
 
   componentDidMount() {
-
     this.firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.globalUser = user;
@@ -61,17 +60,9 @@ class Favourites extends React.Component {
           console.log(snapshot.val());
           this.setState({
             list: snapshot.val(),
+            questList: this.props.data,
             loading: false,
           });
-          this.updateFavouriteArray();
-        });
-
-        this.firebase.completed(user.uid).once("value", snapshot => {
-          console.log(snapshot.val());
-          this.setState({
-            completed: snapshot.val(),
-          });
-          this.updateCompletedArray();
         });
       } else {
         this.props.history.push(ROUTES.SIGN_IN);
@@ -79,133 +70,6 @@ class Favourites extends React.Component {
 
     });
   }
-
-  // updates user Favourite Quests array
-  updateFavouriteArray() {
-    let array = [];
-    
-    for (var quest in this.state.list) {
-      let questID = this.state.list[quest].questID;
-      let savedDate = this.state.list[quest].savedDate;
-      let currentQuest = {
-        questID: questID,
-        savedDate: savedDate
-      };
-      array.push(currentQuest);
-    }
-    this.setState({
-      favouriteArray: array,
-    });
-  }
-
-  updateCompletedArray() {
-    let array = [];
-    for (var quest in this.state.completed) {
-      let questID = this.state.completed[quest].questID;
-      let completedDate = this.state.completed[quest].completedDate;
-      let currentQuest = {
-        questID: questID,
-        completedDate: completedDate,
-      };
-      array.push(currentQuest);
-    }
-    this.setState({
-      completedArray: array,
-    });
-  }
-
-  // deletes the quest associated with the delete button that called this
-  deleteQuest(event) {
-    this.firebase.favourites(this.globalUser.uid).child(event.currentTarget.value).remove();
-
-    this.firebase.favourites(this.globalUser.uid).once("value", snapshot => {
-      this.setState({
-        list: snapshot.val(),
-      });
-
-      this.updateFavouriteArray();
-
-    });
-  }
-
-  // completes the quest associated with the completed button that called this
-  completeQuest(event) {
-    let now = new Date().toString(' MMMM d yyyy');
-    this.firebase.completed(this.globalUser.uid).child(event.currentTarget.value).update({
-      questID: event.currentTarget.value,
-      completedDate: now
-    });
-
-    this.firebase.favourites(this.globalUser.uid).child(event.currentTarget.value).remove();
-
-    this.firebase.favourites(this.globalUser.uid).once("value", snapshot => {
-      this.setState({
-        list: snapshot.val(),
-      });
-
-      this.updateFavouriteArray();
-
-    });
-
-    this.updateProgressArray(event.currentTarget.value);
-
-    this.updateProgressXP();
-
-    this.firebase.completed(this.globalUser.uid).once("value", snapshot => {
-      this.setState({
-        completed: snapshot.val(),
-      });
-
-      this.updateCompletedArray();
-
-    });
-  }
-
-  // update progressArray before adding xp of quest to be completed
-  updateProgressArray(quest) {
-    console.log("xp");
-    console.log(quest);
-    let array = [];
-    console.log(this.state.questList[quest].categories)
-    for (var category in this.state.questList[quest].categories) {
-      let currentCategory = category;
-      let currentXP = this.state.questList[quest].categories[category];
-      let progressXP = {
-        category: currentCategory,
-        xp: currentXP,
-      };
-
-      this.state.progressArray = array;
-      console.log(this.state.progressArray);
-    }
-  }
-
-  updateProgressXP() {
-    this.firebase.categoryProgress(this.globalUser.uid).once("value", snapshot => {
-      let userXP = snapshot.val();
-      console.log(snapshot.val());
-
-      for (var category in this.state.progressArray) {
-        let categoryTag = this.state.progressArray[category].category
-        this.firebase.categoryProgress(this.globalUser.uid).update({
-          [categoryTag]: this.state.progressArray[category].xp + userXP[categoryTag]
-        });
-      }
-    });
-  }
-
-
-  // deletes the quest associated with the delete button that called this
-  clearQuest(event) {
-    this.firebase.completed(this.globalUser.uid).child(event.currentTarget.value).remove();
-    this.firebase.completed(this.globalUser.uid).once("value", snapshot => {
-      this.setState({
-        completed: snapshot.val(),
-      });
-      this.updateCompletedArray();
-    });
-  }
-
 
   render() {
     if (this.state.loading) {
@@ -217,6 +81,7 @@ class Favourites extends React.Component {
     }
 
     const data = this.state.questList;
+    console.log(data);
     const saved = Object.entries(this.state.list);
 
     return (

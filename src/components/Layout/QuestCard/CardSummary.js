@@ -17,13 +17,14 @@ class QuestCardSummary extends React.Component {
 
     handleSave = (e) => {
         e.stopPropagation();
-
+        console.log('hello')
         let now = new Date().toString(' MMMM d yyyy');
-
-        this.firebase.favourites(this.props.globalUser).child(this.props.questId).update({
+        const uid = this.props.globalUser.uid;
+        
+        this.firebase.favourites(uid).child(this.props.questId).update({
             questID : this.props.questId,
             savedDate : now,
-          });
+        });
     }
 
     render() {
