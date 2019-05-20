@@ -3,6 +3,7 @@ import React from "react";
 import Logo from "../../img/pickr-logo-blue2.PNG";
 
 import InboxIcon from '@material-ui/icons/Inbox';
+import CollectionsIcon from '@material-ui/icons/Collections';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -28,7 +29,7 @@ class NavDrawer extends React.Component {
                 <List component="nav">
                     <ListItem component={Link} to={ROUTES.HOME} button>
                         <ListItemIcon style={{ color: textColor }}>
-                            <InboxIcon />
+                            <CollectionsIcon />
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Quests" />
                     </ListItem>
