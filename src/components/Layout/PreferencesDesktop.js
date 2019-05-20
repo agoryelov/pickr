@@ -25,21 +25,7 @@ import CheckboxList from '../Layout/prefButtons';
 
 
 const styles = {
-    catPrompt: {
-        textAlign: 'center',
-        marginTop: 10,
 
-    },
-    list: {
-        width: 250,
-    },
-    fullList: {
-        width: 'auto',
-        height: 40,
-    },
-    slider: {
-        width: 150,
-    }
 };
 
 
@@ -48,9 +34,6 @@ class SwipeableTemporaryDrawer extends React.Component {
       bottom: false,
       
     };
-
-    
-  
     toggleDrawer = (side, open) => () => {
 
       this.setState({
@@ -64,19 +47,12 @@ class SwipeableTemporaryDrawer extends React.Component {
       
   
       const fullList = (
-        <div className={classes.fulllist}>
+        <div style={{padding: '0', margin: '0', width: '200px'}} >
           <List>
             <ListItem>
-              <div className={classes.drawerHeader}>
-                <ListItemText primary={""} />
-                <ListItemIcon>
-                  <IconButton onClick={this.toggleDrawer('bottom', false)}> 
-                  Preferences &nbsp;
-                    <ChevronRightIcon />
-                  </IconButton>
-                </ListItemIcon>
+               
+                  Preferences
                 <Divider />
-              </div>
 
             </ListItem>
             
@@ -96,25 +72,7 @@ class SwipeableTemporaryDrawer extends React.Component {
   
       return (
         <div>
-          <Button onClick={this.toggleDrawer('bottom', true)}>My Preferences</Button>
-          
-         
-          <SwipeableDrawer
-            
-            anchor="right"
-            open={this.state.bottom}
-            onClose={this.toggleDrawer('bottom', false)}
-            onOpen={this.toggleDrawer('bottom', true)}
-          >
-            <div
-              tabIndex={0}
-              role="button"
-              /*onClick={this.toggleDrawer('bottom', false)}*/
-             onKeyDown={this.toggleDrawer('bottom', false)}
-            >
-              {fullList}
-            </div>
-          </SwipeableDrawer>
+          {fullList}
         </div>
       );
     }
@@ -126,34 +84,3 @@ class SwipeableTemporaryDrawer extends React.Component {
   
   export default withStyles(styles)(SwipeableTemporaryDrawer);
 
-class Preferences extends Component {
-    firebase = new Firebase();
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            authUser: null,
-            
-        };
-    }
-
-
-    componentDidMount() {
-        this.firebase.auth.onAuthStateChanged((authUser) => {
-            if (authUser) {
-                this.setState({ authUser });
-            } else {
-                this.setState({ authUser: null });
-            }
-        });
-    }
- 
-    render() {
-        return(
-            <div></div>
-        
-        )
-    }
-}
-
-//export default Preferences;

@@ -6,121 +6,95 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Firebase from '../firebase'
 import '../CSS/Favourites.css';
+import * as ROUTES from '../../constants/routes';
+import 'rc-swipeout/assets/index.css';
 
 
+import Swipeout from 'rc-swipeout';
+
+import SavedQuestItem from '../Layout/SavedQuests/SavedQuestItem';
+
+import '../CSS/QuestPage.css'
 
 
 class Favourites extends React.Component {
-    firebase = new Firebase();
-    constructor(props) {
-        super(props);
+  firebase = new Firebase();
+  constructor(props) {
+    super(props);
 
-        this.state = {
+    this.state = {
 
-            // List of all quests
-            questList: null,
+      // List of all quests
+      questList: null,
 
-            // List of quests favourited by the user
-            list: null,
+      // List of quests favourited by the user (pulled from firebase)
+      list: null,
 
-            // Boolean set to true until user is logged in and list updated
-            loading: true,
-        };
-    }
+      // List of quests completed by the user (pulled from firebase)
+      completed: null,
 
-    componentDidMount() {
-      this.setState({ loading: true });
+      // Boolean set to true until user is logged in and list updated
+      loading: true,
 
-      // grab list of all quests in firebase and save to questList
-      this.firebase.questsAll().once("value", snapshot => {
-        console.log(snapshot.val());
-        this.setState({ 
-          questList: snapshot.val(),
-        });
-      });
+      // current user
+      globalUser: null,
 
-      this.firebase.auth.onAuthStateChanged(user => {
-        if (user) {
-          this.firebase.favourites(user.uid).once("value", snapshot => {
-            console.log(snapshot.val());
-            this.setState({ 
-              list: snapshot.val(),
-              loading: false,
+      // an array of quests favourited by the user
+      favouriteArray: [],
 
-            });
-            console.log("if user list:" + this.state.list);
+      // an array of quests completed by the user
+      completedArray: [],
+
+      // an array of xp by categories the current completed quest will reward
+      progressArray: [],
+
+    };
+  }
+
+  componentDidMount() {
+    this.firebase.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.globalUser = user;
+
+        this.firebase.favourites(user.uid).once("value", snapshot => {
+          console.log(snapshot.val());
+          this.setState({
+            list: snapshot.val(),
+            questList: this.props.data,
+            loading: false,
           });
-          console.log("list:" + this.state.list);
-        } else {
-          //not logged in
-        }
-      });
-    }
-
-    createList = () => {
-      let favouriteList = []
-
-      for (var i = 0; i < this.state.list.length; i++) {
-        console.log(i);
-        if (this.state.list[i] != undefined) {
-
-          let questName = JSON.stringify(this.state.questList[this.state.list[i].questID].name);
-          questName = questName.substring(1, questName.length -1);
-
-          let questDescription = JSON.stringify(this.state.questList[this.state.list[i].questID].description);
-          questDescription = questDescription.substring(1, questDescription.length -1);
-
-          // let questImageLink = JSON.stringify(this.state.questList[this.state.list[i].questID].imgLink);
-          // questImageLink = questImageLink.substring(1, questImageLink.length -1);
-
-          let savedDate = JSON.stringify(this.state.list[i].savedDate);
-          savedDate = savedDate.substring(1, savedDate.length -1);
-
-          console.log("quest" + this.state.questList[this.state.list[i].questID].name);
-          favouriteList.push(
-            <div className = "questContainer">
-              <div className = "questTop">
-                <div className = "questName">{questName}</div>
-                <div className = "savedDate">
-                  Saved: {savedDate}
-                </div>
-              </div>
-              <div className = "questBottom">
-              <div className = "questDescription">
-                {questDescription}
-              </div>
-              </div>
- 
-            </div>
-          
-          
-          
-          
-          
-          )
-        }
+        });
+      } else {
+        this.props.history.push(ROUTES.SIGN_IN);
       }
-      return favouriteList;
-      
+
+    });
+  }
+
+  render() {
+    if (this.state.loading) {
+      return (
+        <div style={{ marginTop: '40vh', display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress />
+        </div>
+      );
     }
 
+    const data = this.state.questList;
+    console.log(data);
+    const saved = Object.entries(this.state.list);
 
-    
-    
-    render() {
-        let content;
-        if (!this.state.loading) {
-
-          content = <div> {this.createList()} </div>;
-          
-        } else {
-          content = 
-          <div>
-          </div>;
-        }
-        return <div>{content}</div>;
-    }
+    return (
+      <div style={{ padding: '2em' }}>
+        {saved.map(x =>
+          <div key={x[0]}>
+            <SavedQuestItem questData={data[x[0]][1]} />
+          </div>
+        )}
+      </div>);
+  }
 }
+
 
 export default Favourites;
 
