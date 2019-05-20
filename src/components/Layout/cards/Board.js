@@ -274,7 +274,6 @@ class Board extends Component {
                    
                     <div
                       key = {dataitem.x * datarow.length + dataitem.y}
-                    
                     >
                     <Cell
                       value = {{dataitem}}

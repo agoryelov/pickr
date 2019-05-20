@@ -52,8 +52,8 @@ class QuestPage extends React.Component {
     }
     
     componentDidMount() {
-        this.arrayShuffle(this.props.data);
-        //this.setState({data: this.props.data, loading: false})
+        const jsonToArray = Object.entries(this.props.data);
+        this.arrayShuffle(jsonToArray);
     }
     
     arrayShuffle = (array) => {
@@ -94,7 +94,7 @@ class QuestPage extends React.Component {
                         getSwiper={(swiper) => this.swiper = swiper} >
                         {data.map((card, index) => (
                             <div key={card[0]}>
-                                <QuestCard current={this.state.current} coords={coords} questId={card[0]} questData={card[1]} globalUser={this.props.authUser} />
+                                <QuestCard current={this.state.current} coords={coords} questId={index + 1} questData={card[1]} globalUser={this.props.authUser} />
                             </div>
                         ))}
                     </Swiper>

@@ -43,14 +43,21 @@ class SavedQuestItem extends React.Component {
     }
 
     componentDidMount() {
+        
     }
 
     handleSave = (e) => {
         e.stopPropagation();
+
     }
 
     handleChip = (e) => {
         e.stopPropagation();
+    }
+
+    handleDelete = () => {
+        //pls delete me
+        console.log(this.props.questId);
     }
 
     render() {
@@ -177,7 +184,7 @@ class SavedQuestItem extends React.Component {
                                 <Button size="small" color="default">
                                     Learn More
                                 </Button>
-                                <Button size="small" color="secondary">
+                                <Button onClick={this.handleDelete} size="small" color="secondary">
                                     Delete
                                 </Button>
                             </Grid>

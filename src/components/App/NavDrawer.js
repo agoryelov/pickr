@@ -48,7 +48,7 @@ class NavDrawer extends React.Component {
                             </ListItemIcon>
                             <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Favourites" />
                         </ListItem>
-                        <ListItem onClick={this.props.close} button>
+                        <ListItem component={Link} to={ROUTES.COMPLETED} onClick={this.props.close} button>
                             <ListItemIcon style={{ color: textColor }}>
                                 <InboxIcon />
                             </ListItemIcon>

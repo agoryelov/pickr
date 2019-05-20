@@ -1,4 +1,5 @@
 import React from "react";
+import Firebase from '../firebase'
 
 class Completed extends React.Component {
     firebase = new Firebase();
@@ -12,11 +13,19 @@ class Completed extends React.Component {
 
     componentDidMount() {
         this.firebase.auth.onAuthStateChanged(user => {
-        }
+            if (user) {
+                //logged in
+            } else {
+                //not logged in
+            }
+        });
     }
     
     render() {
-        return(<div>Example Div</div>)
+        return(
+        <div>
+            Completed Quests
+        </div>)
     }
 }
 

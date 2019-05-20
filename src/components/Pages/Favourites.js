@@ -58,10 +58,10 @@ class Favourites extends React.Component {
 
         this.firebase.favourites(user.uid).once("value", snapshot => {
           console.log(snapshot.val());
-          this.setState({
-            list: snapshot.val(),
-            questList: this.props.data,
-            loading: false,
+          this.setState({ list: snapshot.val() });
+        }).then(() => {
+          this.firebase.questsAll().once("value", snapshot => {
+            this.setState({ questList: snapshot.val(), loading: false});
           });
         });
       } else {
@@ -80,15 +80,16 @@ class Favourites extends React.Component {
       );
     }
 
-    const data = this.state.questList;
+    const data = Object.entries(this.state.questList);
     console.log(data);
     const saved = Object.entries(this.state.list);
+    console.log(saved);
 
     return (
       <div style={{ padding: '2em' }}>
         {saved.map(x =>
           <div key={x[0]}>
-            <SavedQuestItem questData={data[x[0]][1]} />
+            <SavedQuestItem questId={x[0]} questData={data[x[0] - 1][1]} />
           </div>
         )}
       </div>);

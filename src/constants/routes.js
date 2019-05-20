@@ -5,3 +5,4 @@ export const BADGES = '/badges';
 export const FAVS = '/favs';
 export const ABOUT = '/about';
 export const SWEEP = '/sweep';
+export const COMPLETED = '/completed';
