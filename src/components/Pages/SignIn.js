@@ -87,6 +87,7 @@ class SignInFormBase extends Component {
                   <Button type="submit" color="primary" variant="contained" fullWidth>Login</Button>
                 </Grid>
                 <Grid item xs={12}>
+                  <h7 style ={{paddingBottom: '20px'}}> Don't have an account? Sign up below.</h7>
                   <Button component={Link} to={ROUTES.SIGN_UP} variant="contained" fullWidth>Create</Button>
                 </Grid>
               </Grid>
