@@ -69,33 +69,44 @@ class MissState extends Component {
   
           <div className = "col-sm-6">
           <div className = "card" style = {cardStyle}>
-                <img className = "rounded-circle" src = {ProfPic1} style = {imgStyle}/>
+            <div className = "card-header">
+            <img className = "rounded-circle" src = {ProfPic1} style = {imgStyle}/>
                 <Collapsible trigger = "Andrey G."
                    transitionTime = {300}
                    triggerStyle ={{cursor: 'pointer'}}
                    >
-                     <br/><p></p></Collapsible>
+                     <br/><p>Andrey has been passionate about programming since an early age and entered
+                      the CST program to get hands on software development experience and jumpstart his career. 
+                      He likes UX design, programming, puzzles, and llamas.</p></Collapsible>
+                </div>
               </div>
            </div>
            <div className = "col-sm-6">
               <div className = "card" style = {cardStyle}>
+                <div className = "card-header">
                 <img className = "rounded-circle" src = {ProfPic2} style = {imgStyle}/>
                 <Collapsible trigger = "Noah M."
                    transitionTime = {300}
                    triggerStyle ={{cursor: 'pointer'}}
                    >
-                     <br/><p></p></Collapsible>
+                     <br/><p>Noah is currently a CST student at BCIT. He has always had a curiosity to learn more 
+                       about programming and computer science. His major interests are in web development, gaming, and machine learning.</p></Collapsible>
+                </div>
               </div>
            </div>
           
            <div className = "col-sm-6">
               <div className = "card" style = {cardStyle}>
+              <div className = "card-header">
                 <img className = "rounded-circle" src = {ProfPic3} style = {imgStyle}/>
                 <Collapsible trigger = "Steven H."
                    transitionTime = {300}
                    triggerStyle ={{cursor: 'pointer'}}
-                   >
-                     <br/><p></p></Collapsible>
+                   > 
+                     <br/><p>Steven is an aspiring software developer and a current CST student at BCIT.
+                       Steven was interested in programming from an early age and had taught himself programming as a hobby. 
+                       Before coming to BCIT, Steven worked as an accountant and has a BBA in Finance.</p></Collapsible>
+                </div>
               </div>
            </div>
            <div className = "col-sm-6">
@@ -105,7 +116,7 @@ class MissState extends Component {
                    <Collapsible trigger = "Young K."
                    transitionTime = {300}
                    triggerStyle ={{cursor: 'pointer'}}
-                   >
+                   > 
                      <br/><p>Young is currently a CST student at BCIT who has finished his 
                    first term of the program. He has an undergraduate degree in mechanical engineering and has an active 
                    passion for web development, renewable energy, and machine learning.</p></Collapsible>
