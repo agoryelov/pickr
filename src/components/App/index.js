@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SignUpPage from '../Pages/SignUp';
 import SignInPage from '../Pages/SignIn';
 
-import AppBarHeader from './Header3'
-import NavDrawer from './NavDrawer'
-import NavDrawerDesktop from './NavDrawerDesktop'
-import AppContent from './AppContent'
+import AppBarHeader from './Header3';
+import NavDrawer from './NavDrawer';
+import NavDrawerDesktop from './NavDrawerDesktop';
+import AppContent from './AppContent';
 
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
@@ -22,7 +22,7 @@ import * as ROUTES from '../../constants/routes';
 import Firebase from '../firebase';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
+const catNum = 10;
 
 
 class App extends Component {
@@ -36,10 +36,9 @@ class App extends Component {
             loading: true,
             coords: null,
             data: null,
+            badPrefs: null,
         };
     }
-        
-
 
     toggleDrawer = () => {
         this.setState({
@@ -48,7 +47,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        const catNum = 10;
+
         //Getting user location
         navigator.geolocation.getCurrentPosition((position) => {
             this.setState({ coords: position.coords });
@@ -61,9 +60,48 @@ class App extends Component {
                 this.firebase.questsAll().once("value", snapshot => {
                     console.log("hit");
                     this.setState({
-                        data: snapshot.val(),
-                        loading: false
-                    })
+                        data: snapshot.val(), 
+                        loading: false,            
+                    });
+                });
+
+                this.userPreferences = this.firebase.preferences(authUser.uid);
+                this.userPreferences.once("value", snapshot => {
+                    let arrayOfBadPrefs = [];
+
+                   for(let x  = 0; x < catNum; x++) {
+                        if (Object.entries(snapshot.val())[x][1] == false){
+                            arrayOfBadPrefs.push(Object.entries(snapshot.val())[x][0])
+                        }  
+                    }
+
+                    this.setState({
+                        badPrefs: arrayOfBadPrefs
+                    });
+                    console.log(arrayOfBadPrefs);
+                    console.log(this.state.data.length);
+                    console.log("After prefs:");
+                    var addFlag;
+                    var realQuests = [];
+                    for(var index in this.state.data) {
+                        addFlag = true;
+                        for(var cats in this.state.data[index]["categories"]) {
+                          for(var badpref of this.state.badPrefs) {
+                               if(badpref == cats) {
+                                   addFlag = false;
+                               }
+                          }
+                        }
+                        if(addFlag) {
+                            realQuests.push(this.state.data[index]);
+                        }
+                      
+                    }
+                    console.log(realQuests.length);
+                    console.log(realQuests);
+                    this.setState({
+                        data: realQuests,
+                    });
                 });
                 this.userPreferences = this.firebase.preferences(authUser.uid);
                 this.userPreferences.once("value", snapshot => {
@@ -104,7 +142,7 @@ class App extends Component {
                     });
                 });
             } else {
-                this.setState({ authUser: null, loading: false });
+                this.setState({ authUser: null, loading: false});
             }
         });
     }

@@ -5,8 +5,8 @@ import Button from '@material-ui/core/Button';
 import Smiley from '../images/smiley.png';
 import Frown from '../images/frowney.png';
 import Face from '../images/mineface.png';
-
-var w;
+import Timer from './Timer';
+import { flattenDiagnosticMessageText } from 'typescript';
 
 class Board extends Component {
     constructor(props){
@@ -16,6 +16,8 @@ class Board extends Component {
           gameStatus: "Game in Progress",
           mineCount: this.props.mines,
           face: Face,
+          trigger: false,
+          pause: false,
         };
         console.log(this.state.face);
         this.reset = this.reset.bind(this);
@@ -207,6 +209,7 @@ class Board extends Component {
             this.setState({
                 gameStatus: "You Lose.",
                 face: Frown,
+                pause: true,
             });
             this.revealBoard();
         }
@@ -224,6 +227,8 @@ class Board extends Component {
                 mineCount: 0,
                 gameStatus: "You Win!",
                 face: Smiley,
+                trigger: true,
+                pause: true,
             });
 
             this.revealBoard();
@@ -232,6 +237,7 @@ class Board extends Component {
         this.setState({
             boardData: updatedData,
             mineCount: this.props.mines - this.getFlags(updatedData).length,
+            trigger: false,
         });
     }
 
@@ -295,16 +301,17 @@ class Board extends Component {
 
     reset = () => {
         this.setState ({
-          boardData: this.initBoardData(this.props.height, this.props.width, this. props.mines),
+          boardData: this.initBoardData(this.props.height, this.props.width, this.props.mines),
           gameStatus: "Game in Progress",
           mineCount: this.props.mines,
           face: Face,
+          trigger: true,
+          pause: false,
         });
     }
 
     render() {
         return(
-  
             <div className = "board">
                 <div className = "game-info">
                     <div className = "info">
@@ -313,8 +320,8 @@ class Board extends Component {
                     <br />
                     <div className = "info">
                         {this.state.gameStatus}
-                        
                     </div>
+                    <Timer trigger = {this.state.trigger} pause = {this.state.pause}/>
                     <div className = "info">
                     <img style = {{width: '50px'}}src = {this.state.face} alt = "mineFace"/>
                     </div>
