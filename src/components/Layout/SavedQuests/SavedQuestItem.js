@@ -37,14 +37,7 @@ import Firebase from "../../firebase";
 class SavedQuestItem extends React.Component {
     firebase = new Firebase();
 
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            sampleData: "test",
-            xpArray: null,
-        };
-    }
 
     componentDidMount() {
     }
@@ -66,6 +59,51 @@ class SavedQuestItem extends React.Component {
 
     completeQuest() {
         console.log(this.props.questData['categories']);
+
+        let now = new Date().toString(' MMMM d yyyy');
+
+        this.firebase.completed(this.props.globalUser.uid).child(this.props.questId).update({
+              questID : this.props.questId,
+              completedDate : now
+        });
+
+        this.updateXpArray();
+
+        this.deleteQuest();
+    }
+
+    updateXpArray() {
+        console.log(this.props.questData['categories']);
+        // console.log(quest);
+        let xpArray = [];
+        // console.log(this.state.questList[quest].categories)
+        for (var category in this.props.questData['categories']) {
+          let currentXP = this.props.questData['categories'][category];
+          let progressXP = {
+            category: category,
+            xp: currentXP,
+          };
+          xpArray.push(progressXP);
+        };
+      
+
+        this.updateUserXp(xpArray);
+    }
+
+    updateUserXp(xpArray) {
+        console.log(xpArray);
+
+        this.firebase.categoryProgress(this.props.globalUser.uid).once("value", snapshot => {
+            let userXP = snapshot.val();
+            console.log(snapshot.val());
+      
+            for (var category in xpArray) {
+              let categoryTag = xpArray[category].category
+              this.firebase.categoryProgress(this.props.globalUser.uid).update({
+                [categoryTag] : xpArray[category].xp  + userXP[categoryTag]
+              });
+            }
+          });
     }
 
     render() {
@@ -79,8 +117,6 @@ class SavedQuestItem extends React.Component {
         const questEcoRating = data['ecoRating'];
         const questAbout = data['description'];
         const cats = Object.entries(data['categories']);
-
-        console.log(data['categories']);
 
         const icons = {
             Fitness: {

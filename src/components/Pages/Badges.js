@@ -37,6 +37,7 @@ class CategoryProgress extends React.Component {
 
     componentDidMount() {
       const categoryLevel = this.getLevel(this.props.exp);
+      console.log(this.props.exp + " " + categoryLevel);
       const progress = this.getProgress(categoryLevel);
 
       this.setState({
@@ -44,11 +45,24 @@ class CategoryProgress extends React.Component {
         completed: progress,
       });
     }
+
+    // componentWillReceiveProps() {
+    //   const categoryLevel = this.getLevel(this.props.exp);
+    //   console.log(this.props.exp + " " + categoryLevel);
+    //   const progress = this.getProgress(categoryLevel);
+
+    //   this.setState({
+    //     categoryLevel: categoryLevel,
+    //     completed: progress,
+    //   });
+    // }
     
     render() {
       const category = this.props.category;
       const categoryLevel = this.state.categoryLevel;
       const remExp = this.EXP[this.state.categoryLevel + 1] - this.props.exp;
+
+      console.log(this.props.exp + " " + categoryLevel);
 
         return(
         <Paper style={{padding: '0 1em 0 1em'}} >
@@ -99,7 +113,7 @@ class Badges extends React.Component {
       this.setState({ loading: true });
       this.firebase.auth.onAuthStateChanged(user => {
         if (user) {
-          this.firebase.categoryProgress(user.uid).once("value", snapshot => {       
+          this.firebase.categoryProgress(user.uid).on("value", snapshot => {       
             this.setState({
               testSorted: this.sortCats(snapshot.val()),
               loading: false,
