@@ -38,7 +38,7 @@ class App extends Component {
             data: null,
         };
     }
-    
+        
 
 
     toggleDrawer = () => {
@@ -48,7 +48,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-
+        const catNum = 10;
         //Getting user location
         navigator.geolocation.getCurrentPosition((position) => {
             this.setState({ coords: position.coords });
@@ -56,12 +56,52 @@ class App extends Component {
 
         this.firebase.auth.onAuthStateChanged((authUser) => {
             if (authUser) {
+                console.log("No")
                 this.setState({ authUser: authUser });
                 this.firebase.questsAll().once("value", snapshot => {
+                    console.log("hit");
                     this.setState({
                         data: snapshot.val(),
                         loading: false
                     })
+                });
+                this.userPreferences = this.firebase.preferences(authUser.uid);
+                this.userPreferences.once("value", snapshot => {
+                    let arrayOfBadPrefs = [];
+
+                   for(let x  = 0; x < catNum; x++) {
+                        if (Object.entries(snapshot.val())[x][1] == false){
+                            arrayOfBadPrefs.push(Object.entries(snapshot.val())[x][0])
+                        }
+                    }
+
+                    this.setState({
+                        badPrefs: arrayOfBadPrefs
+                    });
+                    console.log(this.state.data.length);
+                    console.log("After prefs:");
+                    var realQuests = [];
+                    var addFlag;
+
+                    for(var index in this.state.data) {
+                        addFlag = true;
+                        for(var cats in this.state.data[index]["categories"]) {
+
+                          for(var badpref of this.state.badPrefs) {
+                               if(badpref == cats) {
+                                   addFlag = false;
+                               }
+                          }
+                        }
+                        if(addFlag) {
+                            realQuests.push(this.state.data[index]);
+                        }
+
+                    }
+                    console.log(realQuests.length);
+                    this.setState({
+                        data: realQuests,
+                    });
                 });
             } else {
                 this.setState({ authUser: null, loading: false });

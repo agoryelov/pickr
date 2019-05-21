@@ -10,6 +10,21 @@ import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
 import Firebase from '../firebase';
 import CircularProgress from '@material-ui/core/CircularProgress';
+//Creative Icon
+import CreativeIcon from '@material-ui/icons/Brush';
+
+//Nature Icon
+import NatureIcon from '@material-ui/icons/FilterHdr';
+
+//Fitness Icon
+import FitnessIcon from '@material-ui/icons/FitnessCenter';
+
+//Food Icon
+import FastIcon from '@material-ui/icons/Fastfood';
+
+//Romantic Icon
+import RomanticIcon from '@material-ui/icons/Favorite';
+import { ListItemIcon } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -105,7 +120,6 @@ class CheckboxList extends React.Component {
         if (authUser) {
           
             this.firebase.preferencesWrite(authUser.uid, value).once("value").then((snapshot) => {
-            console.log("YA it wrorks" + snapshot.val())
             if (snapshot.val() == true){
               console.log("if");
               this.firebase.preferences(authUser.uid).update({
@@ -137,8 +151,42 @@ class CheckboxList extends React.Component {
   };
   
   render() {
+    
     const { classes } = this.props;
-
+    const icons = {
+      Fitness: {
+          icon: <FitnessIcon />,
+          color: "#0277bdCC"
+      },
+      Creative: {
+          icon: <CreativeIcon />,
+          color: "#fbc02dAA"
+      },
+      Nature: {
+          icon: <NatureIcon  />,
+          color: "#66bb6aCC"
+      },
+      Culture: {
+          icon: <FitnessIcon />,
+          color: "#8e24aaCC"
+      },
+      Food: {
+          icon: <FastIcon  />,
+          color: "#8d6e63CC"
+      },
+      Romantic: {
+          icon: <RomanticIcon />,
+          color: "#ec407aCC"
+      },
+      Volunteer: {
+          icon: <RomanticIcon />,
+          color: "#ec407aCC"
+      },
+      Games: {
+          icon: <RomanticIcon  />,
+          color: "#ec407aCC"
+      },
+  };
     if (this.state.loading) {
       return (
         <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
@@ -148,18 +196,22 @@ class CheckboxList extends React.Component {
   }
     return (
     <div>
-      <List className={classes.root}>
         {['Nature', 'Food', 'Fitness', 'Culture', 'Volunteer', 'Creative', 'Romantic', 'Games'].map(value => (
-          <ListItem key={value} role={undefined} dense button onClick={this.handleToggle(value)}>
+          <ListItem key={value} role={undefined}  dense button onClick={this.handleToggle(value)}>
+            <ListItemIcon >
+              
+              {icons[value].icon}
+            </ListItemIcon>
+            <ListItemText primary={`${value}`} />
             <Checkbox
               checked={this.state.checked.indexOf(value) !== -1}
               tabIndex={-1}
               disableRipple
             />
-            <ListItemText primary={`${value}`} />
+            
           </ListItem>
         ))}
-      </List>
+
       </div>
     );
   }
