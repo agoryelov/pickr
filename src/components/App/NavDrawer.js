@@ -46,7 +46,8 @@ class NavDrawer extends React.Component {
             <SwipeableDrawer ModalProps={{ BackdropProps: { invisible: false } }}
                 PaperProps={{ style: { background: '#0d47a1' } }}
                 variant="temporary" open={this.props.open}
-                onClose={this.props.close} >
+                onClose={this.props.close} 
+                onOpen={() => {}} >
                 <div>
                     <List style={{minWidth: '235px'}} component="nav">
                         <div style={{ textAlign: 'center', paddingTop: '12px' }}>

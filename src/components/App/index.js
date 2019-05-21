@@ -76,7 +76,6 @@ class App extends Component {
                 </div>
             );
         }
-        console.log(this.state.badPrefs)
         const user = this.state.authUser;
         const data = this.state.data;
         const loginFlow = <div>
