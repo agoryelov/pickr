@@ -58,11 +58,12 @@ class App extends Component {
                 this.setState({ authUser: authUser });
                 this.firebase.questsAll().once("value", snapshot => {
                     this.setState({
-                        data: snapshot.val(), loading: false,
+                        data: snapshot.val(),
+                        loading: false,
                     }) 
                 });
             } else {
-                this.setState({ authUser: null });
+                this.setState({ authUser: null});
             }
         });
     }
