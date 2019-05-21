@@ -10,7 +10,6 @@ import FavouritesPage from '../Pages/Favourites';
 import AboutPage from '../Pages/About';
 import SweepPage from '../Pages/Sweep';
 import UserPreferencesPage from '../Pages/UserPreferences';
-import FirebaseSubmit from '../Pages/FirebaseSubmit'
 
 import NavDrawerDesktop from './NavDrawerDesktop'
 import Hidden from '@material-ui/core/Hidden';
@@ -37,7 +36,6 @@ class AppContent extends React.Component {
                             <Route path={ROUTES.ABOUT} component={AboutPage} />
                             <Route path={ROUTES.SWEEP} component={SweepPage} />
                             <Route path={ROUTES.PREFERENCES} component={UserPreferencesPage} />
-                            <Route path={ROUTES.FIREBASE} component={FirebaseSubmit} />
                             <Hidden smUp><Route path={ROUTES.FAVS} render={(props) => <FavouritesPage {...props} coords={this.props.coords} data={this.props.data} /> } /></Hidden>
                         </div>
                     </Grid>
