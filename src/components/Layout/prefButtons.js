@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
 import Firebase from '../firebase';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
 //Creative Icon
 import CreativeIcon from '@material-ui/icons/Brush';
 
@@ -24,6 +25,16 @@ import FastIcon from '@material-ui/icons/Fastfood';
 
 //Romantic Icon
 import RomanticIcon from '@material-ui/icons/Favorite';
+
+//Culture Icon
+import LibraryIcon from '@material-ui/icons/LocalLibrary';
+
+//Volunteer Icon
+import SupervisorIcon from '@material-ui/icons/SupervisorAccount';
+
+//Games Icon
+import GamesIcon from '@material-ui/icons/Games';
+
 import { ListItemIcon } from '@material-ui/core';
 
 const styles = theme => ({
@@ -167,7 +178,7 @@ class CheckboxList extends React.Component {
           color: "#66bb6aCC"
       },
       Culture: {
-          icon: <FitnessIcon />,
+          icon: <LibraryIcon />,
           color: "#8e24aaCC"
       },
       Food: {
@@ -179,11 +190,11 @@ class CheckboxList extends React.Component {
           color: "#ec407aCC"
       },
       Volunteer: {
-          icon: <RomanticIcon />,
+          icon: <SupervisorIcon />,
           color: "#ec407aCC"
       },
       Games: {
-          icon: <RomanticIcon  />,
+          icon: <GamesIcon  />,
           color: "#ec407aCC"
       },
   };
