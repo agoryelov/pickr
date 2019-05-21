@@ -23,7 +23,7 @@ import Firebase from '../firebase';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
-
+const catNum = 10;
 
 class App extends Component {
     firebase = new Firebase();
@@ -36,10 +36,9 @@ class App extends Component {
             loading: true,
             coords: null,
             data: null,
+            badPrefs: null,
         };
     }
-    
-
 
     toggleDrawer = () => {
         this.setState({
@@ -60,9 +59,19 @@ class App extends Component {
                 this.firebase.questsAll().once("value", snapshot => {
                     this.setState({
                         data: snapshot.val(),
-                        loading: false
-                    })
-                });
+                    }) 
+                }).then(() => {
+                    this.firebase.preferences(authUser.uid).once('value', snapshot => {
+                        const snap = snapshot.val();
+                        let badPrefs = [];
+                        for (let category in snap) {
+                            if (snap[category] == false) {
+                                badPrefs.push(category);
+                            }
+                        }
+                        this.setState({ badPrefs, loading: false });
+                    });
+                })
             } else {
                 this.setState({ authUser: null, loading: false });
             }
@@ -77,6 +86,7 @@ class App extends Component {
                 </div>
             );
         }
+        console.log(this.state.badPrefs)
         const user = this.state.authUser;
         const data = this.state.data;
         const loginFlow = <div>
