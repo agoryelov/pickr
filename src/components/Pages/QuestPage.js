@@ -43,7 +43,6 @@ class QuestPage extends React.Component {
             array[m] = array[i];
             array[i] = t; 
         }
-        console.log(array);
         this.setState({
               data: array,
               loading: false,
@@ -54,23 +53,6 @@ class QuestPage extends React.Component {
     componentDidMount() {
         const jsonToArray = Object.entries(this.props.data);
         this.arrayShuffle(jsonToArray);
-    }
-    
-    arrayShuffle = (array) => {
-        let m = array.length;
-        let t;
-        let i;
-        console.log("Randomizing");
-        while (m) {
-            i = Math.floor(Math.random() * m--);
-            t = array[m];
-            array[m] = array[i];
-            array[i] = t;
-        }
-        this.setState({
-            data: array,
-            loading: false,
-        });
     }
     
     render() {
@@ -84,7 +66,6 @@ class QuestPage extends React.Component {
 
         const coords = this.props.coords;
         const data = this.state.data;
-        console.log(this.state.current);
 
         return (
             <Grid container justify="center" style={{}}>
