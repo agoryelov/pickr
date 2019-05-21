@@ -6,3 +6,4 @@ export const FAVS = '/favs';
 export const ABOUT = '/about';
 export const SWEEP = '/sweep';
 export const PREFERENCES = '/preferences'
+export const COMPLETED = '/completed';

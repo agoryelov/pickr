@@ -11,11 +11,22 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
+
+//Creative Icon
 import BrushIcon from '@material-ui/icons/Brush';
+
+//Nature Icon
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
+
+//Fitness Icon
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+
+//Food Icon
 import FastFoodIcon from '@material-ui/icons/Fastfood';
+
+//Romantic Icon
 import FavoriteIcon from '@material-ui/icons/Favorite';
+
 import ShareIcon from '@material-ui/icons/Share';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import StyleIcon from '@material-ui/icons/Style';
@@ -47,7 +58,6 @@ class SavedQuestItem extends React.Component {
     }
 
     componentDidMount() {
-
     }
 
     handleSave = (e) => {

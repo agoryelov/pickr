@@ -68,7 +68,7 @@ class QuestCard extends React.Component {
         if (this.state.expanded && this.props.questId != (this.props.current)) {
             this.setState({ expanded: false });
         }
-
+        console.log(this.props.questId);
         const expanded = this.state.expanded;
         return (
             <div>
@@ -76,7 +76,7 @@ class QuestCard extends React.Component {
                     <div className="cardAnimationDefault">
                         <ExpansionPanel elevation={0} expanded={expanded} onChange={this.handleCollapse}>
                             <ExpansionPanelSummary classes={{ content: "noMargin", root: 'noMargin' }} >
-                                <QuestCardSummary expanded={expanded} distance={distance} data={questData} questId={this.props.questId} globalUser={this.props.globalUser}/>
+                                <QuestCardSummary expanded={expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser}/>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails style={{background: '#f4f4f4'}}>
                                 <QuestCardDetails data={questData} />

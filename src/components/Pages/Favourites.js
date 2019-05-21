@@ -81,7 +81,6 @@ class Favourites extends React.Component {
     }
 
     const data = Object.entries(this.state.questList);
-    console.log(data);
     const saved = Object.entries(this.state.list);
 
     return (
