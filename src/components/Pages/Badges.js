@@ -10,7 +10,7 @@ import * as ROUTES from '../../constants/routes';
 
 
 class CategoryProgress extends React.Component {
-    EXP = [0, 0, 500, 1250, 2000, 3000, 4000];
+    EXP = [0, 0, 60, 200, 500, 1000, 2500, 5000, 10000];
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +37,6 @@ class CategoryProgress extends React.Component {
 
     componentDidMount() {
       const categoryLevel = this.getLevel(this.props.exp);
-      console.log(this.props.exp + " " + categoryLevel);
       const progress = this.getProgress(categoryLevel);
 
       this.setState({
@@ -45,24 +44,15 @@ class CategoryProgress extends React.Component {
         completed: progress,
       });
     }
-
-    // componentWillReceiveProps() {
-    //   const categoryLevel = this.getLevel(this.props.exp);
-    //   console.log(this.props.exp + " " + categoryLevel);
-    //   const progress = this.getProgress(categoryLevel);
-
-    //   this.setState({
-    //     categoryLevel: categoryLevel,
-    //     completed: progress,
-    //   });
-    // }
     
     render() {
       const category = this.props.category;
-      const categoryLevel = this.state.categoryLevel;
+      const categoryLevel = this.getLevel(this.props.exp);
+      this.state.categoryLevel = categoryLevel;
+      const progress = this.getProgress(categoryLevel);
       const remExp = this.EXP[this.state.categoryLevel + 1] - this.props.exp;
 
-      console.log(this.props.exp + " " + categoryLevel);
+      this.state.completed = progress;
 
         return(
         <Paper style={{padding: '0 1em 0 1em'}} >
@@ -74,7 +64,7 @@ class CategoryProgress extends React.Component {
             <LinearProgress classes={{barColorPrimary: `barColorLevel${categoryLevel}`, colorPrimary: `colorLevel${categoryLevel}`}} color="primary" style={{height:'18px', borderRadius: '5px'}} variant="determinate" value={this.state.completed} />
             </Grid>
             <Grid item xs={4} style={{fontWeight: '600'}}>
-              <div>Level {categoryLevel}</div>
+              <div>Level {categoryLevel} Exp {this.props.exp} </div>
             </Grid>
             <Grid item xs={8} style={{textAlign: 'right', color: 'grey'}}>
               <div>{remExp} exp to Level {categoryLevel + 1}</div>
@@ -134,8 +124,10 @@ class Badges extends React.Component {
           );
         }
 
+
+
         const sortedCats = this.state.testSorted;
-        console.log(sortedCats);
+
         return (
           <div style={{margin: '1em'}}>
             <Grid container justify='center' spacing={16}>

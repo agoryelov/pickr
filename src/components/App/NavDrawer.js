@@ -5,6 +5,25 @@ import Logo from "../../img/pickr-logo-blue2.PNG";
 import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 
+
+//Menu Icon Quests
+import CollectionsIcon from '@material-ui/icons/Collections';
+
+//Menu Icon Favourites
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
+//Menu Icon Completed
+import DoneIcon from '@material-ui/icons/Done';
+
+//Menu Icon Badges
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+
+//Menu Icon Settings
+import SettingsIcon from '@material-ui/icons/Settings';
+
+//Menu Icon About Us
+import GroupIcon from '@material-ui/icons/Group';
+
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -37,39 +56,39 @@ class NavDrawer extends React.Component {
                         </ListItem>
                         <ListItem component={Link} to={ROUTES.HOME} onClick={this.props.close} button>
                             <ListItemIcon style={{ color: textColor }}>
-                                <InboxIcon />
+                                <CollectionsIcon />
                             </ListItemIcon>
                             <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Quests" />
                         </ListItem>
                         <hr style={{borderColor: '#e3f2fd55'}} />
                         <ListItem component={Link} to={ROUTES.FAVS} onClick={this.props.close} button>
                             <ListItemIcon style={{ color: textColor }}>
-                                <InboxIcon />
+                                <FavoriteIcon />
                             </ListItemIcon>
                             <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Favourites" />
                         </ListItem>
                         <ListItem component={Link} to={ROUTES.COMPLETED} onClick={this.props.close} button>
                             <ListItemIcon style={{ color: textColor }}>
-                                <InboxIcon />
+                                <DoneIcon />
                             </ListItemIcon>
                             <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Completed" />
                         </ListItem>
                         <ListItem component={Link} to={ROUTES.BADGES} onClick={this.props.close} button>
                             <ListItemIcon style={{ color: textColor }}>
-                                <InboxIcon />
+                                <EqualizerIcon />
                             </ListItemIcon>
                             <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Badges" />
                         </ListItem>
                         <hr style={{borderColor: '#e3f2fd55'}} />
                         <ListItem component={Link} to={ROUTES.PREFERENCES} onClick={this.props.close} button>
                             <ListItemIcon style={{ color: textColor }}>
-                                <InboxIcon />
+                                <SettingsIcon />
                             </ListItemIcon>
                             <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Settings" />
                         </ListItem>
                         <ListItem component={Link} to={ROUTES.ABOUT} onClick={this.props.close} button>
                             <ListItemIcon style={{ color: textColor }}>
-                                <InboxIcon />
+                                <GroupIcon />
                             </ListItemIcon>
                             <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="About Us" />
                         </ListItem>

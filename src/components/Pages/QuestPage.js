@@ -51,26 +51,6 @@ class QuestPage extends React.Component {
     }
     
     componentDidMount() {
-        this.arrayShuffle(this.props.data);
-        //this.setState({data: this.props.data, loading: false})
-    }
-    
-    arrayShuffle = (array) => {
-        let m = array.length;
-        let t;
-        let i;
-        console.log("Randomizing");
-        while (m) {
-            i = Math.floor(Math.random() * m--);
-            t = array[m];
-            array[m] = array[i];
-            array[i] = t;
-        }
-        this.setState({
-            data: array,
-            loading: false,
-        });
-
         const jsonToArray = Object.entries(this.props.data);
         this.arrayShuffle(jsonToArray);
     }

@@ -27,6 +27,15 @@ import FastFoodIcon from '@material-ui/icons/Fastfood';
 //Romantic Icon
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
+//Culture Icon
+import LibraryIcon from '@material-ui/icons/LocalLibrary';
+
+//Volunteer Icon
+import SupervisorIcon from '@material-ui/icons/SupervisorAccount';
+
+//Games Icon
+import GamesIcon from '@material-ui/icons/Games';
+
 import ShareIcon from '@material-ui/icons/Share';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import StyleIcon from '@material-ui/icons/Style';
@@ -48,7 +57,14 @@ import Firebase from "../../firebase";
 class SavedQuestItem extends React.Component {
     firebase = new Firebase();
 
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            sampleData: "test",
+            xpArray: null,
+        };
+    }
 
     componentDidMount() {
     }
@@ -129,6 +145,8 @@ class SavedQuestItem extends React.Component {
         const questAbout = data['description'];
         const cats = Object.entries(data['categories']);
 
+        console.log(data['categories']);
+
         const icons = {
             Fitness: {
                 icon: <FitnessCenterIcon style={{ color: 'white', fontSize: '16px' }} />,
@@ -143,7 +161,7 @@ class SavedQuestItem extends React.Component {
                 color: "#66bb6aCC"
             },
             Culture: {
-                icon: <FitnessCenterIcon style={{ color: 'white', fontSize: '16px' }} />,
+                icon: <LibraryIcon style={{ color: 'white', fontSize: '16px' }} />,
                 color: "#8e24aaCC"
             },
             Food: {
@@ -155,7 +173,7 @@ class SavedQuestItem extends React.Component {
                 color: "#ec407aCC"
             },
             Volunteer: {
-                icon: <FavoriteIcon style={{ color: 'white', fontSize: '16px' }} />,
+                icon: <SupervisorIcon style={{ color: 'white', fontSize: '16px' }} />,
                 color: "#ec407aCC"
             },
             Games: {

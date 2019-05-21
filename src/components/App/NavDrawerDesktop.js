@@ -1,9 +1,19 @@
 import React from "react";
 
-import Logo from "../../img/pickr-logo-blue2.PNG";
-
-import InboxIcon from '@material-ui/icons/Inbox';
+//Menu Icon Quests
 import CollectionsIcon from '@material-ui/icons/Collections';
+
+//Menu Icon Completed
+import DoneIcon from '@material-ui/icons/Done';
+
+//Menu Icon Badges
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+
+//Menu Icon Settings
+import SettingsIcon from '@material-ui/icons/Settings';
+
+//Menu Icon About Us
+import GroupIcon from '@material-ui/icons/Group';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -36,26 +46,26 @@ class NavDrawer extends React.Component {
                     <hr style={{ borderColor: '#e3f2fd55' }} />
                     <ListItem component={Link} to={ROUTES.COMPLETED} button>
                         <ListItemIcon style={{ color: textColor }}>
-                            <InboxIcon />
+                            <DoneIcon />
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Completed" />
                     </ListItem>
                     <ListItem component={Link} to={ROUTES.BADGES} button>
                         <ListItemIcon style={{ color: textColor }}>
-                            <InboxIcon />
+                            <EqualizerIcon />
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Badges" />
                     </ListItem>
                     <hr style={{ borderColor: '#e3f2fd55' }} />
                     <ListItem component={Link} to={ROUTES.PREFERENCES} button>
                         <ListItemIcon style={{ color: textColor }}>
-                            <InboxIcon />
+                            <SettingsIcon />
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Settings" />
                     </ListItem>
                     <ListItem component={Link} to={ROUTES.ABOUT} button>
                         <ListItemIcon style={{ color: textColor }}>
-                            <InboxIcon />
+                            <GroupIcon />
                         </ListItemIcon>
                         <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="About Us" />
                     </ListItem>
