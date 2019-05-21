@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SignUpPage from '../Pages/SignUp';
 import SignInPage from '../Pages/SignIn';
 
-import AppBarHeader from './Header3';
-import NavDrawer from './NavDrawer';
-import NavDrawerDesktop from './NavDrawerDesktop';
-import AppContent from './AppContent';
+import AppBarHeader from './Header3'
+import NavDrawer from './NavDrawer'
+import NavDrawerDesktop from './NavDrawerDesktop'
+import AppContent from './AppContent'
 
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
@@ -22,8 +22,8 @@ import * as ROUTES from '../../constants/routes';
 import Firebase from '../firebase';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const catNum = 10;
 
+const catNum = 10;
 
 class App extends Component {
     firebase = new Firebase();
@@ -55,43 +55,21 @@ class App extends Component {
 
         this.firebase.auth.onAuthStateChanged((authUser) => {
             if (authUser) {
-                console.log("No")
                 this.setState({ authUser: authUser });
                 this.firebase.questsAll().once("value", snapshot => {
-                    console.log("hit");
                     this.setState({
-                        data: snapshot.val(), 
-                        loading: false,            
-                    });
-                });
-
-                this.userPreferences = this.firebase.preferences(authUser.uid);
-                this.userPreferences.once("value", snapshot => {
-                    let arrayOfBadPrefs = [];
-
-                   for(let x  = 0; x < catNum; x++) {
-                        if (Object.entries(snapshot.val())[x][1] == false){
-                            arrayOfBadPrefs.push(Object.entries(snapshot.val())[x][0])
-                        }  
-                    }
-
-                    this.setState({
-                        badPrefs: arrayOfBadPrefs
-                    });
-                    console.log(arrayOfBadPrefs);
-                    console.log(this.state.data.length);
-                    console.log("After prefs:");
-                    var addFlag;
-                    var realQuests = [];
-                    for(var index in this.state.data) {
-                        addFlag = true;
-                        for(var cats in this.state.data[index]["categories"]) {
-                          for(var badpref of this.state.badPrefs) {
-                               if(badpref == cats) {
-                                   addFlag = false;
-                               }
-                          }
+                        data: snapshot.val(),
+                    }) 
+                }).then(() => {
+                    this.firebase.preferences(authUser.uid).once('value', snapshot => {
+                        const snap = snapshot.val();
+                        let badPrefs = [];
+                        for (let category in snap) {
+                            if (snap[category] == false) {
+                                badPrefs.push(category);
+                            }
                         }
+<<<<<<< HEAD
                         if(addFlag) {
                             realQuests.push(this.state.data[index]);
                         }
@@ -139,10 +117,13 @@ class App extends Component {
                     console.log(typeof(realQuests));
                     this.setState({
                         data: realQuests,
+=======
+                        this.setState({ badPrefs, loading: false });
+>>>>>>> 4ed48e50135246681a4e111a48ebf6639ef79d1a
                     });
-                });
+                })
             } else {
-                this.setState({ authUser: null, loading: false});
+                this.setState({ authUser: null, loading: false });
             }
         });
     }
@@ -155,6 +136,7 @@ class App extends Component {
                 </div>
             );
         }
+        console.log(this.state.badPrefs)
         const user = this.state.authUser;
         const data = Object.entries(this.state.data);
         const loginFlow = <div>

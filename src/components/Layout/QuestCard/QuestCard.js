@@ -68,7 +68,6 @@ class QuestCard extends React.Component {
         if (this.state.expanded && this.props.questId != (this.props.current)) {
             this.setState({ expanded: false });
         }
-        console.log(this.props.questId);
         const expanded = this.state.expanded;
         return (
             <div>
