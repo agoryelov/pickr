@@ -4,10 +4,12 @@ import * as ROUTES from '../../constants/routes';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import QuestPage from '../Pages/QuestPage';
+import CompletedPage from '../Pages/Completed'
 import BadgesPage from '../Pages/Badges';
 import FavouritesPage from '../Pages/Favourites';
 import AboutPage from '../Pages/About';
 import SweepPage from '../Pages/Sweep';
+import UserPreferencesPage from '../Pages/UserPreferences';
 
 import NavDrawerDesktop from './NavDrawerDesktop'
 import Hidden from '@material-ui/core/Hidden';
@@ -30,8 +32,10 @@ class AppContent extends React.Component {
                         <div style={{ overflow: 'scroll', height: 'calc(100vh - 64px)' }}>
                             <Route exact path={ROUTES.HOME} render={(props) => <QuestPage {...props} authUser={this.props.authUser} coords={this.props.coords} data={this.props.data} /> } />
                             <Route path={ROUTES.BADGES} component={BadgesPage} />
+                            <Route path={ROUTES.COMPLETED} component={CompletedPage} />
                             <Route path={ROUTES.ABOUT} component={AboutPage} />
                             <Route path={ROUTES.SWEEP} component={SweepPage} />
+                            <Route path={ROUTES.PREFERENCES} component={UserPreferencesPage} />
                             <Hidden smUp><Route path={ROUTES.FAVS} render={(props) => <FavouritesPage {...props} coords={this.props.coords} data={this.props.data} /> } /></Hidden>
                         </div>
                     </Grid>

@@ -54,20 +54,16 @@ class Favourites extends React.Component {
   componentDidMount() {
     this.firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        this.globalUser = user;
+        this.state.globalUser = user;
 
-        this.firebase.favourites(user.uid).once("value", snapshot => {
-          console.log(snapshot.val());
-          this.setState({
-            list: snapshot.val(),
-            questList: this.props.data,
-            loading: false,
+        this.firebase.questsAll().once("value", snapshot => {
+          this.setState({ questList: snapshot.val() });
+        }).then(() => {
+          this.firebase.favourites(user.uid).on("value", snapshot => {
+            this.setState({ list: snapshot.val(), loading: false });
           });
         });
-      } else {
-        this.props.history.push(ROUTES.SIGN_IN);
       }
-
     });
   }
 
@@ -80,15 +76,18 @@ class Favourites extends React.Component {
       );
     }
 
-    const data = this.state.questList;
-    console.log(data);
+    if (this.state.list == null) {
+      return(<div>Empty</div>)
+    }
+
+    const data = Object.entries(this.state.questList);
     const saved = Object.entries(this.state.list);
 
     return (
       <div style={{ padding: '2em' }}>
         {saved.map(x =>
           <div key={x[0]}>
-            <SavedQuestItem questData={data[x[0]][1]} />
+            <SavedQuestItem questId={x[0]} globalUser = {this.state.globalUser} questData={data[x[0] - 1][1]} />
           </div>
         )}
       </div>);

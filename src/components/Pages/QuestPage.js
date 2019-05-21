@@ -43,7 +43,6 @@ class QuestPage extends React.Component {
             array[m] = array[i];
             array[i] = t; 
         }
-        console.log(array);
         this.setState({
               data: array,
               loading: false,
@@ -52,11 +51,7 @@ class QuestPage extends React.Component {
     }
     
     componentDidMount() {
-<<<<<<< HEAD
-        this.arrayShuffle(Object.entries(this.props.data));
-=======
         this.arrayShuffle(this.props.data);
->>>>>>> 5a474031afd14270a37c864f7dadb008b56837a0
         //this.setState({data: this.props.data, loading: false})
     }
     
@@ -75,6 +70,9 @@ class QuestPage extends React.Component {
             data: array,
             loading: false,
         });
+
+        const jsonToArray = Object.entries(this.props.data);
+        this.arrayShuffle(jsonToArray);
     }
     
     render() {
@@ -88,7 +86,6 @@ class QuestPage extends React.Component {
 
         const coords = this.props.coords;
         const data = this.state.data;
-        console.log(this.state.current);
 
         return (
             <Grid container justify="center" style={{}}>
@@ -98,7 +95,7 @@ class QuestPage extends React.Component {
                         getSwiper={(swiper) => this.swiper = swiper} >
                         {data.map((card, index) => (
                             <div key={card[0]}>
-                                <QuestCard current={this.state.current} coords={coords} questId={card[0]} questData={card[1]} globalUser={this.props.authUser} />
+                                <QuestCard current={this.state.current} coords={coords} databaseQuestId={card[0]} questId={index + 1} questData={card[1]} globalUser={this.props.authUser} />
                             </div>
                         ))}
                     </Swiper>

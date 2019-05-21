@@ -11,11 +11,22 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
+
+//Creative Icon
 import BrushIcon from '@material-ui/icons/Brush';
+
+//Nature Icon
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
+
+//Fitness Icon
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+
+//Food Icon
 import FastFoodIcon from '@material-ui/icons/Fastfood';
+
+//Romantic Icon
 import FavoriteIcon from '@material-ui/icons/Favorite';
+
 import ShareIcon from '@material-ui/icons/Share';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import StyleIcon from '@material-ui/icons/Style';
@@ -32,25 +43,78 @@ import CardActions from '@material-ui/core/CardActions';
 import 'typeface-roboto';
 
 import '../../CSS/QuestPage.css'
+import Firebase from "../../firebase";
 
 class SavedQuestItem extends React.Component {
-    constructor(props) {
-        super(props);
+    firebase = new Firebase();
 
-        this.state = {
-            sampleData: "test",
-        };
-    }
+
 
     componentDidMount() {
     }
 
     handleSave = (e) => {
         e.stopPropagation();
+
+        this.completeQuest();
     }
 
     handleChip = (e) => {
         e.stopPropagation();
+    }
+
+    deleteQuest() {
+        console.log(this.props.globalUser.uid + " " + this.props.questId);
+        this.firebase.favourites(this.props.globalUser.uid).child(this.props.questId).remove();
+    }
+
+    completeQuest() {
+        console.log(this.props.questData['categories']);
+
+        let now = new Date().toString(' MMMM d yyyy');
+
+        this.firebase.completed(this.props.globalUser.uid).child(this.props.questId).update({
+              questID : this.props.questId,
+              completedDate : now
+        });
+
+        this.updateXpArray();
+
+        this.deleteQuest();
+    }
+
+    updateXpArray() {
+        console.log(this.props.questData['categories']);
+        // console.log(quest);
+        let xpArray = [];
+        // console.log(this.state.questList[quest].categories)
+        for (var category in this.props.questData['categories']) {
+          let currentXP = this.props.questData['categories'][category];
+          let progressXP = {
+            category: category,
+            xp: currentXP,
+          };
+          xpArray.push(progressXP);
+        };
+      
+
+        this.updateUserXp(xpArray);
+    }
+
+    updateUserXp(xpArray) {
+        console.log(xpArray);
+
+        this.firebase.categoryProgress(this.props.globalUser.uid).once("value", snapshot => {
+            let userXP = snapshot.val();
+            console.log(snapshot.val());
+      
+            for (var category in xpArray) {
+              let categoryTag = xpArray[category].category
+              this.firebase.categoryProgress(this.props.globalUser.uid).update({
+                [categoryTag] : xpArray[category].xp  + userXP[categoryTag]
+              });
+            }
+          });
     }
 
     render() {
@@ -131,7 +195,7 @@ class SavedQuestItem extends React.Component {
                             </Grid>
                             <Grid item container xs={3} md={2} alignItems='center' justify='center'>
                                 <Grid item xs={12}>
-                                    <Fab style={{ backgroundColor: '#EEEEEE' }} size="medium" onClick={this.handleSave}>
+                                    <Fab style={{ backgroundColor: '#EEEEEE' }} size="medium" onClick={this.handleSave.bind(this)}>
                                         <DoneIcon style={{ fontSize: '200%', color: 'green' }} />
                                     </Fab>
                                 </Grid>
@@ -177,7 +241,7 @@ class SavedQuestItem extends React.Component {
                                 <Button size="small" color="default">
                                     Learn More
                                 </Button>
-                                <Button size="small" color="secondary">
+                                <Button size="small" color="secondary" onClick={this.deleteQuest.bind(this)}>
                                     Delete
                                 </Button>
                             </Grid>

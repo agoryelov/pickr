@@ -17,7 +17,6 @@ class QuestCardSummary extends React.Component {
 
     handleSave = (e) => {
         e.stopPropagation();
-        console.log('hello')
         let now = new Date().toString(' MMMM d yyyy');
         const uid = this.props.globalUser.uid;
         
