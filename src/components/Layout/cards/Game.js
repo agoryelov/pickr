@@ -15,8 +15,8 @@ class Game extends Component {
 
     updateWindowDimensions() {
         this.setState({
-            width: Math.floor(window.innerWidth/85),
-            height: Math.floor(window.innerWidth/85),
+            width: Math.floor(window.innerWidth/100),
+            height: Math.floor(window.innerWidth/100),
         });
     }
 
