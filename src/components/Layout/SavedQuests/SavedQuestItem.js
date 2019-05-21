@@ -87,9 +87,9 @@ class SavedQuestItem extends React.Component {
     completeQuest() {
         console.log(this.props.questData['categories']);
 
-        let now = new Date().toString(' MMMM d yyyy');
+        let now = new Date();
 
-        this.firebase.completed(this.props.globalUser.uid).child(this.props.questId).update({
+        this.firebase.completed(this.props.globalUser.uid).child(now.getTime()).update({
               questID : this.props.questId,
               completedDate : now
         });
@@ -177,7 +177,7 @@ class SavedQuestItem extends React.Component {
                 color: "#ec407aCC"
             },
             Games: {
-                icon: <FavoriteIcon style={{ color: 'white', fontSize: '16px' }} />,
+                icon: <GamesIcon style={{ color: 'white', fontSize: '16px' }} />,
                 color: "#ec407aCC"
             },
         };

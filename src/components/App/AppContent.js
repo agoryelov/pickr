@@ -33,7 +33,7 @@ class AppContent extends React.Component {
                         <div style={{ overflow: 'scroll', height: 'calc(100vh - 64px)' }}>
                             <Route exact path={ROUTES.HOME} render={(props) => <QuestPage {...props} authUser={this.props.authUser} coords={this.props.coords} data={this.props.data} /> } />
                             <Route path={ROUTES.BADGES} component={BadgesPage} />
-                            <Route path={ROUTES.COMPLETED} component={CompletedPage} />
+                            <Route path={ROUTES.COMPLETED} render={(props) => <CompletedPage {...props} data={this.props.data} /> } />
                             <Route path={ROUTES.ABOUT} component={AboutPage} />
                             <Route path={ROUTES.SWEEP} component={SweepPage} />
                             <Route path={ROUTES.PREFERENCES} component={UserPreferencesPage} />

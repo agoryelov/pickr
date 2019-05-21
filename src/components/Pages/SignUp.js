@@ -54,6 +54,8 @@ class SignUpFormBase extends Component {
           Creative: true,
           Romantic: true,
           Games: true,
+          distance: 30,
+          cost: 2,
         },
         progress: {
           Nature: 0,
