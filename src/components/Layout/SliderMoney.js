@@ -8,10 +8,12 @@ import CoinFull from './../../img/coinsFull.png';
 import CoinEmpty from './../../img/coinsEmpty.png';
 import { ifStatement } from '@babel/types';
 import Typography from '@material-ui/core/Typography';
+import { ListItem, ListItemIcon } from '@material-ui/core';
 
 const styles = {
   root: {
-    width: 125,
+    width: '100%',
+    margin: 'auto 0',
   },
   slider: {
     padding: '22px 0px',
@@ -48,7 +50,7 @@ class StepSlider extends React.Component {
                   <img src = {CoinEmpty} alt = "coins" style={imgStyle} />
                   </div>
                   , document.getElementById('dollarSigns'));  
-                  ReactDOM.render(<span>{lessThan} $20 </span>, document.getElementById('cost'));
+                  ReactDOM.render(<span> is Under $20 </span>, document.getElementById('cost'));
                   this.setState({value : 0}); 
                   break;
                 case 1:
@@ -57,7 +59,7 @@ class StepSlider extends React.Component {
                   <img src = {CoinEmpty} alt = "coins" style={imgStyle} />
                   </div>
                   , document.getElementById('dollarSigns'));  
-                  ReactDOM.render(<span>{lessThan} $50 </span>, document.getElementById('cost'))
+                  ReactDOM.render(<span> is Under $50 </span>, document.getElementById('cost'))
                   this.setState({value : 1}); 
                   break;
                 default:
@@ -66,7 +68,7 @@ class StepSlider extends React.Component {
                   <img src = {CoinFull} alt = "coins" style={imgStyle} />
                   </div>
                   , document.getElementById('dollarSigns'));   
-                  ReactDOM.render(<span> {greaterThan} $50 </span>, document.getElementById('cost'));
+                  ReactDOM.render(<span>is Over $50 </span>, document.getElementById('cost'));
                   this.setState({value : 2}); 
               } 
               
@@ -90,7 +92,7 @@ class StepSlider extends React.Component {
         <img src = {CoinEmpty} alt = "coins" style={imgStyle} />
         </div>
         , document.getElementById('dollarSigns'));  
-        ReactDOM.render(<span>{lessThan} $20 </span>, document.getElementById('cost'));
+        ReactDOM.render(<span>is under $20 </span>, document.getElementById('cost'));
         this.firebase.auth.onAuthStateChanged((authUser) => {
           if (authUser) {
             this.firebase.preferences(authUser.uid).update({
@@ -105,7 +107,7 @@ class StepSlider extends React.Component {
         <img src = {CoinEmpty} alt = "coins" style={imgStyle} />
         </div>
         , document.getElementById('dollarSigns'));  
-        ReactDOM.render(<span>{lessThan} $50 </span>, document.getElementById('cost'));
+        ReactDOM.render(<span>is under $50 </span>, document.getElementById('cost'));
         this.firebase.auth.onAuthStateChanged((authUser) => {
           if (authUser) {
             this.firebase.preferences(authUser.uid).update({
@@ -122,7 +124,7 @@ class StepSlider extends React.Component {
         <img src = {CoinFull} alt = "coins" style={imgStyle} />
         </div>
         , document.getElementById('dollarSigns'));  
-        ReactDOM.render(<span> {greaterThan} $50 </span>, document.getElementById('cost'));
+        ReactDOM.render(<span> is above $50 </span>, document.getElementById('cost'));
         this.firebase.auth.onAuthStateChanged((authUser) => {
           if (authUser) {
             this.firebase.preferences(authUser.uid).update({
@@ -140,16 +142,31 @@ class StepSlider extends React.Component {
     const { value } = this.state.value;
     return (
       <div className={classes.root}>
-        <Typography id="label"><b>Cost</b> <span id="cost"></span></Typography>
-        <span id ="dollarSigns"></span>
-        <Slider
-          classes={{ container: classes.slider }}
-          value={this.state.value}
-          min={0}
-          max={2}
-          step={1}
-          onChange={this.handleChange}
-        />
+        <ListItem>
+          <ListItemIcon>
+              <Typography id="label">
+                <h6>
+                  Cost 
+                  <span id="cost" style={{marginRight: '10vw'}}>
+                  </span>
+                </h6>
+              </Typography>
+              
+            </ListItemIcon>
+            <div id ="dollarSigns"></div>
+        </ListItem>
+        <ListItem>
+          
+          <Slider
+            classes={{ container: classes.slider }}
+            value={this.state.value}
+            min={0}
+            max={2}
+            step={1}
+            onChange={this.handleChange}
+
+          />
+        </ListItem>
         
         
       </div>

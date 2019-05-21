@@ -4,10 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/lab/Slider';
 import Firebase from '../firebase';
+import { ListItem } from '@material-ui/core';
 
 const styles = {
   root: {
-    width: 125,
+    width: '100%',
   },
   slider: {
     padding: '22px 0px',
@@ -58,16 +59,24 @@ class SimpleSlider extends React.Component {
     const lessThan = '<';
     return (
       <div className={classes.root}>
-        <Typography id="label"><b>Distance</b> {lessThan} {this.state.value}km </Typography>
-        <Slider
-          classes={{ container: classes.slider }}
-          value={value}
-          aria-labelledby="label"
-          onChange={this.handleChange}
-          max={30}
-          min={1}
-          step={1}
-        />
+        <ListItem>
+          <Typography id="label">
+            <h6>
+              Within {this.state.value}km 
+            </h6>
+          </Typography>
+        </ListItem>
+        <ListItem>
+          <Slider
+            classes={{ container: classes.slider }}
+            value={value}
+            aria-labelledby="label"
+            onChange={this.handleChange}
+            max={30}
+            min={1}
+            step={1}
+          />
+        </ListItem>
       </div>
     );
   }

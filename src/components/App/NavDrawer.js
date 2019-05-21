@@ -61,7 +61,7 @@ class NavDrawer extends React.Component {
                             <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Badges" />
                         </ListItem>
                         <hr style={{borderColor: '#e3f2fd55'}} />
-                        <ListItem onClick={this.props.close} button>
+                        <ListItem component={Link} to={ROUTES.PREFERENCES} onClick={this.props.close} button>
                             <ListItemIcon style={{ color: textColor }}>
                                 <InboxIcon />
                             </ListItemIcon>
