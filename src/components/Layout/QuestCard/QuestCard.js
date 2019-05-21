@@ -61,8 +61,8 @@ class QuestCard extends React.Component {
     }
 
     render() {
-        console.log(this.props.questId);
-        console.log(this.props.databaseQuestId);
+        //console.log(this.props.questId);
+        //console.log(this.props.databaseQuestId);
         const questData = this.props.questData;
         const distance = Math.ceil(this.state.distance) + " km";
         

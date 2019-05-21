@@ -11,6 +11,12 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { css } from 'emotion';
+
+import ShareComp from './Share';
 
 //Creative Icon
 import BrushIcon from '@material-ui/icons/Brush';
@@ -63,7 +69,21 @@ class SavedQuestItem extends React.Component {
         this.state = {
             sampleData: "test",
             xpArray: null,
+            open: false,
         };
+        this.toggleModal = this.toggleModal.bind(this);
+    }
+
+    toggleModal = () => {
+        if(this.state.open) {
+            this.setState({
+                open: false,
+            }); 
+        } else {
+            this.setState({
+                open: true,
+            }); 
+        }
     }
 
     componentDidMount() {
@@ -137,6 +157,7 @@ class SavedQuestItem extends React.Component {
         const data = this.props.questData;
         const questImage = data['imgLink'];
         const questName = data['name'];
+        const questLink = data['link'];
 
         //Pull relevant card summary data
         const questLocation = data['location'];
@@ -144,8 +165,6 @@ class SavedQuestItem extends React.Component {
         const questEcoRating = data['ecoRating'];
         const questAbout = data['description'];
         const cats = Object.entries(data['categories']);
-
-        console.log(data['categories']);
 
         const icons = {
             Fitness: {
@@ -245,13 +264,24 @@ class SavedQuestItem extends React.Component {
                                     </ListItem>
                                     <Divider light />
                                     <ListItem>
-                                        <ListItemIcon>
-                                            <ShareIcon />
-                                        </ListItemIcon>
+                                        <ShareIcon />
+                                        <Button variant = "contained" color ='inherit' onClick = {this.toggleModal} style = {{backgroundColor: 'white', cursor: 'pointer', marginLeft: '15px'}}>
                                         <ListItemText
                                             primary="Share on Facebook"
                                             disableTypography
                                             style={{ fontWeight: '400', fontSize: '.8em' }} />
+                                        </Button>
+                                            <Dialog open = {this.state.open}
+                                            aria-describedby = "shareButtons"
+                                            onBackdropClick = {this.toggleModal}
+                                            maxWidth = "lg"
+                                            scroll = "paper"
+                                          
+                                            ><DialogTitle>Share with friends!</DialogTitle>
+                                            <DialogContent>
+                                                <ShareComp  id = "shareButtons" questName = {questName} questLocation ={questLocation} questLink = {questLink}/>
+                                            </DialogContent>
+                                            </Dialog>
                                     </ListItem>
                                 </List>
                             </Grid>

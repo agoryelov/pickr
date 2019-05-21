@@ -5,7 +5,7 @@ class GetDirections extends React.Component {
     
     render() {
 
-        console.log(this.props.coords);
+        //console.log(this.props.coords);
         return (
             <div>
                 <Button size="small" color="primary">
