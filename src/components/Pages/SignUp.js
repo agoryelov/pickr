@@ -10,9 +10,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
-import MaterialLink from '@material-ui/core/Link';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
 
@@ -48,6 +45,27 @@ class SignUpFormBase extends Component {
       this.firebase.user(authUser.user.uid).set({
         username,
         email,
+        preferences: {
+          Nature: true,
+          Food: true,
+          Fitness: true,
+          Culture: true,
+          Volunteer: true,
+          Creative: true,
+          Romantic: true,
+          Games: true,
+        },
+        progress: {
+          Nature: 0,
+          Food: 0,
+          Fitness: 0,
+          Culture: 0,
+          Volunteer: 0,
+          Creative: 0,
+          Romantic: 0,
+          Games: 0,
+        },
+          favourites: "null"
       });
     })
     .then(() => {
@@ -74,7 +92,7 @@ class SignUpFormBase extends Component {
     const isInvalid = username === '' || email === '' || password === '';
     return (
         <Grid container justify='center'>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={12} sm={8} md={6} lg={4}>
             <Paper style={{textAlign: 'center', padding: '2em', margin: '2em 2em 0 2em'}}>
               <form onSubmit={this.onSubmit}>
                 <Grid container spacing={24} justify = "center">

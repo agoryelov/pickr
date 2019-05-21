@@ -52,7 +52,11 @@ class QuestPage extends React.Component {
     }
     
     componentDidMount() {
+<<<<<<< HEAD
         this.arrayShuffle(Object.entries(this.props.data));
+=======
+        this.arrayShuffle(this.props.data);
+>>>>>>> 5a474031afd14270a37c864f7dadb008b56837a0
         //this.setState({data: this.props.data, loading: false})
     }
     

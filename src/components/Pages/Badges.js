@@ -4,13 +4,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Firebase from '../firebase'
-import './Badges.css';
-import JourneyTimes from './JourneyTimes';
+import '../CSS/Badges.css';
+import * as ROUTES from '../../constants/routes';
 
 
 
 class CategoryProgress extends React.Component {
-    EXP = [0, 0, 50, 125, 200, 300, 400];
+    EXP = [0, 0, 500, 1250, 2000, 3000, 4000];
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +67,7 @@ class CategoryProgress extends React.Component {
             </Grid>
           </Grid>
         </Paper>
-        )
+        );
     }
 }
 
@@ -106,13 +106,12 @@ class Badges extends React.Component {
             });
           });
         } else {
-          //not logged in
+          this.props.history.push(ROUTES.SIGN_IN);
         }
       });
     }
     
     render() {
-        let content;
         if (this.state.loading) {
           return (
             <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
@@ -122,9 +121,9 @@ class Badges extends React.Component {
         }
 
         const sortedCats = this.state.testSorted;
+        console.log(sortedCats);
         return (
           <div style={{margin: '1em'}}>
-            <JourneyTimes />
             <Grid container justify='center' spacing={16}>
               {sortedCats.map(x => 
                 <Grid key={x[0]} item xs={12} sm={10}>

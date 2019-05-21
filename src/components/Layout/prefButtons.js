@@ -9,12 +9,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
 import Firebase from '../firebase';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    maxWidth: 200,
+    backgroundColor: '#f5f5f5',
   },
 });
 
@@ -28,6 +29,7 @@ class CheckboxList extends React.Component {
     prefTypes: null,
     pref: null,
     prefTest: null,
+    loading: true,
 
   };
   
@@ -35,11 +37,12 @@ class CheckboxList extends React.Component {
   
   componentDidMount() {
     this.firebase.auth.onAuthStateChanged((authUser) => {
+      console.log(authUser);
         if (authUser) {
             this.setState({ authUser });
             this.userPreferences = this.firebase.preferences(authUser.uid);
             this.userPreferences.once("value", snapshot => {
-                this.prefTypes = ['Nature', 'Food', 'Family', 'Music', 'Fitness', 'Games', 'Culture', 'Social', 'Volunteer', 'Romantic', 'Adult'];               
+                this.prefTypes = ['Nature', 'Food', 'Fitness', 'Culture', 'Volunteer', 'Creative', 'Romantic', 'Games'];               
                     if (snapshot.val().Nature) {
                         this.state.checked.push(this.prefTypes[0]);
                         this.handleToggle(this.prefTypes[0])
@@ -48,44 +51,34 @@ class CheckboxList extends React.Component {
                         this.state.checked.push(this.prefTypes[1]);
                         this.handleToggle(this.prefTypes[1])
                     }
-                    if (snapshot.val().Family) {
+                    if (snapshot.val().Fitness) {
                         this.state.checked.push(this.prefTypes[2]);
                         this.handleToggle(this.prefTypes[2])
                     }
-                    if (snapshot.val().Music) {
-                        this.state.checked.push(this.prefTypes[3]);
-                        this.handleToggle(this.prefTypes[3])
+                    if (snapshot.val().Culture) {
+                      this.state.checked.push(this.prefTypes[3]);
+                      this.handleToggle(this.prefTypes[3])
                     }
-                    if (snapshot.val().Fitness) {
-                        this.state.checked.push(this.prefTypes[4]);
-                        this.handleToggle(this.prefTypes[4])
+                    if (snapshot.val().Volunteer) {
+                      this.state.checked.push(this.prefTypes[4]);
+                      this.handleToggle(this.prefTypes[4])
+                    }
+                    if (snapshot.val().Creative) {
+                      this.state.checked.push(this.prefTypes[5]);
+                      this.handleToggle(this.prefTypes[5])
+                    }
+                    if (snapshot.val().Romantic) {
+                      this.state.checked.push(this.prefTypes[6]);
+                      this.handleToggle(this.prefTypes[6])
                     }
                     if (snapshot.val().Games) {
-                        this.state.checked.push(this.prefTypes[5]);
-                        this.handleToggle(this.prefTypes[5])
-                    }
-                    if (snapshot.val().Culture) {
-                        this.state.checked.push(this.prefTypes[6]);
-                        this.handleToggle(this.prefTypes[6])
-                    }
-                    if (snapshot.val().Social) {
                         this.state.checked.push(this.prefTypes[7]);
                         this.handleToggle(this.prefTypes[7])
                     }
-                    if (snapshot.val().Volunteer) {
-                        this.state.checked.push(this.prefTypes[8]);
-                        this.handleToggle(this.prefTypes[8])
-                    }
-                    if (snapshot.val().Romantic) {
-                        this.state.checked.push(this.prefTypes[9]);
-                        this.handleToggle(this.prefTypes[9])
-                    }
-                    if (snapshot.val().Adult) {
-                        this.state.checked.push(this.prefTypes[10]);
-                        this.handleToggle(this.prefTypes[10])
-                    }
 
-                   
+                    this.setState({
+                      loading: false,
+                  });
                    console.log(this.state.checked);
                    
             
@@ -146,10 +139,17 @@ class CheckboxList extends React.Component {
   render() {
     const { classes } = this.props;
 
+    if (this.state.loading) {
+      return (
+        <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
+          <CircularProgress />
+        </div>
+      );
+  }
     return (
     <div>
       <List className={classes.root}>
-        {['Nature', 'Food', 'Family', 'Music', 'Fitness', 'Games', 'Culture', 'Social', 'Volunteer', 'Romantic', 'Adult'].map(value => (
+        {['Nature', 'Food', 'Fitness', 'Culture', 'Volunteer', 'Creative', 'Romantic', 'Games'].map(value => (
           <ListItem key={value} role={undefined} dense button onClick={this.handleToggle(value)}>
             <Checkbox
               checked={this.state.checked.indexOf(value) !== -1}

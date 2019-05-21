@@ -115,7 +115,7 @@ class App extends Component {
             );
         }
         const user = this.state.authUser;
-        const data = this.state.data;
+        const data = Object.entries(this.state.data);
         const loginFlow = <div>
             <Route exact path={ROUTES.HOME} component={SignInPage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
