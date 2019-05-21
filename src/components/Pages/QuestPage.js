@@ -33,9 +33,8 @@ class QuestPage extends React.Component {
     }
     
     componentDidMount() {
-<<<<<<< HEAD
-        this.arrayShuffle(this.props.data);
-        //this.setState({data: this.props.data, loading: false})
+        const jsonToArray = Object.entries(this.props.data);
+        this.arrayShuffle(jsonToArray);
     }
     
     arrayShuffle = (array) => {
@@ -53,10 +52,6 @@ class QuestPage extends React.Component {
             data: array,
             loading: false,
         });
-=======
-        const jsonToArray = Object.entries(this.props.data);
-        this.arrayShuffle(jsonToArray);
->>>>>>> 4ed48e50135246681a4e111a48ebf6639ef79d1a
     }
     
     render() {

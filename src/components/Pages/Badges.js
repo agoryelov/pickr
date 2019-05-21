@@ -10,7 +10,7 @@ import * as ROUTES from '../../constants/routes';
 
 
 class CategoryProgress extends React.Component {
-    EXP = [0, 0, 60, 200, 500, 1000, 2500];
+    EXP = [0, 0, 60, 200, 500, 1000, 2500, 5000, 10000];
     constructor(props) {
         super(props);
         this.state = {
@@ -38,7 +38,6 @@ class CategoryProgress extends React.Component {
     componentDidMount() {
       console.log("current xp: " + this.props.exp);
       const categoryLevel = this.getLevel(this.props.exp);
-      console.log(this.props.exp + " " + categoryLevel);
       const progress = this.getProgress(categoryLevel);
 
       this.setState({
@@ -46,17 +45,6 @@ class CategoryProgress extends React.Component {
         completed: progress,
       });
     }
-
-    // componentWillReceiveProps() {
-    //   const categoryLevel = this.getLevel(this.props.exp);
-    //   console.log(this.props.exp + " " + categoryLevel);
-    //   const progress = this.getProgress(categoryLevel);
-
-    //   this.setState({
-    //     categoryLevel: categoryLevel,
-    //     completed: progress,
-    //   });
-    // }
     
     render() {
       const category = this.props.category;
@@ -66,8 +54,6 @@ class CategoryProgress extends React.Component {
       const remExp = this.EXP[this.state.categoryLevel + 1] - this.props.exp;
 
       this.state.completed = progress;
-
-      console.log(this.props.exp + " meow " + categoryLevel);
 
         return(
         <Paper style={{padding: '0 1em 0 1em'}} >
@@ -142,9 +128,6 @@ class Badges extends React.Component {
 
 
         const sortedCats = this.state.testSorted;
-        console.log("badges rendered asdf")
-        console.log(sortedCats);
-        //console.log("xp "+ x[1]);
         return (
           <div style={{margin: '1em'}}>
             <Grid container justify='center' spacing={16}>

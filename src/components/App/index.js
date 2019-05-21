@@ -69,12 +69,12 @@ class App extends Component {
                                 badPrefs.push(category);
                             }
                         }
-<<<<<<< HEAD
+
                         if(addFlag) {
                             realQuests.push(this.state.data[index]);
                         }
                       
-                    }
+                    
                     console.log(realQuests.length);
                     console.log(realQuests);
                     this.setState({
@@ -117,14 +117,15 @@ class App extends Component {
                     console.log(typeof(realQuests));
                     this.setState({
                         data: realQuests,
-=======
-                        this.setState({ badPrefs, loading: false });
->>>>>>> 4ed48e50135246681a4e111a48ebf6639ef79d1a
                     });
-                })
+                });
             } else {
-                this.setState({ authUser: null, loading: false });
-            }
+                this.setState({
+                        authUser: null,
+                        data: snapshot.val(),
+                        loading: false,
+                    });
+            } 
         });
     }
 
