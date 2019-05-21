@@ -64,8 +64,7 @@ class SignUpFormBase extends Component {
           Creative: 0,
           Romantic: 0,
           Games: 0,
-        },
-          favourites: "null"
+        }
       });
     })
     .then(() => {
