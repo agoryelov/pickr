@@ -48,7 +48,14 @@ import Firebase from "../../firebase";
 class SavedQuestItem extends React.Component {
     firebase = new Firebase();
 
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            sampleData: "test",
+            xpArray: null,
+        };
+    }
 
     componentDidMount() {
     }
@@ -128,6 +135,8 @@ class SavedQuestItem extends React.Component {
         const questEcoRating = data['ecoRating'];
         const questAbout = data['description'];
         const cats = Object.entries(data['categories']);
+
+        console.log(data['categories']);
 
         const icons = {
             Fitness: {
