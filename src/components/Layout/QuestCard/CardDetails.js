@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+
 import GetDirections from './GetDirections';
 class QuestCardDetails extends React.Component {
     
@@ -33,9 +33,7 @@ class QuestCardDetails extends React.Component {
                     {questAbout}
                 </Grid>
                 <Grid item xs={12} style={{ fontSize: ".8em", textAlign: 'justify' }}>
-                <Button size="small" color="primary">
                     <GetDirections coords={this.props.coords} />
-                </Button>
                 </Grid>
             </Grid>
         )
