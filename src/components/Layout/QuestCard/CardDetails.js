@@ -6,7 +6,8 @@ class QuestCardDetails extends React.Component {
     render() {
         //Get quest information from parent
         const data = this.props.data;
-
+        console.log("Hello");
+        console.log(data);
         //Pull relevant card summary data
         const questLocation = data['location'];
         const questCost = data['cost'];
