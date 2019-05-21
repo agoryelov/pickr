@@ -2,6 +2,10 @@ import React from "react";
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import WalkIcon from '@material-ui/icons/DirectionsWalk'
+import BikeIcon from '@material-ui/icons/DirectionsBike';
+import TransitIcon from '@material-ui/icons/DirectionsTransit';
+import { Divider } from "@material-ui/core";
 class GetDirections extends React.Component {
     constructor(props) {
         super(props);
@@ -92,10 +96,11 @@ class GetDirections extends React.Component {
             if(!this.state.loading){
                 return(
                     <div>
-                        <div className = "row">
-                            <div id = "walkTime" className = "col-4 text-center">{this.state.walkingDistance}</div>
-                            <div id = "bikeTime" className = "col-4 text-center">{this.state.bikingDistance}</div>
-                            <div id = "transitTime" className = "col-4 text-center">{this.state.transitDistance}</div>
+                        <Divider />
+                        <div className = "row" style={{marginTop: '1.5em'}}>
+                            <div id = "walkTime" className = "col-4 text-center"><WalkIcon />{this.state.walkingDistance}</div>
+                            <div id = "bikeTime" className = "col-4 text-center"><BikeIcon />{this.state.bikingDistance}</div>
+                            <div id = "transitTime" className = "col-4 text-center"><TransitIcon />{this.state.transitDistance}</div>
                         </div>
                     </div>
                 )
@@ -110,7 +115,7 @@ class GetDirections extends React.Component {
                 </div>
             )
         }
-        return(<LinearProgress color="secondary" variant="query" />)
+        return(<LinearProgress color="primary" variant="query" />)
     }
 }
 
