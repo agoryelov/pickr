@@ -87,7 +87,7 @@ class Favourites extends React.Component {
       <div style={{ padding: '2em' }}>
         {saved.map(x =>
           <div key={x[0]}>
-            <SavedQuestItem questId={x[0]} globalUser = {this.state.globalUser} questData={data[x[0] - 1][1]} />
+            <SavedQuestItem questId={x[0]} globalUser = {this.state.globalUser} questData={data[x[0]][1]} />
           </div>
         )}
       </div>);
