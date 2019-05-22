@@ -63,7 +63,7 @@ class App extends Component {
                     }) 
                 });
             } else {
-                this.setState({ authUser: null});
+                this.setState({ authUser: null, loading: false});
             }
         });
     }
