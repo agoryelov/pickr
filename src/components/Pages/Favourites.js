@@ -94,7 +94,7 @@ class Favourites extends React.Component {
             <SavedQuestItem questId={x[0]} globalUser = {this.state.globalUser} questData={data[x[0]][1]} />
           </div>
         )}
-                  <div>{this.createForm()}</div>
+                  <div>{/*this.createForm()*/}</div>
       </div>);
   }
 
