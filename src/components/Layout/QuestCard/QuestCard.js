@@ -11,7 +11,11 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 
 import { CSSTransition } from 'react-transition-group';
 
+/**
+ * Individual card displayed in the stack of quests
+ */
 class QuestCard extends React.Component {
+    //Grab props from parent
     constructor(props) {
         super(props);
         this.state = {
@@ -38,6 +42,7 @@ class QuestCard extends React.Component {
         }
     }
 
+    //Calculates distance based on the Haversine Formula
     getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
         let R = 6371; // Radius of the earth in km
         let dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
@@ -52,10 +57,12 @@ class QuestCard extends React.Component {
         return d;
     }
 
+    //Convert degrees to radians
     deg2rad = (deg) => {
         return deg * (Math.PI / 180);
     }
 
+    //Keep track of expand and collapse through state
     handleCollapse = () => {
         if (this.state.expanded) {
             this.setState({ expanded: false });
@@ -66,17 +73,16 @@ class QuestCard extends React.Component {
     }
 
     render() {
-        //console.log(this.props.questId);
-        //console.log(this.props.databaseQuestId);
         const questData = this.props.questData;
-
         const distance = Math.ceil(this.state.distance) + " km";
 
+        //This is necessary to keep the card collapsed when it is not the current card on the screen
+        //Uses the current index of the cards passed from the parent
         if (this.state.expanded && this.props.questId != (this.props.current)) {
             this.setState({ expanded: false });
         }
+
         const expanded = this.state.expanded;
-        console.log(expanded)
         return (
             <div>
                 <CSSTransition in={expanded} timeout={400} classNames="cardAnimation">
