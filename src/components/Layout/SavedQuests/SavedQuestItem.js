@@ -270,7 +270,7 @@ class SavedQuestItem extends React.Component {
                                         <ShareIcon />
                                         <Button variant = "contained" color ='inherit' onClick = {this.toggleModal} style = {{backgroundColor: 'white', cursor: 'pointer', marginLeft: '15px'}}>
                                         <ListItemText
-                                            primary="Sharing is Caring"
+                                            primary="Share with friends"
                                             disableTypography
                                             style={{ fontWeight: '400', fontSize: '.8em' }} />
                                         </Button>
@@ -280,7 +280,7 @@ class SavedQuestItem extends React.Component {
                                             maxWidth = "lg"
                                             scroll = "paper"
                                           
-                                            ><DialogTitle>Share with friends!</DialogTitle>
+                                            ><DialogTitle style = {{textAlign: 'center'}}>Sharing is caring!</DialogTitle>
                                             <DialogContent>
                                                 <ShareComp  id = "shareButtons" questName = {questName} questLocation ={questLocation} questLink = {questLink}/>
                                             </DialogContent>

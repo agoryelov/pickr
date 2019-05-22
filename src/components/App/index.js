@@ -46,7 +46,7 @@ class App extends Component {
         })
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let arrayOfBadPrefs = [];
         var realQuests = [];
         //Getting user location
@@ -60,7 +60,7 @@ class App extends Component {
                 this.setState({ authUser: authUser });
                 this.firebase.questsAll().once("value", snapshot => {
                     this.setState({
-                        data: Object.entries(snapshot.val())},()=>{
+                        data: Object.entries(snapshot.val())}, ()=>{
                             this.setState({
                                 loading: false
                             });
@@ -100,7 +100,7 @@ class App extends Component {
                         }
                     }
                     this.setState({
-                       data: realQuests,
+                       data: realQuests, 
                     });
                     console.log("After pref filter:" + this.state.data.length);
                     console.log(this.state.data);
