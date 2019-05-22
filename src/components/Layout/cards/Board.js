@@ -6,8 +6,8 @@ import Smiley from '../images/smiley.png';
 import Frown from '../images/frowney.png';
 import Face from '../images/mineface.png';
 import Timer from './Timer';
-import { flattenDiagnosticMessageText } from 'typescript';
 
+/** This is the board layout for the minesweeper game. */
 class Board extends Component {
     constructor(props){
         super(props);
@@ -19,10 +19,10 @@ class Board extends Component {
           trigger: false,
           pause: false,
         };
-        console.log(this.state.face);
         this.reset = this.reset.bind(this);
     } 
 
+    // Creates the initial layout of the board.
     createEmptyArray = (height, width) => {
         let data = [];
 
@@ -44,6 +44,7 @@ class Board extends Component {
         return data;
     }
 
+    // Plants all of the mines in random places.
     plantMines = (data, height, width, mines) => {
         let randomx, randomy, minesPlanted = 0;
 
@@ -59,6 +60,7 @@ class Board extends Component {
         return (data);
     }
 
+    // Gets the number of mines remaining.
     getMines = (data) => {
         let mineArray = [];
 
@@ -73,6 +75,7 @@ class Board extends Component {
         return mineArray;
     }
 
+    // Gets the number of flags that have been used.
     getFlags = (data) => {
         let mineArray = [];
 
@@ -87,6 +90,7 @@ class Board extends Component {
         return mineArray;
     }
 
+    // Gets the number of cells that are hidden.
     getHidden = (data) => {
         let mineArray = [];
 
@@ -105,6 +109,7 @@ class Board extends Component {
         return Math.floor((Math.random() * 1000) + 1) % size;
     }
 
+    // On click, this function opens up the neighboring cells if they have not been flagged/not a mine.
     getNeighbours = (data, height, width) => {
         let updatedData = data;
 
@@ -128,6 +133,7 @@ class Board extends Component {
         return (updatedData);
     }
 
+    // Support method for opening the surrounding cells in the getNeighbours method.
     traverseBoard = (x, y, data) => {
         const el = [];
 
@@ -166,6 +172,7 @@ class Board extends Component {
         return el;
     }
 
+    // Grabs the data of the initial layout of the board.
     initBoardData = (height, width, mines) => {
         let data = this.createEmptyArray(height, width);
         data = this.plantMines(data, height, width, mines);
@@ -174,6 +181,7 @@ class Board extends Component {
         return data;
     }
 
+    // Method for revealing the value of the cell.
     revealEmpty(x, y, data) {
         let area = this.traverseBoard(x, y, data);
         area.map(value => {
@@ -187,6 +195,7 @@ class Board extends Component {
         return data;
     }
 
+    // Method for revealing the entire board (done on loss).
     revealBoard = () => {
         let updatedData = this.state.boardData;
         updatedData.map((datarow) => {
@@ -200,6 +209,7 @@ class Board extends Component {
         });
     }
 
+    // Checks the state of the cell on a user's click.
     handleCellClick = (x, y) => {
         if(this.state.boardData[x][y].isRevealed || this.state.boardData[x][y].isFlagged) {
             return null;
@@ -241,6 +251,7 @@ class Board extends Component {
         });
     }
 
+    // Handles what happens with the data on a user's click.
     handleContextMenu = (e, x, y) => {
         e.preventDefault();
         let updatedData = this.state.boardData;
@@ -273,6 +284,7 @@ class Board extends Component {
         });
     }
 
+    // Render the actual board with the cells.
     renderBoard = (data) => {
         return data.map((datarow) => {
             return datarow.map((dataitem) => {
@@ -295,10 +307,12 @@ class Board extends Component {
         });
     }
 
+    // Whenever the window is resized, the board will be reset.
     componentWillReceiveProps(nextProps) {
         this.reset();
     }
 
+    // Reset button.
     reset = () => {
         this.setState ({
           boardData: this.initBoardData(this.props.height, this.props.width, this.props.mines),

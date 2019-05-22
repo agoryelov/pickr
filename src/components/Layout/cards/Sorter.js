@@ -70,7 +70,7 @@ class Sorter extends Component {
     render() {
         return(
             <div>
-                {this.distFilter()}
+                {this.bubblesort()}
             </div>
         );
     }

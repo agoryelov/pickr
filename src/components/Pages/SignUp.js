@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import Firebase from '../firebase'
 
+// Material-ui imports
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
@@ -12,13 +13,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-
 const SignUpPage = () => (
   <div>
     <SignUpForm />
   </div>
 );
 
+/** This component provides a form for the user to create an account with. */
 class SignUpFormBase extends Component {
 
   firebase = new Firebase();
@@ -34,12 +35,14 @@ class SignUpFormBase extends Component {
     }
   }
 
+  // Function for handling the data when the user presses submit.
   onSubmit = event => {
     event.preventDefault();
     const username = this.state.username;
     const email = this.state.email;
     const password = this.state.password;
     
+    // Once the user has signed up, the preferences and the progress is set for the user.
     this.firebase.signUp(email, password)
     .then((authUser) => {
       this.firebase.user(authUser.user.uid).set({
@@ -76,6 +79,7 @@ class SignUpFormBase extends Component {
         password: '',
         error: null,
       });
+      // Redirects the user after signing up.
       this.props.history.push(ROUTES.HOME);
     });
   }
@@ -85,12 +89,6 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const username = this.state.username;
-    const email = this.state.email;
-    const password = this.state.password;
-    const error = this.state.error;
-
-    const isInvalid = username === '' || email === '' || password === '';
     return (
         <Grid container justify='center'>
           <Grid item xs={12} sm={8} md={6} lg={4}>
@@ -117,7 +115,7 @@ class SignUpFormBase extends Component {
                       <InputLabel htmlFor="email-input">
                         Email
                       </InputLabel>
-                      <Input name="email" id="email-input" type="email" onChange={this.onChange} required />
+                      <Input name="email" id="email-input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" type="email" onChange={this.onChange} required />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
@@ -125,7 +123,7 @@ class SignUpFormBase extends Component {
                       <InputLabel htmlFor="password-input">
                         Password
                       </InputLabel>
-                      <Input name="password" id="password-input" type="password" onChange={this.onChange} required />
+                      <Input name="password" id="password-input" type="password" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onChange={this.onChange} required />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} style={{marginTop: '2em'}}>
