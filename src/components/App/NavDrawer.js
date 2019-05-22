@@ -2,9 +2,6 @@ import React from "react";
 
 import Logo from "../../img/pickr-logo-blue2.PNG";
 
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-
 
 //Menu Icon Quests
 import CollectionsIcon from '@material-ui/icons/Collections';

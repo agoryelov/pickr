@@ -10,16 +10,23 @@ import { CSSTransition } from 'react-transition-group';
 
 import Firebase from '../../firebase.js'
 
-
+// the summary component of the quest cards showed in the quest page
 class QuestCardSummary extends React.Component {
 
+    // Call access to the Firebase database.
     firebase = new Firebase();
 
+    // called when user clicks to save a quest
     handleSave = (e) => {
         e.stopPropagation();
+
+        // the time the user saved the quest
         let now = new Date().toString(' MMMM d yyyy');
+
+        // the current user
         const uid = this.props.globalUser.uid;
         
+        // add the quest to the user's favourite quest list in firebase
         this.firebase.favourites(uid).child(this.props.questId).update({
             questID : this.props.questId,
             savedDate : now,

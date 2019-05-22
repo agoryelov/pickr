@@ -1,79 +1,60 @@
 import React from "react";
 
+//  Material-UI components
 import Grid from '@material-ui/core/Grid';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-
-import IconButton from '@material-ui/core/IconButton';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { css } from 'emotion';
-
 import ShareComp from './Share';
-
-//Creative Icon
 import BrushIcon from '@material-ui/icons/Brush';
-
-//Nature Icon
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
-
-//Fitness Icon
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
-
-//Food Icon
 import FastFoodIcon from '@material-ui/icons/Fastfood';
-
-//Romantic Icon
 import FavoriteIcon from '@material-ui/icons/Favorite';
-
-//Culture Icon
 import LibraryIcon from '@material-ui/icons/LocalLibrary';
-
-//Volunteer Icon
 import SupervisorIcon from '@material-ui/icons/SupervisorAccount';
-
-//Games Icon
 import GamesIcon from '@material-ui/icons/Games';
-
 import ShareIcon from '@material-ui/icons/Share';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import StyleIcon from '@material-ui/icons/Style';
 import Tooltip from '@material-ui/core/Tooltip';
-import RoomServiceIcon from '@material-ui/icons/RoomService';
-import DeleteIcon from '@material-ui/icons/Delete';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Badge from '@material-ui/core/Badge';
-import CardActions from '@material-ui/core/CardActions';
-import 'typeface-roboto';
 
+import 'typeface-roboto';
 import '../../CSS/QuestPage.css'
 import Firebase from "../../firebase";
 
+// React component for the user's saved(favourited) quests.
 class SavedQuestItem extends React.Component {
+    // Call access to the Firebase database.
     firebase = new Firebase();
 
+    //Grab props from parent
     constructor(props) {
         super(props);
 
-        this.state = {
-            sampleData: "test",
+        this.state = {            
+            // an array of xp per category the current completed quest will reward
             xpArray: null,
+
+            // boolean value for the currrent toggle state of the saved quest item
             open: false,
         };
         this.toggleModal = this.toggleModal.bind(this);
     }
 
+    // function to handle indiviudal quest toggle.
     toggleModal = () => {
         if(this.state.open) {
             this.setState({
@@ -89,61 +70,73 @@ class SavedQuestItem extends React.Component {
     componentDidMount() {
     }
 
+    // Called when the user clicks the completed button of a quest in their favourites list.
     handleSave = (e) => {
         e.stopPropagation();
 
+        // call completeQuest function
         this.completeQuest();
     }
 
+    // function to handle xp category chip clip
     handleChip = (e) => {
         e.stopPropagation();
     }
 
-    deleteQuest() {
-        console.log(this.props.globalUser.uid + " " + this.props.questId);
-        this.firebase.favourites(this.props.globalUser.uid).child(this.props.questId).remove();
-    }
 
+    // Adds the quest to their completed quest list and rewards user XP for completing the quest.
+    // Also deletes the quest from the favourites list.
     completeQuest() {
-        console.log(this.props.questData['categories']);
 
+        // The current date. This date (in absolute time) will be used as the index of the quest in the
+        // user's completed quest list. 
         let now = new Date();
 
+        // add quest to completed list in firebase
         this.firebase.completed(this.props.globalUser.uid).child(now.getTime()).update({
               questID : this.props.questId,
               completedDate : now
         });
 
+        // Calls updateXPArray function. This function creates an array of objects. Each object is a category of the quest
+        // and the amount of xp for the category the quest will reward for completing.
         this.updateXpArray();
 
+        // Call deleteQuest function to remove the completed quest from the user's favourites
         this.deleteQuest();
     }
 
+    // Creates an array of objects. Each object is a category of the quest to be completed
+    // and the amount of xp for the category the quest will reward for completing.
     updateXpArray() {
-        console.log(this.props.questData['categories']);
-        // console.log(quest);
         let xpArray = [];
-        // console.log(this.state.questList[quest].categories)
+
+        // loop through every cateogry in categories for the quest
         for (var category in this.props.questData['categories']) {
+
+          // grab the xp to be rewarded for the current category
           let currentXP = this.props.questData['categories'][category];
+          // create an object for category and xp
           let progressXP = {
             category: category,
             xp: currentXP,
           };
+          // add current category object to xpArray
           xpArray.push(progressXP);
         };
       
-
+        // pass xpArray to updateUserXP function which will add the xp in xpArray to the user's xp values in firebase
         this.updateUserXp(xpArray);
     }
 
+    // takes in an array of objects with categeory and xp per category to add to user's current xp in database
     updateUserXp(xpArray) {
-        console.log(xpArray);
 
+        // get user's current xp progress before update
         this.firebase.categoryProgress(this.props.globalUser.uid).once("value", snapshot => {
             let userXP = snapshot.val();
-            console.log(snapshot.val());
       
+            // Loop through every object in xpArray. Grab the category and xp and update the user's xp for that category in firebase
             for (var category in xpArray) {
               let categoryTag = xpArray[category].category
               this.firebase.categoryProgress(this.props.globalUser.uid).update({
@@ -153,22 +146,39 @@ class SavedQuestItem extends React.Component {
           });
     }
 
+    // called when user clicks the delete button of a quest in their favourites list. Deletes quest.
+    deleteQuest() {
+        this.firebase.favourites(this.props.globalUser.uid).child(this.props.questId).remove();
+    }
+
     render() {
+        // the complete quest data
         const data = this.props.questData;
-        const questImage = data['imgLink'];
-        const questName = data['name'];
-        const questLink = data['link'];
 
         //Pull relevant card summary data
-        const questLocation = data['location'];
-        const questCost = data['cost'];
-        const questEcoRating = data['ecoRating'];
-        const questAbout = data['description'];
-        const cats = Object.entries(data['categories']);
-        const address = data['address'];
-        const tags = data['tags'];
-        const learnMoreLink = data['link'];
 
+        // quest image link
+        const questImage = data['imgLink'];
+
+        // quest name
+        const questName = data['name'];
+
+        // external link for quest
+        const questLink = data['link'];
+
+        // quest location (city)
+        const questLocation = data['location'];
+
+        //quest categories and xp for each category
+        const cats = Object.entries(data['categories']);
+
+        // quest address
+        const address = data['address'];
+
+        // quest categories as a string
+        const tags = data['tags'];
+
+        // icons for the different categories
         const icons = {
             Fitness: {
                 icon: <FitnessCenterIcon style={{ color: 'white', fontSize: '16px' }} />,
@@ -204,6 +214,7 @@ class SavedQuestItem extends React.Component {
             },
         };
 
+        // JSX
         return (
             <div>
                 <ExpansionPanel elevation={1} style={{
@@ -289,7 +300,7 @@ class SavedQuestItem extends React.Component {
                                 </List>
                             </Grid>
                             <Grid item style={{padding: '4px 4px'}}>
-                                <Button size="small" color="default" href={learnMoreLink} target="_blank">
+                                <Button size="small" color="default" href={questLink} target="_blank">
                                     Learn More
                                 </Button>
                                 <Button size="small" color="secondary" onClick={this.deleteQuest.bind(this)}>
