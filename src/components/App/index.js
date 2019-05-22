@@ -46,10 +46,9 @@ class App extends Component {
         })
     }
 
-
-
     componentDidMount() {
         let arrayOfBadPrefs = [];
+        var realQuests = [];
         //Getting user location
         navigator.geolocation.getCurrentPosition((position) => {
             this.setState({ coords: position.coords });
@@ -72,16 +71,13 @@ class App extends Component {
                         if (Object.entries(snapshot.val())[x][1] == false){
                             arrayOfBadPrefs.push(Object.entries(snapshot.val())[x][0]);
                         }  
-                        
-
                     }
           
                     this.setState({
                         badPrefs: arrayOfBadPrefs}, () =>{
                            console.log(this.state.badPrefs);
                     });
-
-                    var realQuests = [];
+                    
                     var addFlag;
 
                     /**  The first loop goes through each quest */
@@ -90,10 +86,8 @@ class App extends Component {
                          /*The second loop finds the categories of each quest */
                         
                         for(let cats in questies[1]["categories"]) {
-                            console.log(cats);
                             /*The last loop goes through all of the bad preferences  */
                              for(let bPref of this.state.badPrefs) {
-                                console.log("running");
                                 if(cats == bPref) {
                                     addFlag = false;
                                 }
@@ -106,9 +100,10 @@ class App extends Component {
                         }
                     }
                     this.setState({
-                        data: realQuests,
+                       data: realQuests,
                     });
-                    console.log("After pref filter:" + realQuests.length);
+                    console.log("After pref filter:" + this.state.data.length);
+                    console.log(this.state.data);
                      
                 }); 
 
@@ -121,6 +116,8 @@ class App extends Component {
             }
         });
     }
+
+   
 
     render() {
         if (this.state.loading) {

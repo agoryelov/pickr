@@ -270,7 +270,7 @@ class SavedQuestItem extends React.Component {
                                         <ShareIcon />
                                         <Button variant = "contained" color ='inherit' onClick = {this.toggleModal} style = {{backgroundColor: 'white', cursor: 'pointer', marginLeft: '15px'}}>
                                         <ListItemText
-                                            primary="Share on Facebook"
+                                            primary="Sharing is Caring"
                                             disableTypography
                                             style={{ fontWeight: '400', fontSize: '.8em' }} />
                                         </Button>

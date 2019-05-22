@@ -65,8 +65,6 @@ class QuestPage extends React.Component {
 
         const coords = this.props.coords;
         const data = this.state.data;
-        console.log(this.state.current);
-        console.log(this.state.data);
 
         return (
             <Grid container justify="center" style={{}}>
