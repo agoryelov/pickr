@@ -105,7 +105,7 @@ class SignUpFormBase extends Component {
                   <Grid item xs={12}>
                     <FormControl fullWidth>
                       <InputLabel htmlFor="username-input">
-                        Username
+                        Username <span style={{color: 'red'}}>*</span>
                       </InputLabel>
                       <Input name="username" id="username-input" type="text" onChange={this.onChange} required />
                     </FormControl>
@@ -113,7 +113,7 @@ class SignUpFormBase extends Component {
                   <Grid item xs={12}>
                     <FormControl fullWidth>
                       <InputLabel htmlFor="email-input">
-                        Email
+                        Email <span style={{color: 'red'}}>*</span>
                       </InputLabel>
                       <Input name="email" id="email-input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" type="email" onChange={this.onChange} required />
                     </FormControl>
@@ -121,7 +121,7 @@ class SignUpFormBase extends Component {
                   <Grid item xs={12}>
                     <FormControl fullWidth>
                       <InputLabel htmlFor="password-input">
-                        Password
+                        Password <span style={{color: 'red'}}>*</span>
                       </InputLabel>
                       <Input name="password" id="password-input" type="password" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onChange={this.onChange} required />
                     </FormControl>
