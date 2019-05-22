@@ -90,78 +90,83 @@ class Favourites extends React.Component {
             <SavedQuestItem questId={x[0]} globalUser = {this.state.globalUser} questData={data[x[0]][1]} />
           </div>
         )}
-                  <div>{this.createForm()}</div>
+          {/* <div>{this.createForm()}</div> */}
       </div>);
   }
 
-  addQuestToDB(e) {
-    e.preventDefault();
+  // The below code allowed us to add quests to firebase:
 
-    let questSize = null;
+  // addQuestToDB(e) {
+  //   e.preventDefault();
 
-    this.firebase.questsAll().once("value", snapshot => {
-      questSize = snapshot.val().length;
-    }).then(() => {this.firebase.questsAll().child(questSize).update({
-      address: this.inputQuestAddress.value,
-      cost: this.inputQuestCost.value,
-      description: this.inputQuestDescription.value,
-      ecoRating: this.inputQuestEcoRating.value,
-      imgLink: this.inputQuestImgLink.value,
-      link: this.inputQuestLink.value,
-      location: this.inputQuestLocation.value,
-      name: this.inputQuestName.value,
-      tags: this.inputQuestTags.value,
-    });
-    this.firebase.quests(questSize).child('coordinates').update({
-      lat: this.inputQuestLat.value,
-      long: this.inputQuestLong.value,
-    });
-    this.firebase.quests(questSize).child('categories').update({
-      [this.inputQuestCat1.value]: this.inputQuestCat1XP.value,
-    });
-    if (!(this.inputQuestCat2.value === "" || this.inputQuestCat2XP.value === "")) {
-      this.firebase.quests(questSize).child('categories').update({
-        [this.inputQuestCat2.value]: this.inputQuestCat2XP.value,
-      });
-    };
-    if (!(this.inputQuestCat3.value === "" || this.inputQuestCat3XP.value === "")) {
-      this.firebase.quests(questSize).child('categories').update({
-        [this.inputQuestCat3.value]: this.inputQuestCat3XP.value,
-      });
-    };
-  });
+  //   let questSize = null;
 
-  }
+  //   this.firebase.questsAll().once("value", snapshot => {
+         // gets the current size of the quest list in firebase. The new quest index will be the current length
+  //     questSize = snapshot.val().length;
+        // add new quest to firebase
+  //   }).then(() => {this.firebase.questsAll().child(questSize).update({
+  //     address: this.inputQuestAddress.value,
+  //     cost: parseInt(this.inputQuestCost.value),
+  //     description: this.inputQuestDescription.value,
+  //     ecoRating: parseInt(this.inputQuestEcoRating.value),
+  //     imgLink: this.inputQuestImgLink.value,
+  //     link: this.inputQuestLink.value,
+  //     location: this.inputQuestLocation.value,
+  //     name: this.inputQuestName.value,
+  //     tags: this.inputQuestTags.value,
+  //   });
+          // add lat and long (gps cord) values to coordinates of the quest
+  //   this.firebase.quests(questSize).child('coordinates').update({
+  //     lat: parseInt(this.inputQuestLat.value),
+  //     long: parseInt(this.inputQuestLong.value),
+  //   });
+        // add category and xp for that cateogry to the categories of the quest
+  //   this.firebase.quests(questSize).child('categories').update({
+  //     [this.inputQuestCat1.value]: parseInt(this.inputQuestCat1XP.value),
+  //   });
+        // if the quest has a second category
+  //   if (!(this.inputQuestCat2.value === "" || this.inputQuestCat2XP.value === "")) {
+  //     this.firebase.quests(questSize).child('categories').update({
+  //       [this.inputQuestCat2.value]: parseInt(this.inputQuestCat2XP.value),
+  //     });
+  //   };
+        // if the quest has a third category
+  //   if (!(this.inputQuestCat3.value === "" || this.inputQuestCat3XP.value === "")) {
+  //     this.firebase.quests(questSize).child('categories').update({
+  //       [this.inputQuestCat3.value]: parseInt(this.inputQuestCat3XP.value),
+  //     });
+  //   };
+  // });
+
+  // }
 
 
-  createForm() {
-    let form = 
-    <form onSubmit = {this.addQuestToDB.bind(this)}>
-        <input type = "text" name = "questAddress" ref = {questAddress => this.inputQuestAddress = questAddress} placeholder = "address" required = "required"></input>
-        <input type = "number" name = "questCost" ref = {questCost => this.inputQuestCost = questCost} placeholder = "cost" required = "required"></input>
-        <input type = "text" name = "questDescription" ref = {questDescription => this.inputQuestDescription = questDescription} placeholder = "description" required = "required"></input>
-        <input type = "number" name = "questEcoRating" ref = {questEcoRating => this.inputQuestEcoRating = questEcoRating} placeholder = "eco rating" required = "required"></input>
-        <input type = "text" name = "questImgLink" ref = {questImgLink => this.inputQuestImgLink = questImgLink} placeholder = "img link" required = "required"></input>
-        <input type = "text" name = "questLink" ref = {questLink => this.inputQuestLink = questLink} placeholder = "link" required = "required"></input>
-        <input type = "text" name = "questLocation" ref = {questLocation => this.inputQuestLocation = questLocation}  placeholder = "location" required = "required"></input>
-        <input type = "text" name = "questName" ref = {questName => this.inputQuestName = questName} placeholder = "name" required = "required"></input>
-        <input type = "text" name = "questTags" ref = {questEcoTags => this.inputQuestTags = questEcoTags} placeholder = "tags" required = "required"></input>
-        <input type = "number" name = "questLong" ref = {questLong => this.inputQuestLong = questLong} placeholder = "long" required = "required"></input>
-        <input type = "number" name = "questLat" ref = {questLat => this.inputQuestLat = questLat} placeholder = "lat" required = "required"></input>
-        <input type = "text" name = "questCat1" ref = {questCat1 => this.inputQuestCat1 = questCat1} placeholder = "category 1" required = "required"></input>
-        <input type = "number" name = "questCat1XP" ref = {questCat1XP => this.inputQuestCat1XP = questCat1XP} placeholder = "category 1 XP" required = "required"></input>
-        <input type = "text" name = "questCat2" ref = {questCat2 => this.inputQuestCat2 = questCat2} placeholder = "category 2 (optional)"></input>
-        <input type = "number" name = "questCat2XP" ref = {questCat2XP => this.inputQuestCat2XP = questCat2XP} placeholder = "category 2 XP (optional)"></input>
-        <input type = "text" name = "questCat3" ref = {questCat3 => this.inputQuestCat3 = questCat3} placeholder = "category 3 (optional)"></input>
-        <input type = "number" name = "questCat3XP" ref = {questCat3XP => this.inputQuestCat3XP = questCat3XP} placeholder = "category 3 XP (optional)"></input>
-        <input type = "submit" value = "submit"></input>
-        
+  // createForm() {
+  //   let form = 
+  //   <form onSubmit = {this.addQuestToDB.bind(this)}>
+  //       <input type = "text" name = "questAddress" ref = {questAddress => this.inputQuestAddress = questAddress} placeholder = "address" required = "required"></input>
+  //       <input type = "number" name = "questCost" ref = {questCost => this.inputQuestCost = questCost} placeholder = "cost" required = "required"></input>
+  //       <input type = "text" name = "questDescription" ref = {questDescription => this.inputQuestDescription = questDescription} placeholder = "description" required = "required"></input>
+  //       <input type = "number" name = "questEcoRating" ref = {questEcoRating => this.inputQuestEcoRating = questEcoRating} placeholder = "eco rating" required = "required"></input>
+  //       <input type = "text" name = "questImgLink" ref = {questImgLink => this.inputQuestImgLink = questImgLink} placeholder = "img link" required = "required"></input>
+  //       <input type = "text" name = "questLink" ref = {questLink => this.inputQuestLink = questLink} placeholder = "link" required = "required"></input>
+  //       <input type = "text" name = "questLocation" ref = {questLocation => this.inputQuestLocation = questLocation}  placeholder = "location" required = "required"></input>
+  //       <input type = "text" name = "questName" ref = {questName => this.inputQuestName = questName} placeholder = "name" required = "required"></input>
+  //       <input type = "text" name = "questTags" ref = {questEcoTags => this.inputQuestTags = questEcoTags} placeholder = "tags" required = "required"></input>
+  //       <input type = "number" name = "questLong" ref = {questLong => this.inputQuestLong = questLong} placeholder = "long" required = "required"></input>
+  //       <input type = "number" name = "questLat" ref = {questLat => this.inputQuestLat = questLat} placeholder = "lat" required = "required"></input>
+  //       <input type = "text" name = "questCat1" ref = {questCat1 => this.inputQuestCat1 = questCat1} placeholder = "category 1" required = "required"></input>
+  //       <input type = "number" name = "questCat1XP" ref = {questCat1XP => this.inputQuestCat1XP = questCat1XP} placeholder = "category 1 XP" required = "required"></input>
+  //       <input type = "text" name = "questCat2" ref = {questCat2 => this.inputQuestCat2 = questCat2} placeholder = "category 2 (optional)"></input>
+  //       <input type = "number" name = "questCat2XP" ref = {questCat2XP => this.inputQuestCat2XP = questCat2XP} placeholder = "category 2 XP (optional)"></input>
+  //       <input type = "text" name = "questCat3" ref = {questCat3 => this.inputQuestCat3 = questCat3} placeholder = "category 3 (optional)"></input>
+  //       <input type = "number" name = "questCat3XP" ref = {questCat3XP => this.inputQuestCat3XP = questCat3XP} placeholder = "category 3 XP (optional)"></input>
+  //       <input type = "submit" value = "submit"></input> 
+  //   </form>
   
-  
-    </form>
-  
-    return form;
-  }
+  //   return form;
+  // }
 }
 
 
