@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import Firebase from '../firebase';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
+//Checkbox list with all categories
+import CheckboxList from '../Layout/CheckboxList';
+//Slider for changing the money range
+import MoneySlide from '../Layout/SliderMoney';
+//Slider for changing the distance range
+import DistSlide from '../Layout/SliderDistance';
+//Material UI's utility and styling components
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import MoneySlide from '../Layout/SliderMoney';
-import DistSlide from '../Layout/SliderDistance';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import CheckboxList from '../Layout/prefButtons';
-import { blue } from '@material-ui/core/colors';
 
 
+/*The UserPreferences class will render all of the settings that the user can change.*/
 class UserPreferences extends React.Component {  
     
     render() {

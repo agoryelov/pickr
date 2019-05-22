@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Firebase from '../firebase';
+// Material UI's utility and styling components
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/lab/Slider';
-import Firebase from '../firebase';
 import { ListItem } from '@material-ui/core';
 
 const styles = {
@@ -14,26 +15,24 @@ const styles = {
     padding: '22px 0px',
   },
 };
-
+/*Class that exports a slider in the setting page with the range of distance
+quests will be searched in.*/
 class SimpleSlider extends React.Component {
   firebase = new Firebase();
+  //default value for state is 30
   state = {
     value: 30,
   };
+  /*On Mount it checks for the users firebase distance setting value and 
+  sets it's state so it can be displayed on the component.*/
   componentDidMount() {
     this.firebase.auth.onAuthStateChanged((authUser) => {
-      console.log(authUser);
         if (authUser) {
             this.setState({ authUser });
+            //Shortcut for accesing userbase prferences on firebase
             this.userPreferences = this.firebase.preferences(authUser.uid);
             this.userPreferences.once("value", snapshot => {
-            this.setState({value : snapshot.val().Distance,})    
-
-                   
-                   console.log(this.state.checked);
-                   
-            
-                
+            this.setState({value : snapshot.val().Distance,})                    
             })
             
         } else {
@@ -42,6 +41,7 @@ class SimpleSlider extends React.Component {
         }
     });
   }
+  /*When the slider is moved it sets the new values state and also stores it in firebase.*/
   handleChange = (event, value) => {
     this.setState({ value });
     this.firebase.auth.onAuthStateChanged((authUser) => {
@@ -52,11 +52,10 @@ class SimpleSlider extends React.Component {
       }
     })
   }; 
-
+  /* Renders the slider on the settings page as a list item with a title.*/
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-    const lessThan = '<';
     return (
       <div className={classes.root}>
         <ListItem>

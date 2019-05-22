@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Slider from '@material-ui/lab/Slider';
-import Firebase from '../firebase';
 import ReactDOM from 'react-dom';
+import Firebase from '../firebase';
 import CoinFull from './../../img/coinsFull.png';
 import CoinEmpty from './../../img/coinsEmpty.png';
-import { ifStatement } from '@babel/types';
+// Material UI's utility and styling components
+import { withStyles } from '@material-ui/core/styles';
+import Slider from '@material-ui/lab/Slider';
 import Typography from '@material-ui/core/Typography';
 import { ListItem, ListItemIcon } from '@material-ui/core';
 
@@ -15,10 +15,12 @@ const styles = {
     width: '100%',
     margin: 'auto 0',
   },
+
   slider: {
     padding: '22px 0px',
   },
 };
+//Coins sizes
 const imgStyle = {
   height: 30,
   width: 30,
@@ -26,23 +28,22 @@ const imgStyle = {
 };
 
 class StepSlider extends React.Component {
+  // Call access to the Firebase database.
   firebase = new Firebase();
-  state = {
-    value: 0,
-    moneySigns: null,
-  };
 
+  state = {
+    value: 0, //slider value
+  };
+  /*When the component mounts it retreves the users money search value, then 
+  sets the state of the value and uses ReactDom to display the right amount
+  of coins corresponding to the value. Along with the $ range*/
   componentDidMount() {
-    console.log("Mounted");
     this.firebase.auth.onAuthStateChanged((authUser) => {
       
         if (authUser) {
-          var lessThan = '<';
-          var greaterThan = '>';
             this.setState({ authUser });
             this.userPreferences = this.firebase.preferences(authUser.uid);
             this.userPreferences.once("value", snapshot => {
-              console.log("snap" + snapshot.val());
               switch(snapshot.val().Cost) {
                 case 0:
                   ReactDOM.render(<div><img src = {CoinFull} alt = "coins" style={imgStyle} />
@@ -71,9 +72,7 @@ class StepSlider extends React.Component {
                   ReactDOM.render(<span> is Over $50 </span>, document.getElementById('cost'));
                   this.setState({value : 2}); 
               } 
-              
-              //document.getElementById("dollarSigns").setInnerHTML(this.state.moneySigns);
-              console.log(this.state.checked);
+
             })
             
         } else {
@@ -82,9 +81,10 @@ class StepSlider extends React.Component {
         }
     });
 }
+  /*When the slider is moved the new value will be used to figure out how many coins to display
+  as well as the $ amount. The state of the value will also be updated along with the user's
+  Firebase value. */
   handleChange = (event, value) => {
-    var lessThan = '<';
-    var greaterThan = '>';
     this.setState({ value: value},() => {switch(this.state.value) {
       case 0:
         ReactDOM.render(<div><img src = {CoinFull} alt = "coins" style={imgStyle} />
@@ -136,10 +136,10 @@ class StepSlider extends React.Component {
     }});
  
   };
-  
+  /*Renders the slide for the money range, coins corresponding to the value and the $ range as a list item.
+   */
   render() {
     const { classes } = this.props;
-    const { value } = this.state.value;
     return (
       <div className={classes.root}>
         <ListItem>
