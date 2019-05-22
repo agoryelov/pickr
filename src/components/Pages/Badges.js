@@ -127,7 +127,6 @@ class Badges extends React.Component {
 
 
         const sortedCats = this.state.testSorted;
-
         return (
           <div style={{margin: '1em'}}>
             <Grid container justify='center' spacing={16}>

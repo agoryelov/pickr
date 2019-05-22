@@ -34,7 +34,7 @@ const statement = (
   <h2 style ={cardFont}>Our Mission</h2>
   <p id = "userStory" style ={cardFont}>
     Pickr began with a common experience that we all have had: boredom. Whether it's the boredom of having the same routine everyday or the boredom
-    of not knowing what there is to explore, we have all felt that there needs to be a change. For myself, I know that I have a habit of repeating the same
+    of not knowing what there is to explore, we have all felt that there needs to be a change in our lives. For myself, I know that I have a habit of repeating the same
     activities especially when I am busy with school or work, and it can actually be energy draining to be stuck in a rut. As a result, I thought it would be
     great if there was an application that could push me to try new things where I live, and as a result Pickr was created.
   </p>
