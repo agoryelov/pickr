@@ -32,7 +32,7 @@ class QuestCardDetails extends React.Component {
                     {questAbout}
                 </Grid>
                 <Grid item xs={12} style={{ fontSize: ".8em", textAlign: 'justify' }}>
-                    <GetDirections coords={this.props.coords} />
+                    <GetDirections coords={this.props.coords} expanded={this.props.expanded} questData={this.props.data}/>
                 </Grid>
             </Grid>
         )

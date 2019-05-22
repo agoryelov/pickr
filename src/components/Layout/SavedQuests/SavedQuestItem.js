@@ -107,9 +107,9 @@ class SavedQuestItem extends React.Component {
     completeQuest() {
         console.log(this.props.questData['categories']);
 
-        let now = new Date().toString(' MMMM d yyyy');
+        let now = new Date();
 
-        this.firebase.completed(this.props.globalUser.uid).child(this.props.questId).update({
+        this.firebase.completed(this.props.globalUser.uid).child(now.getTime()).update({
               questID : this.props.questId,
               completedDate : now
         });
@@ -165,6 +165,9 @@ class SavedQuestItem extends React.Component {
         const questEcoRating = data['ecoRating'];
         const questAbout = data['description'];
         const cats = Object.entries(data['categories']);
+        const address = data['address'];
+        const tags = data['tags'];
+        const learnMoreLink = data['link'];
 
         const icons = {
             Fitness: {
@@ -196,7 +199,7 @@ class SavedQuestItem extends React.Component {
                 color: "#ec407aCC"
             },
             Games: {
-                icon: <FavoriteIcon style={{ color: 'white', fontSize: '16px' }} />,
+                icon: <GamesIcon style={{ color: 'white', fontSize: '16px' }} />,
                 color: "#ec407aCC"
             },
         };
@@ -215,7 +218,7 @@ class SavedQuestItem extends React.Component {
                                     <span style={{ fontWeight: 'bold' }}>{questName}</span>
                                 </Grid>
                                 <Grid item xs={12} style={{ margin: '0 0 0 1em' }}>
-                                    <span style={{ fontSize: '0.8em', color: '#FFFFFFCC' }}>5 km away</span>
+                                    <span style={{ fontSize: '0.8em', color: '#FFFFFFCC' }}>{questLocation}</span>
                                 </Grid>
                                 <Grid item xs={12} style={{ margin: '.5em .5em .5em 0' }}>
                                     {cats.map(x => (
@@ -248,7 +251,7 @@ class SavedQuestItem extends React.Component {
                                             <NearMeIcon />
                                         </ListItemIcon>
                                         <ListItemText
-                                            primary="1499 Arbutus Street, Vancouver"
+                                            primary={address}
                                             disableTypography
                                             style={{ fontWeight: '400', fontSize: '.8em' }} />
                                     </ListItem>
@@ -258,7 +261,7 @@ class SavedQuestItem extends React.Component {
                                             <StyleIcon />
                                         </ListItemIcon>
                                         <ListItemText
-                                            primary="Culture, Fitness"
+                                            primary={tags}
                                             disableTypography
                                             style={{ fontWeight: '400', fontSize: '.8em' }} />
                                     </ListItem>
@@ -286,7 +289,7 @@ class SavedQuestItem extends React.Component {
                                 </List>
                             </Grid>
                             <Grid item style={{padding: '4px 4px'}}>
-                                <Button size="small" color="default">
+                                <Button size="small" color="default" href={learnMoreLink} target="_blank">
                                     Learn More
                                 </Button>
                                 <Button size="small" color="secondary" onClick={this.deleteQuest.bind(this)}>

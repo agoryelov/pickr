@@ -36,7 +36,6 @@ class CategoryProgress extends React.Component {
     }
 
     componentDidMount() {
-      console.log("current xp: " + this.props.exp);
       const categoryLevel = this.getLevel(this.props.exp);
       const progress = this.getProgress(categoryLevel);
 
