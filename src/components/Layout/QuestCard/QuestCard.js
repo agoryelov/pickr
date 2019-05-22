@@ -56,19 +56,27 @@ class QuestCard extends React.Component {
         return deg * (Math.PI / 180);
     }
 
-    handleCollapse = (event, expanded) => {
-        this.setState({ expanded });
+    handleCollapse = () => {
+        if(this.state.expanded) {
+            this.setState({ expanded: false });
+        } else {
+            this.setState({expanded: true});
+        }
+        
     }
 
     render() {
+        //console.log(this.props.questId);
+        //console.log(this.props.databaseQuestId);
         const questData = this.props.questData;
+
         const distance = Math.ceil(this.state.distance) + " km";
         
-
-        if (this.state.expanded && this.props.questId != (this.props.current)) {
+       /** if (this.state.expanded && this.props.questId != (this.props.current)) {
             this.setState({ expanded: false });
-        }
+        }*/ 
         const expanded = this.state.expanded;
+        console.log(expanded)
         return (
             <div>
                 <CSSTransition in={expanded} timeout={400} classNames="cardAnimation">
@@ -78,7 +86,7 @@ class QuestCard extends React.Component {
                                 <QuestCardSummary expanded={expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser}/>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails style={{background: '#f4f4f4'}}>
-                                <QuestCardDetails data={questData} />
+                                <QuestCardDetails data={questData} coords={this.props.coords} expanded={expanded}/>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                     </div>

@@ -22,11 +22,6 @@ import CheckboxList from '../Layout/prefButtons';
 import { blue } from '@material-ui/core/colors';
 
 
-
-
-
-
-
 class UserPreferences extends React.Component {  
     
     render() {
