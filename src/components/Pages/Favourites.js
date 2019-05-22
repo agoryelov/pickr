@@ -1,30 +1,25 @@
 import React, { cloneElement } from "react";
-import LinearProgress from '@material-ui/core/LinearProgress';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Firebase from '../firebase'
 import '../CSS/Favourites.css';
-import * as ROUTES from '../../constants/routes';
 import 'rc-swipeout/assets/index.css';
-
-
-import Swipeout from 'rc-swipeout';
 
 import SavedQuestItem from '../Layout/SavedQuests/SavedQuestItem';
 
 import '../CSS/QuestPage.css'
 
-
+// The Favourites tab which displays the user's favourited (saved) quests
 class Favourites extends React.Component {
+  // Call access to the Firebase database.
   firebase = new Firebase();
+
+  // Grab props from parent
   constructor(props) {
     super(props);
 
     this.state = {
 
-      // List of all quests
+      // List of all quests in the database
       questList: null,
 
       // List of quests favourited by the user (pulled from firebase)
@@ -52,6 +47,9 @@ class Favourites extends React.Component {
   }
 
   componentDidMount() {
+
+    // if the user is signed in, grab both a master list of all quest and a list of quests favourited by the user,
+    // then set loading to false so the page renders its content
     this.firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.state.globalUser = user;
@@ -68,7 +66,9 @@ class Favourites extends React.Component {
   }
 
   render() {
+    // if the user is not logged in or the page is still grabbing user data from firebase
     if (this.state.loading) {
+      // show circular loading icon
       return (
         <div style={{ marginTop: '40vh', display: 'flex', justifyContent: 'center' }}>
           <CircularProgress />
@@ -76,11 +76,15 @@ class Favourites extends React.Component {
       );
     }
 
+    // if the user has no favourited quest return empty favourite list
     if (this.state.list == null) {
       return(<div>Empty</div>)
     }
 
+    // convert the master quest list (object) pulled from firebase into an array
     const data = Object.entries(this.state.questList);
+
+    // convert the favourited quest list (object) pulled from firebase into an array
     const saved = Object.entries(this.state.list);
 
     return (

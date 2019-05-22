@@ -8,9 +8,11 @@ import '../CSS/Badges.css';
 import * as ROUTES from '../../constants/routes';
 
 
-
+// the progress bar for the the xp badges
 class CategoryProgress extends React.Component {
-    EXP = [0, 0, 60, 200, 500, 1000, 2500, 5000, 10000];
+  
+    // an array of xp points need for each level
+    EXP = [0, 0, 60, 200, 500, 1000, 2500, 5000, 10000, 20000, 50000, 100000, 250000, 500000, 1000000];
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +21,7 @@ class CategoryProgress extends React.Component {
         };
     }
 
+    // calculates the current level of the user based on their current xp
     getLevel = (exp) => {
       let level;
       for (level = 1; level < this.EXP.length; level++) {
@@ -28,6 +31,7 @@ class CategoryProgress extends React.Component {
       }
     }
 
+    // calculates the percentage of progress until the next level
     getProgress = (level) => {
       let levelExp = this.props.exp - this.EXP[level];
       let totalLevelExp = this.EXP[level + 1] - this.EXP[level];
@@ -46,14 +50,22 @@ class CategoryProgress extends React.Component {
     }
     
     render() {
+
+      // the category
       const category = this.props.category;
+
+      // the user level for this category
       const categoryLevel = this.getLevel(this.props.exp);
       this.state.categoryLevel = categoryLevel;
-      const progress = this.getProgress(categoryLevel);
-      const remExp = this.EXP[this.state.categoryLevel + 1] - this.props.exp;
 
+      // the percentage of progress until next level for this category
+      const progress = this.getProgress(categoryLevel);
       this.state.completed = progress;
 
+      // the amount of xp needed for the next level for this category
+      const remExp = this.EXP[this.state.categoryLevel + 1] - this.props.exp;
+
+        // JSX for the progress bar
         return(
         <Paper style={{padding: '0 1em 0 1em'}} >
           <Grid container spacing={8} style={{marginTop: '1em'}}>
@@ -75,6 +87,7 @@ class CategoryProgress extends React.Component {
     }
 }
 
+// Component for the xp badges which shows level and xp for the different categories for the user
 class Badges extends React.Component {
     firebase = new Firebase();
     constructor(props) {
@@ -101,6 +114,8 @@ class Badges extends React.Component {
 
     componentDidMount() {
       this.setState({ loading: true });
+
+      // Grab the current XP by category for the user. Cnce pulled set loading to false so the Badges can render.
       this.firebase.auth.onAuthStateChanged(user => {
         if (user) {
           this.firebase.categoryProgress(user.uid).on("value", snapshot => {       
@@ -116,6 +131,7 @@ class Badges extends React.Component {
     }
     
     render() {
+        // if the page is still loading show a circular loading icon
         if (this.state.loading) {
           return (
             <div style={{marginTop: '40vh', display: 'flex', justifyContent: 'center'}}>
@@ -125,8 +141,10 @@ class Badges extends React.Component {
         }
 
 
-
+        // the sorted XPs by category for the user
         const sortedCats = this.state.testSorted;
+
+        // if no longer loading render the content
         return (
           <div style={{margin: '1em'}}>
             <Grid container justify='center' spacing={16}>

@@ -20,9 +20,14 @@ class QuestCardSummary extends React.Component {
     //Saving the quest to the user profile
     handleSave = (e) => {
         e.stopPropagation();
+
+        // the time the user saved the quest
         let now = new Date().toString(' MMMM d yyyy');
+
+        // the current user
         const uid = this.props.globalUser.uid;
         
+        // add the quest to the user's favourite quest list in firebase
         this.firebase.favourites(uid).child(this.props.questId).update({
             questID : this.props.questId,
             savedDate : now,
