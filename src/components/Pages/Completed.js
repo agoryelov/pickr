@@ -41,6 +41,7 @@ import SupervisorIcon from '@material-ui/icons/SupervisorAccount';
 //Games Icon
 import GamesIcon from '@material-ui/icons/Games';
 
+//Icons for different categories
 const icons = {
     Fitness: {
         icon: <FitnessCenterIcon style={{ color: 'white', fontSize: '14px' }} />,
@@ -76,11 +77,16 @@ const icons = {
     },
 };
 
+/**
+ * Renders an updated list of completed quests for the current user and formats the information
+ */
 class Completed extends React.Component {
+    // Call access to the Firebase database.
     firebase = new Firebase();
+
+    //Grab props from parent
     constructor(props) {
         super(props);
-
         this.state = {
             allQuests: null,
             completed: null,
@@ -88,10 +94,10 @@ class Completed extends React.Component {
         };
     }
 
+    //Grab the completd quests for the current user to map on the page
     componentDidMount() {
         this.firebase.auth.onAuthStateChanged(user => {
             if (user) {
-
                 this.firebase.completed(user.uid).once('value', snapshot => {
                     this.setState({
                         completed: snapshot.val(),
@@ -108,14 +114,15 @@ class Completed extends React.Component {
         });
     }
 
+    //Takes date in any valid javascript format and returns it formated to display on this page (Month + Day)
     formatDate = (date) => {
         let d = new Date(date);
-        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
         let month = months[d.getMonth()];
         let day = d.getDate();
         let suffix;
         switch (parseInt(day)) {
-            case 21: {
+            case 1: {
                 suffix = "st";
                 break;
             }
@@ -123,14 +130,35 @@ class Completed extends React.Component {
                 suffix = "nd";
                 break;
             }
+            case 3: {
+                suffix = "rd";
+                break;
+            }
+            case 21: {
+                suffix = "st";
+                break;
+            }
+            case 22: {
+                suffix = "nd";
+            }
+            case 23: {
+                suffix = "rd";
+                break;
+            }
+            case 31: {
+                suffix = "st";
+                break;
+            }
             default: {
                 suffix = "th";
             }
         }
+
         return (<span>{month} {day}{suffix}</span>);
     }
 
     render() {
+        //If firebase is still retreiving the user data it will display a loading circle
         if (this.state.loading) {
             return (
                 <div style={{ marginTop: '40vh', display: 'flex', justifyContent: 'center' }}>
@@ -139,37 +167,16 @@ class Completed extends React.Component {
             );
         }
 
+        //Check if the completed list is empty
         if (this.state.completed == null) {
-            return(<div>hello</div>)
+            return (<div>No quests completed</div>)
         }
 
+        //Assign constants for the data retrived from firebase API
         const completed = Object.entries(this.state.completed);
         const data = this.state.allQuests;
-        console.log(data)
-        //{completed.map(quest => console.log(quest))}
-
-        /*                    <ListItem>
-                        <ListItemText
-                            primary="Watch a Movie"
-                            secondary={
-                                <React.Fragment>
-                                    <Chip style={{ height: '20px', marginTop: '5px', color: 'white', borderColor: 'white', background: "#66bb6aAA" }}
-                                        label="35"
-                                        icon={<FilterHdrIcon style={{ color: 'white', fontSize: '14px' }} />} />
-                                    <Chip style={{ height: '20px', marginLeft: '1em', marginTop: '5px', color: 'white', borderColor: 'white', background: "#fbc02d99" }}
-                                        label="75"
-                                        icon={<BrushIcon style={{ color: 'white', fontSize: '14px' }} />} /> </React.Fragment>} />
-                        <ListSubheader>
-                            <span style={{fontWeight: '400'}}>May 20th</span>
-                        </ListSubheader>
-                        <ListItemSecondaryAction>
-                            <IconButton>
-                                <AutorenewIcon />
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </ListItem>
-                    <Divider light />*/
-
+        
+        //JSX
         return (
             <div>
                 <List style={{ margin: '0 1em' }}>
@@ -178,7 +185,7 @@ class Completed extends React.Component {
                             <ListItemText primary={data[x[1]['questID']]['name']}
                                 secondary={
                                     Object.entries(data[x[1]['questID']]['categories']).map(y => (
-                                        <Chip key={y[0]} 
+                                        <Chip key={y[0]}
                                             style={{ height: '20px', marginRight: '1em', marginTop: '5px', color: 'white', borderColor: 'white', background: `${icons[y[0]]['color']}` }}
                                             label={y[1]}
                                             icon={icons[y[0]]['icon']}

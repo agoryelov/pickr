@@ -2,11 +2,15 @@ import React from "react";
 import Grid from '@material-ui/core/Grid';
 
 import GetDirections from './GetDirections';
+
+/**
+ * Renders quest details from the Quest Card component
+ */
 class QuestCardDetails extends React.Component {
     
     render() {
         //Get quest information from parent
-        const data = this.props.data[1];
+        const data = this.props.data;
 
         //Pull relevant card summary data
         const questLocation = data['location'];

@@ -11,7 +11,11 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 
 import { CSSTransition } from 'react-transition-group';
 
+/**
+ * Individual card displayed in the stack of quests
+ */
 class QuestCard extends React.Component {
+    //Grab props from parent
     constructor(props) {
         super(props);
         this.state = {
@@ -38,6 +42,7 @@ class QuestCard extends React.Component {
         }
     }
 
+    //Calculates distance based on the Haversine Formula
     getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
         let R = 6371; // Radius of the earth in km
         let dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
@@ -52,41 +57,42 @@ class QuestCard extends React.Component {
         return d;
     }
 
+    //Convert degrees to radians
     deg2rad = (deg) => {
         return deg * (Math.PI / 180);
     }
 
+    //Keep track of expand and collapse through state
     handleCollapse = () => {
-        if(this.state.expanded) {
+        if (this.state.expanded) {
             this.setState({ expanded: false });
         } else {
-            this.setState({expanded: true});
+            this.setState({ expanded: true });
         }
-        
+
     }
 
     render() {
-        //console.log(this.props.questId);
-        //console.log(this.props.databaseQuestId);
         const questData = this.props.questData;
-
         const distance = Math.ceil(this.state.distance) + " km";
-        
-       /** if (this.state.expanded && this.props.questId != (this.props.current)) {
+
+        //This is necessary to keep the card collapsed when it is not the current card on the screen
+        //Uses the current index of the cards passed from the parent
+        if (this.state.expanded && this.props.questId != (this.props.current)) {
             this.setState({ expanded: false });
-        }*/ 
+        }
+
         const expanded = this.state.expanded;
-        console.log(expanded)
         return (
             <div>
                 <CSSTransition in={expanded} timeout={400} classNames="cardAnimation">
                     <div className="cardAnimationDefault">
                         <ExpansionPanel elevation={0} expanded={expanded} onChange={this.handleCollapse}>
                             <ExpansionPanelSummary classes={{ content: "noMargin", root: 'noMargin' }} >
-                                <QuestCardSummary expanded={expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser}/>
+                                <QuestCardSummary expanded={expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser} />
                             </ExpansionPanelSummary>
-                            <ExpansionPanelDetails style={{background: '#f4f4f4'}}>
-                                <QuestCardDetails data={questData} coords={this.props.coords} expanded={expanded}/>
+                            <ExpansionPanelDetails style={{ background: '#f4f4f4' }}>
+                                <QuestCardDetails data={questData} coords={this.props.coords} expanded={expanded} />
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                     </div>

@@ -10,13 +10,14 @@ import { CSSTransition } from 'react-transition-group';
 
 import Firebase from '../../firebase.js'
 
-// the summary component of the quest cards showed in the quest page
+/**
+ * The header of the quest card that lets you save it to your favourites
+ */
 class QuestCardSummary extends React.Component {
-
-    // Call access to the Firebase database.
+    //If firebase is still retreiving the user data it will display a loading circle
     firebase = new Firebase();
 
-    // called when user clicks to save a quest
+    //Saving the quest to the user profile
     handleSave = (e) => {
         e.stopPropagation();
 
@@ -38,7 +39,7 @@ class QuestCardSummary extends React.Component {
         const expanded = this.props.expanded;
 
         //Get quest information from parent
-        const data = this.props.data[1];
+        const data = this.props.data;
         const distance = this.props.distance;
 
         //Pull relevant card summary data

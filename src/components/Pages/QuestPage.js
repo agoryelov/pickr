@@ -2,13 +2,12 @@ import React from "react";
 import Swiper from 'react-id-swiper/lib/ReactIdSwiper.full';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
-import Firebase from '../firebase'
 
 import '../CSS/QuestPage.css'
 
 import QuestCard from '../Layout/QuestCard/QuestCard';
-import * as ROUTES from '../../constants/routes';
 
+/** The page where the users' preferred quests will be loaded. */
 class QuestPage extends React.Component {
 
     constructor(props) {
@@ -26,22 +25,24 @@ class QuestPage extends React.Component {
         this.swiper = null;
     }
     
+    // Updates the index of the card when a user swipes.
     updateIndex = () => {
         if (this.swiper != null) {
             this.setState({ current: this.swiper.activeIndex });
         }
     }
     
-    componentDidMount() {
-        const jsonToArray = Object.entries(this.props.data);
+    // Shuffles the array prior to mounting
+    componentWillMount() {
+        const jsonToArray = this.props.data;
         this.arrayShuffle(jsonToArray);
     }
     
+    // Function that shuffles the activities.
     arrayShuffle = (array) => {
         let m = array.length;
         let t;
         let i;
-        console.log("Randomizing");
         while (m) {
             i = Math.floor(Math.random() * m--);
             t = array[m];
@@ -55,6 +56,7 @@ class QuestPage extends React.Component {
     }
     
     render() {
+        // Shows a loading screen if the data has not been loaded yet.
         if (this.state.loading) {
             return (
                 <div style={{ marginTop: '40vh', display: 'flex', justifyContent: 'center' }}>
@@ -74,7 +76,7 @@ class QuestPage extends React.Component {
                         getSwiper={(swiper) => this.swiper = swiper} >
                         {data.map((card, index) => (
                             <div key={card[0]}>
-                                <QuestCard current={this.state.current} databaseQuestId={card[0]} coords={coords} questId={card[0]} questData={card[1]} globalUser={this.props.authUser} />
+                                <QuestCard current={this.state.current} databaseQuestId={card[0]} coords={coords} questId={index + 1} questData={card[1]} globalUser={this.props.authUser} />
                             </div>
                         ))}
                     </Swiper>

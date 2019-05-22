@@ -1,8 +1,8 @@
 import React from "react";
 import Grid from '@material-ui/core/Grid';
-import * as ROUTES from '../../constants/routes';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+//Website pages to router towards
 import QuestPage from '../Pages/QuestPage';
 import CompletedPage from '../Pages/Completed'
 import BadgesPage from '../Pages/Badges';
@@ -12,8 +12,12 @@ import SweepPage from '../Pages/Sweep';
 import UserPreferencesPage from '../Pages/UserPreferences';
 import FirebaseSubmit from '../Pages/FirebaseSubmit'
 
+//Dsktop navbar and a helper module to hide it on mobile
 import NavDrawerDesktop from './NavDrawerDesktop'
 import Hidden from '@material-ui/core/Hidden';
+
+//Static page routes
+import * as ROUTES from '../../constants/routes';
 
 class AppContent extends React.Component {
     constructor(props) {

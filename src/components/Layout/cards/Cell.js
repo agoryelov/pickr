@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+/** This is the cell component that is inserted into the Board. */
 class Cell extends Component {
     constructor(props) {
         super(props);
     }
 
+    // On a user's click, the cell will be updated with a flag, bomb, or number.
     getValue = () => {
         const {value} = this.props;
 
@@ -20,6 +22,7 @@ class Cell extends Component {
         }
         return value.dataitem.neighbour;
     }
+    
     render() {
         const { value, onClick, cMenu} = this.props;
         let className = "cell" + (value.dataitem.isRevealed ? "": " hidden") + (value.dataitem.isMine ? " is-mine" : "") + (value.dataitem.isFlagged ? " is-flag" : "");
@@ -35,12 +38,14 @@ class Cell extends Component {
     }
 }
 
+
 const cellItemShape = {
     isRevealed: PropTypes.bool,
     isMine: PropTypes.bool, 
     isFlagged: PropTypes.bool,
 }
 
+// Sets the types of properties that must be passed to the Cell component.
 Cell.propTypes = {
     value: PropTypes.objectOf(PropTypes.shape(cellItemShape)),
     onClick: PropTypes.func,

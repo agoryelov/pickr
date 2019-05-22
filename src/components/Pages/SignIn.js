@@ -12,17 +12,14 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-
-const SignInPage = () => (
-  <div>
-    <SignInForm />
-  </div>
-);
-
+/**
+ * Renders the Sign In form component, accessible if the user is not logged in
+ */
 class SignInFormBase extends Component {
-
+  // Call access to the Firebase database.
   firebase = new Firebase();
 
+  //Grab props from parent
   constructor(props) {
     super(props);
 
@@ -33,18 +30,20 @@ class SignInFormBase extends Component {
     }
   }
 
+  //Login logic for returning users, redirects to HOME on success
   onSubmit = event => {
     event.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
-    
+
     this.firebase.signIn(email, password).then(() => {
       this.props.history.push(ROUTES.HOME);
     });
   }
 
+  //Updates state to keep track of form's inputs realtime
   onChange = event => {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
@@ -57,15 +56,15 @@ class SignInFormBase extends Component {
     return (
       <Grid container justify='center'>
         <Grid item xs={12} sm={8} md={6} lg={4}>
-          <Paper style={{textAlign: 'center', padding: '2em', margin: '2em 2em 0 2em'}}>
+          <Paper style={{ textAlign: 'center', padding: '2em', margin: '2em 2em 0 2em' }}>
             <form onSubmit={this.onSubmit}>
-              <Grid container spacing={24} justify = "center">
+              <Grid container spacing={24} justify="center">
                 <Grid item xs={8}>
                   <Grid container direction="column-reverse" justify="center" alignItems="center" spacing={8}>
                     <Grid item>
-                      <Typography style={{color: 'grey'}} variant="h5">Login</Typography>
+                      <Typography style={{ color: 'grey' }} variant="h5">Login</Typography>
                     </Grid>
-                  </Grid>                  
+                  </Grid>
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl fullWidth>
@@ -83,11 +82,10 @@ class SignInFormBase extends Component {
                     <Input name="password" id="password-input" type="password" onChange={this.onChange} required />
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} style={{marginTop: '2em'}}>
+                <Grid item xs={12} style={{ marginTop: '2em' }}>
                   <Button type="submit" color="primary" variant="contained" fullWidth>Login</Button>
                 </Grid>
                 <Grid item xs={12}>
-                  <h7 style ={{paddingBottom: '20px'}}> Don't have an account? Sign up below.</h7>
                   <Button component={Link} to={ROUTES.SIGN_UP} variant="contained" fullWidth>Create</Button>
                 </Grid>
               </Grid>
@@ -99,21 +97,4 @@ class SignInFormBase extends Component {
   }
 }
 
-/*
-      <form onSubmit={this.onSubmit}>
-        <input name="email" value={email} onChange={this.onChange} type="email" placeholder="Email" />
-        <input name="password" value={password} onChange={this.onChange} type="password" placeholder="Password" />
-        <button disabled={isInvalid} type="submit">Sign In</button>
-
-        {error && <p>{error.message}</p>}
-      </form>
-*/
-const SignUpLink = () => (
-  <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </p>
-);
-
-const SignInForm = withRouter(SignInFormBase);
-
-export default SignInPage;
+export default withRouter(SignInFormBase);

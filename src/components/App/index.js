@@ -4,29 +4,31 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SignUpPage from '../Pages/SignUp';
 import SignInPage from '../Pages/SignIn';
 
-import AppBarHeader from './Header3'
-import NavDrawer from './NavDrawer'
-import NavDrawerDesktop from './NavDrawerDesktop'
-import AppContent from './AppContent'
+import AppBarHeader from './Header3';
+import NavDrawer from './NavDrawer';
+import AppContent from './AppContent';
 
+// Material-ui imports
 import Grid from '@material-ui/core/Grid';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import './index.css';
-import Logo from "../../img/pickr-logo-blue2.PNG";
-
-import Hidden from '@material-ui/core/Hidden';
 
 import * as ROUTES from '../../constants/routes';
 import Firebase from '../firebase';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 
+// Number of categories that the quests can be organized by.
 const catNum = 10;
 
+/** This is a major component of our Application that is present on each page and
+ * passes user data to the children components. 
+ */
 class App extends Component {
+    // Call access to the Firebase database.
     firebase = new Firebase();
+
+    //Grab props from parent
     constructor(props) {
         super(props);
 
@@ -40,6 +42,7 @@ class App extends Component {
         };
     }
 
+    // function for toggling the side menu
     toggleDrawer = () => {
         this.setState({
             drawer: !this.state.drawer,
@@ -54,72 +57,62 @@ class App extends Component {
             this.setState({ coords: position.coords });
         });
 
+        // Action to occur when the status of the user's authentication has been changed
         this.firebase.auth.onAuthStateChanged((authUser) => {
-            
+            // if the user has been authenticated
             if (authUser) {
-                this.setState({ authUser: authUser });
-                this.firebase.questsAll().once("value", snapshot => {
-                    this.setState({
-                        data: Object.entries(snapshot.val())}, ()=>{
-                            this.setState({
-                                loading: false
-                            });
-                    });
-                /* This section grabs the unselected preferences of the user and stores them in an array */
-                this.firebase.preferences(authUser.uid).once("value", snapshot => {
-                    for(let x  = 0; x < catNum; x++) {
-                        if (Object.entries(snapshot.val())[x][1] == false){
-                            arrayOfBadPrefs.push(Object.entries(snapshot.val())[x][0]);
-                        }  
-                    }
-          
-                    this.setState({
-                        badPrefs: arrayOfBadPrefs}, () =>{
-                           console.log(this.state.badPrefs);
-                    });
-                    
-                    var addFlag;
-
-                    /**  The first loop goes through each quest */
-                    for(let questies of this.state.data) {
-                        addFlag = true;
-                         /*The second loop finds the categories of each quest */
+                this.firebase.questsAll().once('value', snapshot => {
+                    this.setState({data: Object.entries(snapshot.val())});
+                }).then(() => {
+                    this.firebase.preferences(authUser.uid).once('value', snapshot => {
+                        const prefSnap = Object.entries(snapshot.val());
                         
-                        for(let cats in questies[1]["categories"]) {
-                            /*The last loop goes through all of the bad preferences  */
-                             for(let bPref of this.state.badPrefs) {
-                                if(cats == bPref) {
-                                    addFlag = false;
-                                }
-                               
+                        // Grabs the unwanted preferences of the user.
+                        for (let x = 0; x < catNum; x++) {
+                            if (prefSnap[x][1] == false) {
+                                arrayOfBadPrefs.push(prefSnap[x][0]);
                             }
-    
                         }
-                        if(addFlag) {
-                            realQuests.push(questies);
-                        }
-                    }
-                    this.setState({
-                       data: realQuests, 
-                    });
-                    console.log("After pref filter:" + this.state.data.length);
-                    console.log(this.state.data);
-                     
-                }); 
+                        // Store the unwanted preferences of the user.
+                        this.setState({ badPrefs: arrayOfBadPrefs});
 
-              });
-               
-             
+                        let addFlag;
+
+                        // The first for loop runs through all of the loaded quests.
+                        for (let questies of this.state.data) {
+                            addFlag = true;
+                            // The second for loop runs through the categories of each quest.
+                            for (let cats in questies[1]['categories']) {
+                                // The third for loop runs through the users' unwanted preferences.
+                                for (let bPref of this.state.badPrefs) {
+                                    if (cats == bPref) {
+                                        addFlag = false;
+                                    }
+                                }
+                            }
+                            
+                            // If the quest has no unwanted preferences, it is added to the displayed quests.
+                            if (addFlag) {
+                                realQuests.push(questies);
+                            }
+                        }
+                    }).then(() => {
+                        this.setState({
+                            data: realQuests,
+                            authUser: authUser,
+                            loading: false
+                        });
+                    });
+                });
             }  
             else {
-                this.setState({ authUser: null});
+                this.setState({ authUser: null, loading: false});
             }
         });
     }
 
-   
-
     render() {
+        // Calls the loading screen if the user has not been authenticated.
         if (this.state.loading) {
             return (
                 <div style={{ marginTop: '40vh', display: 'flex', justifyContent: 'center' }}>
@@ -129,6 +122,7 @@ class App extends Component {
         }
         const user = this.state.authUser;
         const data = this.state.data;
+        // Reroutes the user to the sign-up/login pages if user is not authenticated.
         const loginFlow = <div>
             <Route exact path={ROUTES.HOME} component={SignInPage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
