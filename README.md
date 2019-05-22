@@ -6,7 +6,7 @@ Pickr is an activity finder app that suggests local activities and attractions t
 
 Make sure you have an up to date version of NodeJS installed
 
-### `git clone`
+### `git clone https://github.com/esuom1/Pickr.git`
 
 Clone the repository to your local machine
 
