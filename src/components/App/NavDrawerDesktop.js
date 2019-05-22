@@ -1,7 +1,7 @@
 import React from "react";
 
 //Menu Icon Quests
-import CollectionsIcon from '@material-ui/icons/Collections';
+import CollectionsIcon from '@material-ui/icons/Collections'; 
 
 //Menu Icon Completed
 import DoneIcon from '@material-ui/icons/Done';
@@ -15,24 +15,29 @@ import SettingsIcon from '@material-ui/icons/Settings';
 //Menu Icon About Us
 import GroupIcon from '@material-ui/icons/Group';
 
+//Material list style components
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
+//Routing constants and modules
 import * as ROUTES from '../../constants/routes';
 import { Link } from 'react-router-dom';
 
+//Color of the icons and buttons in the drawer nav menu
 const textColor = '#e3f2fd';
 
+/**
+ * Navigation component displayed on the desktop version instead of the swipable drawer.
+ */
 class NavDrawer extends React.Component {
+    //Grab props from parent
     constructor(props) {
         super(props);
-
-        this.state = {
-        };
     }
 
+    //JSX
     render() {
         return (
             <div style={{ background: '#1565c0', width: '100%', height: '100%', paddingTop: '12px' }}>

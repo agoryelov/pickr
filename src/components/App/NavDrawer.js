@@ -1,10 +1,7 @@
 import React from "react";
 
+//Pickr logo
 import Logo from "../../img/pickr-logo-blue2.PNG";
-
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-
 
 //Menu Icon Quests
 import CollectionsIcon from '@material-ui/icons/Collections';
@@ -24,23 +21,31 @@ import SettingsIcon from '@material-ui/icons/Settings';
 //Menu Icon About Us
 import GroupIcon from '@material-ui/icons/Group';
 
+//Material style components
+import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
+//Routing constants and modules
 import * as ROUTES from '../../constants/routes';
 import { Link } from 'react-router-dom';
 
+//Color of the icons and buttons in the drawer nav menu
 const textColor = '#e3f2fd';
 
+/**
+ * Navigation drawer component displayed on the mobile version
+ */
 class NavDrawer extends React.Component {
+    //Grab props from parent
     constructor(props) {
         super(props);
     }
 
+    //JSX
     render() {
         return (<div>
             <SwipeableDrawer ModalProps={{ BackdropProps: { invisible: false } }}

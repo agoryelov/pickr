@@ -10,11 +10,14 @@ import { CSSTransition } from 'react-transition-group';
 
 import Firebase from '../../firebase.js'
 
-
+/**
+ * The header of the quest card that lets you save it to your favourites
+ */
 class QuestCardSummary extends React.Component {
-
+    //If firebase is still retreiving the user data it will display a loading circle
     firebase = new Firebase();
 
+    //Saving the quest to the user profile
     handleSave = (e) => {
         e.stopPropagation();
         let now = new Date().toString(' MMMM d yyyy');
