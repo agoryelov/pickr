@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import SignUpPage from '../Pages/SignUp';
-import SignInPage from '../Pages/SignIn';
+import SignUpPage from './Auth/SignUp';
+import SignInPage from './Auth/SignIn';
 
-import AppBarHeader from './Header3';
-import NavDrawer from './NavDrawer';
-import AppContent from './AppContent';
+import AppBarHeader from './Header';
+import NavDrawer from './NavMobile';
+import AppContent from './AppContent/AppContent';
 
 // Material-ui imports
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import './index.css';
+import '../css/index.css';
 
-import * as ROUTES from '../../constants/routes';
+import * as ROUTES from '../constants/routes';
 import Firebase from '../firebase';
 
 
