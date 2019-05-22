@@ -32,8 +32,9 @@ class QuestPage extends React.Component {
         }
     }
     
-    componentDidMount() {
-        const jsonToArray = Object.entries(this.props.data);
+    componentWillMount() {
+        const jsonToArray = this.props.data;
+        console.log(jsonToArray);
         this.arrayShuffle(jsonToArray);
     }
     
@@ -65,6 +66,7 @@ class QuestPage extends React.Component {
 
         const coords = this.props.coords;
         const data = this.state.data;
+        console.log(this.state.current);
 
         return (
             <Grid container justify="center" style={{}}>
@@ -74,7 +76,7 @@ class QuestPage extends React.Component {
                         getSwiper={(swiper) => this.swiper = swiper} >
                         {data.map((card, index) => (
                             <div key={card[0]}>
-                                <QuestCard current={this.state.current} databaseQuestId={card[0]} coords={coords} questId={card[0]} questData={card[1]} globalUser={this.props.authUser} />
+                                <QuestCard current={this.state.current} databaseQuestId={card[0]} coords={coords} questId={index + 1} questData={card[1]} globalUser={this.props.authUser} />
                             </div>
                         ))}
                     </Swiper>

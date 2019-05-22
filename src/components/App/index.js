@@ -57,59 +57,44 @@ class App extends Component {
         this.firebase.auth.onAuthStateChanged((authUser) => {
             
             if (authUser) {
-                this.setState({ authUser: authUser });
-                this.firebase.questsAll().once("value", snapshot => {
-                    this.setState({
-                        data: Object.entries(snapshot.val())}, ()=>{
-                            this.setState({
-                                loading: false
-                            });
-                    });
-                /* This section grabs the unselected preferences of the user and stores them in an array */
-                this.firebase.preferences(authUser.uid).once("value", snapshot => {
-                    for(let x  = 0; x < catNum; x++) {
-                        if (Object.entries(snapshot.val())[x][1] == false){
-                            arrayOfBadPrefs.push(Object.entries(snapshot.val())[x][0]);
-                        }  
-                    }
-          
-                    this.setState({
-                        badPrefs: arrayOfBadPrefs}, () =>{
-                           console.log(this.state.badPrefs);
-                    });
-                    
-                    var addFlag;
-
-                    /**  The first loop goes through each quest */
-                    for(let questies of this.state.data) {
-                        addFlag = true;
-                         /*The second loop finds the categories of each quest */
-                        
-                        for(let cats in questies[1]["categories"]) {
-                            /*The last loop goes through all of the bad preferences  */
-                             for(let bPref of this.state.badPrefs) {
-                                if(cats == bPref) {
-                                    addFlag = false;
-                                }
-                               
+                this.firebase.questsAll().once('value', snapshot => {
+                    this.setState({data: Object.entries(snapshot.val())});
+                }).then(() => {
+                    this.firebase.preferences(authUser.uid).once('value', snapshot => {
+                        const prefSnap = Object.entries(snapshot.val());
+                        for (let x = 0; x < catNum; x++) {
+                            if (prefSnap[x][1] == false) {
+                                arrayOfBadPrefs.push(prefSnap[x][0]);
                             }
-    
                         }
-                        if(addFlag) {
-                            realQuests.push(questies);
-                        }
-                    }
-                    this.setState({
-                       data: realQuests, 
-                    });
-                    console.log("After pref filter:" + this.state.data.length);
-                    console.log(this.state.data);
-                     
-                }); 
+                        this.setState({ badPrefs: arrayOfBadPrefs});
 
-              });
-               
-             
+                        let addFlag;
+
+                        for (let questies of this.state.data) {
+                            addFlag = true;
+
+                            for (let cats in questies[1]['categories']) {
+                                for (let bPref of this.state.badPrefs) {
+                                    if (cats == bPref) {
+                                        addFlag = false;
+                                    }
+                                }
+                            }
+
+                            if (addFlag) {
+                                realQuests.push(questies);
+                            }
+                        }
+                    }).then(() => {
+                        console.log(realQuests);
+                        this.setState({
+                            data: realQuests,
+                            authUser: authUser,
+                            loading: false
+                        });
+                    });
+                });
             }  
             else {
                 this.setState({ authUser: null, loading: false});
