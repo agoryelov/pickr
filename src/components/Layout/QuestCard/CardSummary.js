@@ -31,7 +31,7 @@ class QuestCardSummary extends React.Component {
         const expanded = this.props.expanded;
 
         //Get quest information from parent
-        const data = this.props.data[1];
+        const data = this.props.data;
         const distance = this.props.distance;
 
         //Pull relevant card summary data

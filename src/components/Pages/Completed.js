@@ -115,12 +115,31 @@ class Completed extends React.Component {
         let day = d.getDate();
         let suffix;
         switch (parseInt(day)) {
-            case 21: {
+            case 1: {
                 suffix = "st";
                 break;
             }
             case 2: {
                 suffix = "nd";
+                break;
+            }
+            case 3: {
+                suffix = "rd";
+                break;
+            }
+            case 21: {
+                suffix = "st";
+                break;
+            }
+            case 22: {
+                suffix = "nd";
+            }
+            case 23: {
+                suffix = "rd";
+                break;
+            }
+            case 31: {
+                suffix = "st";
                 break;
             }
             default: {
@@ -140,7 +159,7 @@ class Completed extends React.Component {
         }
 
         if (this.state.completed == null) {
-            return(<div>hello</div>)
+            return (<div>hello</div>)
         }
 
         const completed = Object.entries(this.state.completed);
@@ -178,7 +197,7 @@ class Completed extends React.Component {
                             <ListItemText primary={data[x[1]['questID']]['name']}
                                 secondary={
                                     Object.entries(data[x[1]['questID']]['categories']).map(y => (
-                                        <Chip key={y[0]} 
+                                        <Chip key={y[0]}
                                             style={{ height: '20px', marginRight: '1em', marginTop: '5px', color: 'white', borderColor: 'white', background: `${icons[y[0]]['color']}` }}
                                             label={y[1]}
                                             icon={icons[y[0]]['icon']}

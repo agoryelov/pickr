@@ -57,12 +57,12 @@ class QuestCard extends React.Component {
     }
 
     handleCollapse = () => {
-        if(this.state.expanded) {
+        if (this.state.expanded) {
             this.setState({ expanded: false });
         } else {
-            this.setState({expanded: true});
+            this.setState({ expanded: true });
         }
-        
+
     }
 
     render() {
@@ -71,10 +71,10 @@ class QuestCard extends React.Component {
         const questData = this.props.questData;
 
         const distance = Math.ceil(this.state.distance) + " km";
-        
-       /** if (this.state.expanded && this.props.questId != (this.props.current)) {
+
+        if (this.state.expanded && this.props.questId != (this.props.current)) {
             this.setState({ expanded: false });
-        }*/ 
+        }
         const expanded = this.state.expanded;
         console.log(expanded)
         return (
@@ -83,10 +83,10 @@ class QuestCard extends React.Component {
                     <div className="cardAnimationDefault">
                         <ExpansionPanel elevation={0} expanded={expanded} onChange={this.handleCollapse}>
                             <ExpansionPanelSummary classes={{ content: "noMargin", root: 'noMargin' }} >
-                                <QuestCardSummary expanded={expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser}/>
+                                <QuestCardSummary expanded={expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser} />
                             </ExpansionPanelSummary>
-                            <ExpansionPanelDetails style={{background: '#f4f4f4'}}>
-                                <QuestCardDetails data={questData} coords={this.props.coords} expanded={expanded}/>
+                            <ExpansionPanelDetails style={{ background: '#f4f4f4' }}>
+                                <QuestCardDetails data={questData} coords={this.props.coords} expanded={expanded} />
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                     </div>
