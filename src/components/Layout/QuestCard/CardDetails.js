@@ -6,14 +6,13 @@ class QuestCardDetails extends React.Component {
     
     render() {
         //Get quest information from parent
-        const data = this.props.data;
+        const data = this.props.data[1];
 
         //Pull relevant card summary data
         const questLocation = data['location'];
         const questCost = data['cost'];
         const questEcoRating = data['ecoRating'];
         const questAbout = data['description'];
-
 
         return (
             <Grid container spacing={8}>
@@ -33,7 +32,7 @@ class QuestCardDetails extends React.Component {
                     {questAbout}
                 </Grid>
                 <Grid item xs={12} style={{ fontSize: ".8em", textAlign: 'justify' }}>
-                    <GetDirections coords={this.props.coords} expanded={this.props.expanded} questData={this.props.data}/>
+                    <GetDirections coords={this.props.coords} expanded={this.props.expanded} questData={data}/>
                 </Grid>
             </Grid>
         )
