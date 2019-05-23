@@ -28,11 +28,11 @@ class QuestCardSummary extends React.Component {
         const uid = this.props.globalUser.uid;
         
         // add the quest to the user's favourite quest list in firebase
-        /*
+        
         this.firebase.favourites(uid).child(this.props.questId).update({
             questID : this.props.questId,
             savedDate : now,
-        });*/
+        });
     }
 
     render() {
