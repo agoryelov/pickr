@@ -20,7 +20,7 @@ class QuestCardSummary extends React.Component {
     //Saving the quest to the user profile
     handleSave = (e) => {
         e.stopPropagation();
-
+        this.props.toggleSnackbar();
         // the time the user saved the quest
         let now = new Date().toString(' MMMM d yyyy');
 
@@ -28,10 +28,11 @@ class QuestCardSummary extends React.Component {
         const uid = this.props.globalUser.uid;
         
         // add the quest to the user's favourite quest list in firebase
+        /*
         this.firebase.favourites(uid).child(this.props.questId).update({
             questID : this.props.questId,
             savedDate : now,
-        });
+        });*/
     }
 
     render() {
@@ -54,6 +55,7 @@ class QuestCardSummary extends React.Component {
                         backgroundPosition: 'center',
                         backgroundSize: '100% auto',
                         backgroundRepeat: 'no-repeat',
+                        borderRadius: '15px 15px 0 0'
                     }}>
                         <div className={expanded ? "cardTopOpened" : "cardTopClosed"}>
                             <CSSTransition in={expanded} timeout={500} classNames="saveButtonAnimation">
@@ -64,7 +66,7 @@ class QuestCardSummary extends React.Component {
                                 </div>
                             </CSSTransition>
                         </div>
-                        <div className={expanded ? "cardOpened" : "cardClosed"}>
+                        <div style={{borderRadius: '0 0 15px 15px'}} className={expanded ? "cardOpened" : "cardClosed"}>
                             <Grid container alignItems="center" style={{ height: '100%', textAlign: 'left' }}>
                                 <Grid item xs={12} style={{ paddingLeft: '12px' }}>
                                     {questName}

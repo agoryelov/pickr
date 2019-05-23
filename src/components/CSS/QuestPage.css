@@ -33,14 +33,14 @@
 
 .cardBgOpened {
     margin: 0em;
-    height: 250px;
+    height: 350px;
     width: 100%;
     transition: 500ms all ease;
 }
 
 .cardBgClosed {
     margin: 0em;
-    height: 400px;
+    height: 500px;
     width: 100%;
     transition: 500ms all ease;
 }
@@ -64,16 +64,16 @@
 }
 
 .cardAnimation-enter-active {
-    padding: 0em;
+    padding: 2m;
     transition: 500ms all ease;
 }
 
 .cardAnimation-enter-done {
-    padding: 0em;
+    padding: 2m;
 }
 
 .cardAnimation-exit {
-    padding: 0em;
+    padding: 2em;
 }
 
 .cardAnimation-exit-active {
@@ -87,39 +87,39 @@
 
 .saveButtonAnimationDefault {
     position: absolute !important;
-    top: 325px;
+    top: 400px;
     right: 10%;
 }
 
 .saveButtonAnimation-enter {
-    top: 325px;
+    top: 400px;
     right: 10%;
 }
 
 .saveButtonAnimation-enter-active {
-    top: 180px;
+    top: 250px;
     right: 10%;
     transition: 500ms all ease;
 }
 
 .saveButtonAnimation-enter-done {
-    top: 180px;
+    top: 250px;
     right: 10%;
 }
 
 .saveButtonAnimation-exit {
-    top: 180px;
+    top: 250px;
     right: 10%;
 }
 
 .saveButtonAnimation-exit-active {
-    top: 325px;
+    top: 400px;
     right: 10%;
     transition: 500ms all ease;
 }
 
 .saveButtonAnimation-exit-done {
-    top: 325px;
+    top: 400px;
     right: 10%;
 }
 

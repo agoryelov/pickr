@@ -169,7 +169,7 @@ class Completed extends React.Component {
 
         //Check if the completed list is empty
         if (this.state.completed == null) {
-            return (<div>No quests completed</div>)
+            return(<div style={{color: 'darkgrey', margin: '2em', textAlign: 'center'}}>No completed quests</div>)
         }
 
         //Assign constants for the data retrived from firebase API

@@ -87,9 +87,9 @@ class QuestCard extends React.Component {
             <div>
                 <CSSTransition in={expanded} timeout={400} classNames="cardAnimation">
                     <div className="cardAnimationDefault">
-                        <ExpansionPanel elevation={0} expanded={expanded} onChange={this.handleCollapse}>
+                        <ExpansionPanel style={{borderRadius: '15px'}} elevation={3} expanded={expanded} onChange={this.handleCollapse}>
                             <ExpansionPanelSummary classes={{ content: "noMargin", root: 'noMargin' }} >
-                                <QuestCardSummary expanded={expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser} />
+                                <QuestCardSummary toggleSnackbar={this.props.toggleSnackbar} expanded={expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser} />
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails style={{ background: '#f4f4f4' }}>
                                 <QuestCardDetails data={questData} coords={this.props.coords} expanded={expanded} />

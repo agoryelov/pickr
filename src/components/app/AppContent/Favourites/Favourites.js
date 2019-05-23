@@ -78,7 +78,7 @@ class Favourites extends React.Component {
 
     // if the user has no favourited quest return empty favourite list
     if (this.state.list == null) {
-      return(<div>Empty</div>)
+      return(<div style={{color: 'darkgrey', margin: '2em', textAlign: 'center'}}>No saved quests</div>)
     }
 
     // convert the master quest list (object) pulled from firebase into an array
