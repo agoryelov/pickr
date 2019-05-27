@@ -21,9 +21,9 @@ class Game extends Component {
     // Function to grab the initial dimensions of the game.
     updateWindowDimensions() {
         this.setState({
-            width: Math.floor(window.innerWidth/100),
-            height: Math.floor(window.innerWidth/100),
-            mines: Math.floor(window.innerWidth/100 * window.innerWidth/100 / 5),
+            width: Math.floor(window.innerWidth/50),
+            height: Math.floor(window.innerWidth/50),
+            mines: Math.floor(window.innerWidth/50 * window.innerWidth/100 / 5),
         });
     }
 
@@ -44,7 +44,7 @@ class Game extends Component {
     
     render() {
         return (
-            <div id = "game">
+            <div id = "game" style={{textAlign: 'center'}}>
                 <Board height = {this.state.height} width = {this.state.width} mines = {this.state.mines} className = "board"/>
             </div>
         );

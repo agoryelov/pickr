@@ -69,16 +69,19 @@ class CategoryProgress extends React.Component {
         return(
         <Paper style={{padding: '0 1em 0 1em'}} >
           <Grid container spacing={8} style={{marginTop: '1em'}}>
-            <Grid item xs={12} style={{fontWeight: '600'}}>
+            <Grid item xs={3} md={2} style={{fontWeight: '600'}}>
               <div>{category}</div>
+            </Grid>
+            <Grid item xs={9} md={10}>
+              <span style={{color: 'grey', fontWeight: '400'}}>{this.props.exp} exp</span>
             </Grid>
             <Grid item xs={12}>
             <LinearProgress classes={{barColorPrimary: `barColorLevel${categoryLevel}`, colorPrimary: `colorLevel${categoryLevel}`}} color="primary" style={{height:'18px', borderRadius: '5px'}} variant="determinate" value={this.state.completed} />
             </Grid>
-            <Grid item xs={4} style={{fontWeight: '600'}}>
-              <div>Level {categoryLevel} Exp {this.props.exp} </div>
+            <Grid item xs={5} style={{fontWeight: '600'}}>
+              <div>Level {categoryLevel} Exp  </div>
             </Grid>
-            <Grid item xs={8} style={{textAlign: 'right', color: 'grey'}}>
+            <Grid item xs={7} style={{textAlign: 'right', color: 'grey'}}>
               <div>{remExp} exp to Level {categoryLevel + 1}</div>
             </Grid>
           </Grid>

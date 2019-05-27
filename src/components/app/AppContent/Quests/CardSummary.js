@@ -54,8 +54,7 @@ class QuestCardSummary extends React.Component {
                         backgroundImage: `url('${questImage}')`,
                         backgroundPosition: 'center',
                         backgroundSize: '100% auto',
-                        backgroundRepeat: 'no-repeat',
-                        borderRadius: '15px 15px 0 0'
+                        backgroundRepeat: 'no-repeat'
                     }}>
                         <div className={expanded ? "cardTopOpened" : "cardTopClosed"}>
                             <CSSTransition in={expanded} timeout={500} classNames="saveButtonAnimation">
@@ -66,7 +65,7 @@ class QuestCardSummary extends React.Component {
                                 </div>
                             </CSSTransition>
                         </div>
-                        <div style={{borderRadius: '0 0 15px 15px'}} className={expanded ? "cardOpened" : "cardClosed"}>
+                        <div className={expanded ? "cardOpened" : "cardClosed"}>
                             <Grid container alignItems="center" style={{ height: '100%', textAlign: 'left' }}>
                                 <Grid item xs={12} style={{ paddingLeft: '12px' }}>
                                     {questName}

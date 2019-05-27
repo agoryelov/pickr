@@ -16,10 +16,8 @@ class QuestForm extends React.Component {
         super(props);
 
         this.state = {
-
             // List of all quests
             questList: null,
-
         };
     }
 
