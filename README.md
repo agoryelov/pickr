@@ -1,5 +1,9 @@
 ## Pickr
 
+![ScreenShot](https://i.imgur.com/Kew4ixV.jpg)
+
+
+## Overview
 Pickr is an activity finder app that suggests local activities and attractions to the user. Users can save and share activities that interests them and will earn XP as they complete them.  Pickr allows users to filter activities by category, cost, and distance, and it's XP system challenges users to try activities outside their comfort zone. Pickr emphasizes a clean and responsive UI, with familiar and intuitive design patterns of popular apps such as Tinder
 
 ## Usage
