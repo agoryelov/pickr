@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 
 /** This is the cell component that is inserted into the Board. */
 class Cell extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     // On a user's click, the cell will be updated with a flag, bomb, or number.
     getValue = () => {
         const {value} = this.props;

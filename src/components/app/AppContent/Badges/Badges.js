@@ -53,15 +53,6 @@ class CategoryProgress extends React.Component {
 
       // the category
       const category = this.props.category;
-
-      // the user level for this category
-      const categoryLevel = this.getLevel(this.props.exp);
-      this.state.categoryLevel = categoryLevel;
-
-      // the percentage of progress until next level for this category
-      const progress = this.getProgress(categoryLevel);
-      this.state.completed = progress;
-
       // the amount of xp needed for the next level for this category
       const remExp = this.EXP[this.state.categoryLevel + 1] - this.props.exp;
 
@@ -76,13 +67,13 @@ class CategoryProgress extends React.Component {
               <span style={{color: 'grey', fontWeight: '400'}}>{this.props.exp} exp</span>
             </Grid>
             <Grid item xs={12}>
-            <LinearProgress classes={{barColorPrimary: `barColorLevel${categoryLevel}`, colorPrimary: `colorLevel${categoryLevel}`}} color="primary" style={{height:'18px', borderRadius: '5px'}} variant="determinate" value={this.state.completed} />
+            <LinearProgress classes={{barColorPrimary: `barColorLevel${this.state.categoryLevel}`, colorPrimary: `colorLevel${this.state.categoryLevel}`}} color="primary" style={{height:'18px', borderRadius: '5px'}} variant="determinate" value={this.state.completed} />
             </Grid>
             <Grid item xs={5} style={{fontWeight: '600'}}>
-              <div>Level {categoryLevel} Exp  </div>
+              <div>Level {this.state.categoryLevel} Exp  </div>
             </Grid>
             <Grid item xs={7} style={{textAlign: 'right', color: 'grey'}}>
-              <div>{remExp} exp to Level {categoryLevel + 1}</div>
+              <div>{remExp} exp to Level {this.state.categoryLevel + 1}</div>
             </Grid>
           </Grid>
         </Paper>

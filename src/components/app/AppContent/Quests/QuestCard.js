@@ -26,7 +26,7 @@ class QuestCard extends React.Component {
 
     componentDidMount() {
         //Check that props data actually came in
-        if (this.props.coords != null && this.props.questData['coordinates'] != null) {
+        if (this.props.coords !== null && this.props.questData['coordinates'] !== null) {
 
             //Grab location data from passed props
             const userLat = this.props.coords.latitude;
@@ -78,7 +78,7 @@ class QuestCard extends React.Component {
 
         //This is necessary to keep the card collapsed when it is not the current card on the screen
         //Uses the current index of the cards passed from the parent
-        if (this.state.expanded && this.props.questId != (this.props.current)) {
+        if (this.state.expanded && this.props.questId !== (this.props.current)) {
             this.setState({ expanded: false });
         }
 

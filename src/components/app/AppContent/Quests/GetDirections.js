@@ -40,7 +40,7 @@ class GetDirections extends React.Component {
         if (this.state.open && this.props.expanded){
             //Creates a directionsService object that will be used to make the requests.
             const directionsService = new window.google.maps.DirectionsService();
-            if (this.props.coords != null) {
+            if (this.props.coords !== null) {
                 if(this.state.loading){
                     //Create request header using navigator position for google maps object
                     const requestWalk = {
@@ -67,7 +67,7 @@ class GetDirections extends React.Component {
                     //Call route method to get distance to destination specified in the request header
                     if(!this.state.apiCalled){
                         directionsService.route(requestWalk, (result, status) => {
-                            if (status == window.google.maps.DirectionsStatus.OK) {
+                            if (status === window.google.maps.DirectionsStatus.OK) {
                                 this.setState({
                                     walkingDistance: result.routes[0].legs[0].duration.text,
                                 });
@@ -76,7 +76,7 @@ class GetDirections extends React.Component {
                         });
 
                         directionsService.route(requestBike, (result, status) => {
-                            if (status == window.google.maps.DirectionsStatus.OK) {
+                            if (status === window.google.maps.DirectionsStatus.OK) {
                                 this.setState({
                                     bikingDistance: result.routes[0].legs[0].duration.text,
                                 });
@@ -87,7 +87,7 @@ class GetDirections extends React.Component {
                         });
 
                         directionsService.route(requestTransit, (result, status) => {
-                            if (status == window.google.maps.DirectionsStatus.OK) {
+                            if (status === window.google.maps.DirectionsStatus.OK) {
                                 this.setState({
                                     transitDistance: result.routes[0].legs[0].duration.text,
                                     loading: false,

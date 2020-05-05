@@ -1,5 +1,5 @@
 import React from "react";
-import Swiper from 'react-id-swiper/lib/ReactIdSwiper.full';
+import Swiper from 'react-id-swiper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 

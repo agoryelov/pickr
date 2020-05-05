@@ -16,13 +16,16 @@ import Firebase from '../../../firebase.js'
 class QuestCardSummary extends React.Component {
     //If firebase is still retreiving the user data it will display a loading circle
     firebase = new Firebase();
-
+    favColor = 'disabled';
     //Saving the quest to the user profile
     handleSave = (e) => {
         e.stopPropagation();
         this.props.toggleSnackbar();
         // the time the user saved the quest
         let now = new Date().toString(' MMMM d yyyy');
+
+        // changes the color of the favorite icon
+        this.favColor = 'secondary';
 
         // the current user
         const uid = this.props.globalUser.uid;
@@ -33,6 +36,13 @@ class QuestCardSummary extends React.Component {
             questID : this.props.questId,
             savedDate : now,
         });
+    }
+
+    componentDidMount() {
+        const uid = this.props.globalUser.uid;
+        if(this.props.questId == this.firebase.favourites(uid)) {
+            
+        }
     }
 
     render() {
@@ -60,7 +70,7 @@ class QuestCardSummary extends React.Component {
                             <CSSTransition in={expanded} timeout={500} classNames="saveButtonAnimation">
                                 <div className="saveButtonAnimationDefault heartBeat">
                                     <Fab style={{ backgroundColor: 'white' }} size="medium" onClick={this.handleSave}>
-                                        <FavoriteIcon color="secondary" />
+                                        <FavoriteIcon color={this.favColor} />
                                     </Fab>
                                 </div>
                             </CSSTransition>

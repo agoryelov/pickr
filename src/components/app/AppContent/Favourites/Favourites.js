@@ -1,5 +1,6 @@
 import React, { cloneElement } from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ReactSearchBox from 'react-search-box';
 import Firebase from '../../../firebase'
 import '../../../css/Favourites.css';
 import 'rc-swipeout/assets/index.css';
@@ -87,13 +88,28 @@ class Favourites extends React.Component {
     // convert the favourited quest list (object) pulled from firebase into an array
     const saved = Object.entries(this.state.list);
 
+    const searches = [];
+    
+    // adds saved items into array of key value pairs     
+    for(let i = 0; i < saved.length; i++) {
+      searches.push({key: saved[i][0], value:data[saved[i][0]][1]["name"]})
+    }
+
     return (
       <div style={{ padding: '2em' }}>
-        {saved.map(x =>
-          <div key={x[0]}>
-            <SavedQuestItem questId={x[0]} globalUser = {this.state.globalUser} questData={data[x[0]][1]} />
-          </div>
-        )}
+        <ReactSearchBox 
+        placeholder="Search quests"
+        value = "Find quests"
+        data = {searches}
+        callback={record =>console.log(record)}
+        />
+
+          <br/>
+          {saved.map(x =>
+      <div key={x[0]}>
+        <SavedQuestItem questId={x[0]} globalUser = {this.state.globalUser} questData={data[x[0]][1]} />
+          </div>)}
+
       </div>);
   }
 

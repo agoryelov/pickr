@@ -39,6 +39,7 @@ class App extends Component {
             coords: null,
             data: null,
             badPrefs: null,
+            distPref: null,
         };
     }
 
@@ -69,7 +70,7 @@ class App extends Component {
                         
                         // Grabs the unwanted preferences of the user.
                         for (let x = 0; x < catNum; x++) {
-                            if (prefSnap[x][1] == false) {
+                            if (prefSnap[x][1] === false) {
                                 arrayOfBadPrefs.push(prefSnap[x][0]);
                             }
                         }
@@ -85,7 +86,7 @@ class App extends Component {
                             for (let cats in questies[1]['categories']) {
                                 // The third for loop runs through the users' unwanted preferences.
                                 for (let bPref of this.state.badPrefs) {
-                                    if (cats == bPref) {
+                                    if (cats === bPref) {
                                         addFlag = false;
                                     }
                                 }
