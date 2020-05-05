@@ -92,12 +92,6 @@ class NavDrawer extends React.Component {
                             </ListItemIcon>
                             <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="Settings" />
                         </ListItem>
-                        <ListItem component={Link} to={ROUTES.ABOUT} onClick={this.props.close} button>
-                            <ListItemIcon style={{ color: textColor }}>
-                                <GroupIcon />
-                            </ListItemIcon>
-                            <ListItemText primaryTypographyProps={{ style: { color: textColor } }} primary="About Us" />
-                        </ListItem>
                     </List>
                 </div>
             </SwipeableDrawer>
