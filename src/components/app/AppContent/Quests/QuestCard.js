@@ -82,17 +82,16 @@ class QuestCard extends React.Component {
             this.setState({ expanded: false });
         }
 
-        const expanded = this.state.expanded;
         return (
             <div>
-                <CSSTransition in={expanded} timeout={400} classNames="cardAnimation">
+                <CSSTransition in={this.state.expanded} timeout={400} classNames="cardAnimation">
                     <div className="cardAnimationDefault">
-                        <ExpansionPanel style={{borderRadius: '15px'}} elevation={3} expanded={expanded} onChange={this.handleCollapse}>
+                        <ExpansionPanel style={{borderRadius: '15px'}} elevation={3} expanded={this.state.expanded} onChange={this.handleCollapse}>
                             <ExpansionPanelSummary classes={{ content: "noMargin", root: 'noMargin' }} >
-                                <QuestCardSummary toggleSnackbar={this.props.toggleSnackbar} expanded={expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser} />
+                                <QuestCardSummary toggleSnackbar={this.props.toggleSnackbar} expanded={this.state.expanded} distance={distance} data={questData} questId={this.props.databaseQuestId} globalUser={this.props.globalUser} />
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails style={{ background: '#f4f4f4' }}>
-                                <QuestCardDetails data={questData} coords={this.props.coords} expanded={expanded} />
+                                <QuestCardDetails data={questData} coords={this.props.coords} expanded={this.state.expanded} />
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                     </div>

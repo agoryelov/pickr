@@ -42,6 +42,7 @@ class SearchBar extends Component {
     componentWillMount() {
 
     }
+    
     render() {
         return(
             <Paper className = {classes.root}>

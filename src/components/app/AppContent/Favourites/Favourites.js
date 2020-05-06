@@ -106,8 +106,8 @@ class Favourites extends React.Component {
 
           <br/>
           {saved.map(x =>
-      <div key={x[0]}>
-        <SavedQuestItem questId={x[0]} globalUser = {this.state.globalUser} questData={data[x[0]][1]} />
+          <div key={x[0]}>
+            <SavedQuestItem questId={x[0]} globalUser = {this.state.globalUser} questData={data[x[0]][1]} />
           </div>)}
 
       </div>);

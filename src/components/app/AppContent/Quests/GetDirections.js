@@ -30,12 +30,9 @@ class GetDirections extends React.Component {
     showTravelTimes = () => {
         console.log("Works");
         this.setState({open: true});
+    }
 
-    } 
     render() {
-        
-    
-        
         //Button must be clicked and the card must be expanded to make the request
         if (this.state.open && this.props.expanded){
             //Creates a directionsService object that will be used to make the requests.
@@ -71,7 +68,6 @@ class GetDirections extends React.Component {
                                 this.setState({
                                     walkingDistance: result.routes[0].legs[0].duration.text,
                                 });
-                                
                             }
                         });
 
@@ -80,7 +76,6 @@ class GetDirections extends React.Component {
                                 this.setState({
                                     bikingDistance: result.routes[0].legs[0].duration.text,
                                 });
-                               
                             } else {
                                 console.log(status);
                             }
@@ -94,7 +89,6 @@ class GetDirections extends React.Component {
                                 });
                             }
                         });
-                      
                         this.setState({apiCalled: true});
                     }
                 }
