@@ -69,7 +69,6 @@ class QuestCard extends React.Component {
         } else {
             this.setState({ expanded: true });
         }
-
     }
 
     render() {

@@ -13,7 +13,6 @@ import { Divider } from "@material-ui/core";
 class GetDirections extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             open: false, //Has the get journey time button been pressed for the card
             walkingDistance: null,
@@ -21,8 +20,6 @@ class GetDirections extends React.Component {
             bikingDistance: null,
             apiCalled: false, //Flag to see if api has already been called for the card
             loading: true, 
-
-
         }
         this.showTravelTimes = this.showTravelTimes.bind(this);
     }
@@ -62,7 +59,7 @@ class GetDirections extends React.Component {
                     };
 
                     //Call route method to get distance to destination specified in the request header
-                    if(!this.state.apiCalled){
+                    if (!this.state.apiCalled) {
                         directionsService.route(requestWalk, (result, status) => {
                             if (status === window.google.maps.DirectionsStatus.OK) {
                                 this.setState({
@@ -94,7 +91,7 @@ class GetDirections extends React.Component {
                 }
             }
             //If all of the reponses from google have been received the repsonses are displayed
-            if(!this.state.loading){
+            if (!this.state.loading) {
                 return(
                     <div>
                         <Divider />
@@ -108,7 +105,7 @@ class GetDirections extends React.Component {
             }
         }
         //If the get travel times button has not been clicked the button is displayed
-        if(!this.state.open){        
+        if (!this.state.open) {        
             return (
                 <div>
                     <Button size="small" color="primary" onClick={this.showTravelTimes}>

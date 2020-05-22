@@ -31,16 +31,11 @@ const root = {
 const classes = useStyles();
 
 class SearchBar extends Component {
-    
     constructor(props) {
         super(props);
         this.state = {
             questList: null,
         }
-    }
-
-    componentWillMount() {
-
     }
     
     render() {

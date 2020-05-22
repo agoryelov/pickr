@@ -14,8 +14,6 @@ class QuestCardDetails extends React.Component {
 
         //Pull relevant card summary data
         const questLocation = data['location'];
-        const questCost = data['cost'];
-        const questEcoRating = data['ecoRating'];
         const questAbout = data['description'];
 
         return (

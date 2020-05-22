@@ -91,17 +91,16 @@ class Favourites extends React.Component {
     const searches = [];
     
     // adds saved items into array of key value pairs     
-    for(let i = 0; i < saved.length; i++) {
+    for (let i = 0; i < saved.length; i++) {
       searches.push({key: saved[i][0], value:data[saved[i][0]][1]["name"]})
     }
 
     return (
       <div style={{ padding: '2em' }}>
         <ReactSearchBox 
-        placeholder="Search quests"
-        value = "Find quests"
-        data = {searches}
-        callback={record =>console.log(record)}
+          placeholder="Search quests"
+          data = {searches}
+          callback={record =>console.log(record)}
         />
 
           <br/>
@@ -112,12 +111,7 @@ class Favourites extends React.Component {
 
       </div>);
   }
-
-
 }
-
-
-
 
 export default Favourites;
 

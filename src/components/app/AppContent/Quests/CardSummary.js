@@ -38,13 +38,6 @@ class QuestCardSummary extends React.Component {
         });
     }
 
-    componentDidMount() {
-        const uid = this.props.globalUser.uid;
-        if(this.props.questId == this.firebase.favourites(uid)) {
-            
-        }
-    }
-
     render() {
         //Get state of the card from parent
         const expanded = this.props.expanded;
